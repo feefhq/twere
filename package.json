@@ -1,0 +1,8 @@
+{
+  "name": "twere",
+  "version": "0.0.0",
+  "main": "index.html",
+  "repository": "git@github.com:feefhq/twere.git",
+  "author": "Phil Powell",
+  "license": "GPL-3.0"
+}
