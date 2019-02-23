@@ -6,8 +6,10 @@ Description will be written sometime soon.
 
 ### Tooling
 
-- https://yarnpkg.com/en/
+- https://yarnpkg.com/
 - https://parceljs.org/
+- https://eslint.org/
+- https://jestjs.io/
 
 ### Development server
 
