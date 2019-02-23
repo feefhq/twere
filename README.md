@@ -1,6 +1,6 @@
 # &lsquo;twere
 
-TODO
+Description will be written sometime soon.
 
 ## Development
 
@@ -12,5 +12,5 @@ TODO
 ### Development server
 
 ```
-$ parcel index.html
+$ yarn start
 ```
