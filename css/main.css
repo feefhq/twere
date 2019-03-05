@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Seaweed+Script');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400');
+@import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css');
+
+:root {
+  --main-bg-color:    hsl(212, 8%, 25%);
+  --main-color:       rgb(255, 255, 255);
+  --header-bg-color:  hsl(212, 8%, 22%);
+  --caret-color:      rgb(0, 148, 255);
+  --code-background:  rgba(255, 255, 255, 0.02);
+  --code-color:       rgba(255, 255, 255, 0.75);
+  --code-box-shadow:  0 0 2px rgba(0, 0, 0, .1);
+  --code-padding:     16px 15px 16px 12px;
+  --code-margin:      8px 0 8px -15px;
+  --editable-padding: 8px 12px 8px 12px;
+  --editable-margin:  -8px -12px -8px -15px;
+}
+
+html {
+  -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
+  -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
+  margin: 0;
+  background: var(--main-bg-color);
+  font-size: 16px;
+  font-weight: 100;
+  line-height: 24px;
+  color: rgb(255, 255, 255);
+}
+
+body {
+  margin: 0;
+  font-feature-settings: "calt" 1;
+  font-family: "Fira Code";
+}
+
+header {
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  padding: 6px 0;
+  background: var(--header-bg-color);
+  font-family: 'Merriweather', serif;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+section {
+  position: fixed;
+  bottom: 0;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 400;
+  margin: 0;
+  padding: 8px 16px;
+}
+
+header span {
+  color: rgb(0, 148, 255);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+[contenteditable]:focus {
+  outline: 0px solid transparent;
+  caret-color: var(--caret-color);
+  padding: var(--editable-padding);
+  margin: var(--editable-margin);
+  background: rgba(0, 0, 0, 0.025);
+  border-left: 3px solid var(--caret-color);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
+}
+
+[contenteditable]:focus::selection,
+textarea::selection {
+  background: var(--caret-color);
+  color: rgb(0, 0, 0);
+}
+
+dt {
+  white-space: nowrap;
+  margin: 8px 16px 8px 16px;
+  text-align: right;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+dt span {
+}
+
+dt.prompt {
+  color: var(--caret-color);
+  margin-top: 16px;
+}
+
+dd {
+  margin: 8px 16px;
+}
+
+pre {
+  display: inline-block;
+  margin: var(--code-margin);
+  padding: var(--code-padding);
+  background: var(--code-background);
+  border-left: 3px solid rgb(255, 255, 255, 0.1);
+  box-shadow: var(--code-box-shadow);
+  color: var(--code-color);
+  font-family: "Fira Code";
+}
+
+code {
+  display: inline-block;
+  padding: 0 4px;
+  line-height: 1.2em;
+  box-shadow: var(--code-box-shadow);
+  background: var(--code-background);
+  color: var(--code-color);
+  font-family: "Fira Code";
+}
+
+textarea {
+  box-sizing: border-box; /* Ensures width can be set exactly */
+  border: none;
+  color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.025);
+  font-family: "Fira Code";
+  line-height: 24px;
+  width: 100%;
+  border-left: 3px solid var(--caret-color);
+  padding: 8px 15px 8px 12px;
+  margin: 0 0 0 -15px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
+  resize: none;
+  caret-color: var(--caret-color);
+}
+
+textarea::selected {
+  background: var(--caret-color);
+}
+
+a {
+  color: var(--main-color);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+cite {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+cite a {
+  display: block;
+  border-bottom: none;
+  color: rgb(255, 255, 255, 0.3);
+}
