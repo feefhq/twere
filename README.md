@@ -7,9 +7,9 @@ Description will be written sometime soon.
 ### Tooling
 
 - https://yarnpkg.com/
-- https://parceljs.org/
 - https://eslint.org/
 - https://jestjs.io/
+- https://github.com/airbnb/javascript
 
 ### Development server
 
