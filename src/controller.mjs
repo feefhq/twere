@@ -6,11 +6,19 @@ export default class Controller {
     return this;
   }
 
+  /**
+   *
+   */
   static list() {
     Note.getAll();
   }
 
+  /**
+   *
+   */
   static new() {
-    Note.new();
+    const note = new Note();
+    note.content = 'Something different';
+    note.save();
   }
 }
