@@ -1,19 +1,19 @@
-import Controller from './controller.mjs';
-import Application from './application.mjs';
-import Database from './database.mjs';
-import Note from './models/note.mjs';
+// import Controller from './controller';
+import Application from './application';
+import Database from './database';
+import Note from './models/Note';
 
-import './../css/main.css';
+import '../css/main.css';
 
 const db = new Database('twere');
-const app = new Application(db);
 
-app.models = [
-  Note
-]
+Application.db = db;
+Application.models = [
+  Note,
+];
+Application.start();
 
 if (module.hot) {
-  module.hot.accept(function() {
-    console.log('Ouch! Something went wrong with HMR.');
-  })
+  module.hot.accept(() => {
+  });
 }

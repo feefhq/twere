@@ -1,15 +1,12 @@
-import Note from './models/note.mjs';
+import Note from './models/Note';
 
 export default class Controller {
-
   constructor(db) {
-    this.db = db;
+    this._db = db;
     return this;
   }
 
   list() {
-    console.log("Listing notes");
-    Note.getAll(this.db);
+    Note.getAll(this._db);
   }
-
 }

@@ -1,14 +1,11 @@
-import  Model from '../model.mjs';
+import Model from '../model';
 
 export default class Note extends Model {
-
-  constructor(db) {
-    super(db);
+  constructor() {
+    super();
+    return this;
   }
 
-  static getAll(db) {
-    console.log("Getting all notes", this.name);
-    db.createObjectStore(this.name);
+  static getAll() {
   }
-
 }

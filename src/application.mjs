@@ -1,13 +1,13 @@
 /**
- *
+ * The main Application class. This is designed to be a singleton with only
+ * static methods, so that it can maintain state, and be easily injected
+ * anywhere.
  */
 export default class Application {
-
   /**
    *
    */
   constructor(db) {
-    console.log("Something");
     this._models = [];
     this._controllers = [];
     this._views = [];
@@ -16,46 +16,67 @@ export default class Application {
   }
 
   /**
+   * Fire up the application. A connection to the DB will do any data store
+   * upgrades.
+   */
+  static start() {
+    this._db.open();
+  }
+
+  /**
    *
    */
-  get models() {
+  static get models() {
     return this._models;
   }
 
   /**
    *
    */
-  set models(models) {
+  static set models(models) {
     this._models = models;
-    this._db.models = this._models;
+    this._db.open();
   }
 
   /**
    *
    */
-  get controllers() {
+  static get controllers() {
     return this._controllers;
   }
 
   /**
    *
    */
-  set controllers(controller) {
+  static set controllers(controllers) {
     this._controllers = controllers;
   }
 
   /**
    *
    */
-  get views() {
+  static get views() {
     return this._views;
   }
 
   /**
    *
    */
-  set views(views) {
+  static set views(views) {
     this._views = views;
   }
 
+  /**
+   *
+   */
+  static get db() {
+    return this._db;
+  }
+
+  /**
+   *
+   */
+  static set db(db) {
+    this._db = db;
+  }
 }

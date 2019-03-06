@@ -1,36 +1,26 @@
+import Application from './application';
+
 /**
  * A simple way to access a database and it's data stores. This is currently an
  * experiment in being able to wrap Promises and async/await around the standard
  * indexedDB implementation, which only uses callbacks.
  */
 export default class Database {
-
   /**
    * Sets the name of the DB, and returns the instance.
    */
   constructor(name) {
     this._models = [];
-    this.name = name;
-    this.db;
+    this._name = name;
+    this._db = null;
     return this;
   }
 
   /**
-   * Set the models for the app. This will then automagically create data stores
-   * if they don't already exist.
+   * Get the current database version
    */
-  set models(models) {
-    this._models = models;
-    this.open()
-      .then(() => { return this.checkModels(models) })
-      .then((exist) => { exist || console.log(exist) });
-  }
-
-  /**
-   * Check whether all objects in the models array have a store in the database
-   */
-  checkModels(models) {
-    return models.every(e => this.db.objectStoreNames.contains(e));
+  get version() {
+    return this._db.version;
   }
 
   /**
@@ -38,31 +28,40 @@ export default class Database {
    * ability to chain.
    */
   open() {
-    return new Promise((resolve, reject) => {
-      let request = indexedDB.open(this.name, 1);
+    return new Promise((resolve) => {
+      const request = indexedDB.open(this._name, 1);
       request.onsuccess = () => {
-        resolve(request);
+        resolve(request.result);
       };
+      request.onupgradeneeded = () => this.onupgradeneeded(request.result);
+      request.onerror = () => {};
     })
-    .then((result) => {
-      this.db = result.result;
-      return this;
+      .then((result) => {
+        this._db = result;
+        return this;
+      });
+  }
+
+  /**
+   *
+   */
+  onupgradeneeded(db) {
+    this._db = db;
+    const filtered = Application.models.filter(model => !db.objectStoreNames.contains(model.name));
+    filtered.forEach((model) => {
+      model.createObjectStore();
     });
   }
 
   /**
-   * Create an object store
+   * Create an object store. Dubious about this needing to be async
    */
-  async createObjectStore(name) {
-    return await new Promise((resolve, reject) => {
-      console.log("Creating store...", this.db);
-      let request = this.db.createObjectStore(name);
+  createObjectStore(name) {
+    return new Promise((resolve) => {
+      const request = this._db.createObjectStore(name);
       request.onsuccess = () => {
         resolve(request);
       };
-    }).then((result) => {
-      return this;
-    });
+    }).then(() => this);
   }
-
 }
