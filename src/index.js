@@ -1,4 +1,4 @@
-// import Controller from './controller';
+import Controller from './controller';
 import Application from './application';
 import Database from './database';
 import Note from './models/Note';
@@ -11,6 +11,7 @@ Application.db = db;
 Application.models = [
   Note,
 ];
+Application.controllers = Controller;
 Application.start();
 
 if (module.hot) {

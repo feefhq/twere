@@ -20,7 +20,9 @@ export default class Application {
    * upgrades.
    */
   static start() {
-    this._db.open();
+    this._db.open().then(() => {
+      this._controllers.new();
+    });
   }
 
   /**
@@ -35,7 +37,7 @@ export default class Application {
    */
   static set models(models) {
     this._models = models;
-    this._db.open();
+    this._db.open().then();
   }
 
   /**

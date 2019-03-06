@@ -58,10 +58,17 @@ export default class Database {
    */
   createObjectStore(name) {
     return new Promise((resolve) => {
-      const request = this._db.createObjectStore(name);
+      const request = this._db.createObjectStore(name, { autoIncrement: true });
       request.onsuccess = () => {
         resolve(request);
       };
     }).then(() => this);
+  }
+
+  /**
+   *
+   */
+  transaction(name, readable) {
+    return this._db.transaction(name, readable);
   }
 }

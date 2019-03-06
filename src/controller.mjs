@@ -6,7 +6,11 @@ export default class Controller {
     return this;
   }
 
-  list() {
-    Note.getAll(this._db);
+  static list() {
+    Note.getAll();
+  }
+
+  static new() {
+    Note.new();
   }
 }
