@@ -7,11 +7,11 @@ export default class Application {
   /**
    *
    */
-  constructor(db) {
-    this._models = [];
-    this._controllers = [];
-    this._views = [];
-    this._db = db;
+  constructor() {
+    this.models = [];
+    this.controllers = [];
+    this.views = [];
+    this.db = null;
     return this;
   }
 
@@ -20,65 +20,8 @@ export default class Application {
    * upgrades.
    */
   static start() {
-    this._db.open().then(() => {
-      this._controllers.new();
+    this.db.open().then(() => {
+      this.controllers.new();
     });
-  }
-
-  /**
-   *
-   */
-  static get models() {
-    return this._models;
-  }
-
-  /**
-   *
-   */
-  static set models(models) {
-    this._models = models;
-    this._db.open().then();
-  }
-
-  /**
-   *
-   */
-  static get controllers() {
-    return this._controllers;
-  }
-
-  /**
-   *
-   */
-  static set controllers(controllers) {
-    this._controllers = controllers;
-  }
-
-  /**
-   *
-   */
-  static get views() {
-    return this._views;
-  }
-
-  /**
-   *
-   */
-  static set views(views) {
-    this._views = views;
-  }
-
-  /**
-   *
-   */
-  static get db() {
-    return this._db;
-  }
-
-  /**
-   *
-   */
-  static set db(db) {
-    this._db = db;
   }
 }
