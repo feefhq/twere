@@ -13,6 +13,8 @@ Description will be written sometime soon.
 
 ### Development server
 
+To fire up a development server:
+
 ```
-$ yarn start
+$ yarn dev
 ```
