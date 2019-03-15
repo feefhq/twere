@@ -8,7 +8,7 @@ Description will be written sometime soon.
 
 - https://yarnpkg.com/
 - https://eslint.org/
-- https://jestjs.io/
+- https://github.com/ccampbell/luna
 - https://github.com/airbnb/javascript
 
 ### Development server
@@ -17,4 +17,10 @@ To fire up a development server:
 
 ```
 $ yarn dev
+```
+
+To run tests:
+
+```
+$ yarn test
 ```

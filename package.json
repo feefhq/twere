@@ -7,7 +7,7 @@
   "license": "GPL-3.0",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "test": "luna src/application.unit.test.js"
+    "test": "luna src --no-coverage"
   },
   "devDependencies": {
     "css-loader": "^2.1.0",
