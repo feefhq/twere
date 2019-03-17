@@ -2,7 +2,7 @@
  *
  */
 import Application from './core/Application';
-import MainController from './controllers/MainController.mjs';
+import MainController from './controllers/MainController';
 import Database from './core/Database';
 import Note from './models/Note';
 
@@ -11,10 +11,15 @@ import '../css/main.css';
 const db = new Database('twere');
 
 Application.db = db;
+
 Application.models = [
   Note,
 ];
-Application.controllers = MainController;
+
+Application.controllers = [
+  MainController,
+];
+
 Application.start();
 
 if (module.hot) {

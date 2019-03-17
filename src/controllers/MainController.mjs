@@ -1,13 +1,17 @@
 /**
  *
  */
-import Controller from './../core/Controller';
-import Note from './../models/Note';
+import Controller from '../core/Controller';
+import Note from '../models/Note';
 
 export default class MainController extends Controller {
+
+  /**
+   *
+   */
   constructor() {
-    this.super();
-    return this;
+    super();
+    this.template = 'Bar';
   }
 
   /**

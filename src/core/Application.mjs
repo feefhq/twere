@@ -10,9 +10,17 @@ export default class Application {
   constructor() {
     this.models = [];
     this.controllers = [];
+    this.controllerMap = new Map();
     this.views = [];
     this.db = null;
     return this;
+  }
+
+  static set controllers(controllers) {
+    this.controllerMap = new Map();
+    controllers.forEach((controller) => {
+      this.controllerMap.set(controller.name, new controller());
+    });
   }
 
   /**
@@ -21,7 +29,9 @@ export default class Application {
    */
   static start() {
     this.db.open().then(() => {
-      this.controllers.new();
+      this.controllerMap.forEach((controller) => {
+        controller.render();
+      })
     });
   }
 }
