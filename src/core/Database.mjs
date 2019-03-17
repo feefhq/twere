@@ -1,10 +1,10 @@
-import Application from './Application';
-
 /**
  * A simple way to access a database and it's data stores. This is currently an
  * experiment in being able to wrap Promises and async/await around the standard
  * indexedDB implementation, which only uses callbacks.
  */
+import Application from './Application';
+
 export default class Database {
   /**
    * Sets the name of the DB, and returns the instance.
@@ -43,7 +43,9 @@ export default class Database {
   }
 
   /**
-   *
+   * This is still a bit clunky, but is intended to upgrade the DB to a new
+   * version whenever the schema changes. It doesn't really do that properly
+   * yet.
    */
   onupgradeneeded(db) {
     this._db = db;
@@ -66,7 +68,7 @@ export default class Database {
   }
 
   /**
-   *
+   * Wrapper around IDB transaction. Clunky, and could do with a Promise.
    */
   transaction(name, readable) {
     return this._db.transaction(name, readable);

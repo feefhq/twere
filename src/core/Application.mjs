@@ -5,7 +5,7 @@
  */
 export default class Application {
   /**
-   *
+   * Set up some basic detaults.
    */
   constructor() {
     this.models = [];
@@ -13,9 +13,16 @@ export default class Application {
     this.controllerMap = new Map();
     this.views = [];
     this.db = null;
-    return this;
   }
 
+  /**
+   * Controllers get passed in as object references, and this takes care of
+   * doing instantiation. Everything is stored in a map, so that references can
+   * be used at any time.
+   *
+   * Why not just instantiate and then pass in? It makes application config
+   * really straightforward.
+   */
   static set controllers(controllers) {
     this.controllerMap = new Map();
     controllers.forEach((controller) => {
@@ -30,7 +37,7 @@ export default class Application {
   static start() {
     this.db.open().then(() => {
       this.controllerMap.forEach((controller) => {
-        controller.render();
+        controller.build();
       })
     });
   }

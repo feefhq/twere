@@ -1,8 +1,8 @@
+/**
+ * The M in MVC
+ */
 import Application from './Application';
 
-/**
- * Model object
- */
 export default class Model {
   /**
    * Creates a store for this model based on the name. Probably needs a better
