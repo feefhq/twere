@@ -4,9 +4,14 @@
  * view is pretty gnarly, but at the same time, it would be good not to start
  * bringing in loads of helpers if it can be avoided.
  */
+import { f } from '../core/view/helpers';
+
+/**
+ * A basic view which includes some params.
+ */
 export const main = (testVar = 'Foo', list = []) => `
-  <h1>This is a view template ${testVar}</h1>
-  <ul>${list.reduce((a, c) => a + c)}</ul>
+  <h1>This is a view template ${f(testVar)}</h1>
+  <ul>${f(list)}</ul>
 `;
 
 /**
@@ -14,5 +19,5 @@ export const main = (testVar = 'Foo', list = []) => `
  * parent component.
  */
 export const listItem = (testVar = 'Foo') => `
-  <li>This is a listItem: ${testVar}</li>
+  <li>This is a listItem: ${f(testVar)}</li>
 `;
