@@ -1,4 +1,4 @@
-import Note from './models/Note';
+import Note from './../models/Note';
 
 export default class Controller {
   constructor(db) {

@@ -1,7 +1,7 @@
 /**
  *
  */
-import Model from './Model';
+import Model from './../core/Model';
 
 export default class Note extends Model {
   constructor() {

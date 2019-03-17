@@ -1,6 +1,6 @@
-import Application from './Application';
-import Controller from './Controller';
-import Database from './Database';
+import Application from './core/Application';
+import Controller from './core/Controller';
+import Database from './core/Database';
 import Note from './models/Note';
 
 import '../css/main.css';
