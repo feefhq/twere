@@ -12,7 +12,9 @@ module.exports = {
   devServer: {
     hotOnly: true,
     overlay: true,
+    host: 'localhost'
   },
+  mode: 'development',
   devtool: 'inline-source-map',
   module: {
     rules: [
