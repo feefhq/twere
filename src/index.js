@@ -1,5 +1,8 @@
+/**
+ *
+ */
 import Application from './core/Application';
-import Controller from './core/Controller';
+import MainController from './controllers/MainController.mjs';
 import Database from './core/Database';
 import Note from './models/Note';
 
@@ -11,7 +14,7 @@ Application.db = db;
 Application.models = [
   Note,
 ];
-Application.controllers = Controller;
+Application.controllers = MainController;
 Application.start();
 
 if (module.hot) {
