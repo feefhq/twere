@@ -17,7 +17,9 @@ export default class Controller {
    */
   render() {
     const fragment = document.createDocumentFragment();
-    fragment.textContent = this.template;
+    const content = document.createElement("span");
+    content.innerHTML = this.template;
+    fragment.appendChild(content);
     document.body.appendChild(fragment);
   }
 }

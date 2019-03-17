@@ -3,6 +3,7 @@
  */
 import Controller from '../core/Controller';
 import Note from '../models/Note';
+import main from '../views/main'
 
 export default class MainController extends Controller {
 
@@ -11,7 +12,7 @@ export default class MainController extends Controller {
    */
   constructor() {
     super();
-    this.template = 'Bar';
+    this.template = main;
   }
 
   /**
