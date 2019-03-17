@@ -10,8 +10,10 @@ import { f } from '../core/view/helpers';
  * A basic view which includes some params.
  */
 export const main = (testVar = 'Foo', list = []) => `
-  <h1>This is a view template ${f(testVar)}</h1>
-  <ul>${f(list)}</ul>
+  <section>
+    <h1>This is a view template ${f(testVar)}</h1>
+    <dl>${f(list)}</dl>
+  </section>
 `;
 
 /**
@@ -19,5 +21,6 @@ export const main = (testVar = 'Foo', list = []) => `
  * parent component.
  */
 export const listItem = (testVar = 'Foo') => `
-  <li>This is a listItem: ${f(testVar)}</li>
+  <dt>--</dt>
+  <dd>${f(testVar)}</dd>
 `;

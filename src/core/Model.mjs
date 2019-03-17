@@ -30,8 +30,17 @@ export default class Model {
   /**
    * Currently obsolete. Will get all entities. Getters will want to be chainable.
    */
-  getAll() {
-    return this;
+  static getAll() {
+    return new Promise((resolve) => {
+      const tx = Application.db.transaction(this.prototype.constructor.name, 'readwrite');
+      const store = tx.objectStore(this.prototype.constructor.name);
+      const request = store.getAll();
+      request.onsuccess = (res) => {
+        resolve(request);
+      };
+    }).then((request) => {
+      return request.result;
+    });
   }
 
   /**

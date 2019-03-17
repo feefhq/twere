@@ -9,8 +9,10 @@ export default class MainController extends Controller {
   /**
    * Doesn't do anything yet
    */
-  static list() {
-    Note.getAll();
+  list() {
+    Note.getAll().then((result) => {
+      this.build(result);
+    });
   }
 
   /**
@@ -26,12 +28,11 @@ export default class MainController extends Controller {
    * This is a rudimentary attempt at creating a builder. It's trying to realise
    * a concept of component composition.
    */
-  build() {
-    const items = [
-      listItem('Something foo'),
-      listItem('Something bar'),
-      listItem('Something baz')
-    ];
+  build(result) {
+    const items = [];
+    result.forEach((item) => {
+      items.push(listItem(`${item.createdAt} : ${item.content}`))
+    })
     const container = main('Bar', items);
     this.template = container;
     this.render();

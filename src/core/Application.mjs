@@ -37,8 +37,8 @@ export default class Application {
   static start() {
     this.db.open().then(() => {
       this.controllerMap.forEach((controller) => {
-        controller.build();
-      })
+        controller.list();
+      });
     });
   }
 }
