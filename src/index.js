@@ -3,6 +3,7 @@
  */
 import Application from './core/Application';
 import Database from './core/Database';
+import CommandController from './controllers/CommandController';
 import MainController from './controllers/MainController';
 import Note from './models/Note';
 
@@ -22,6 +23,7 @@ Application.models = [
 
 // Add controllers to the app
 Application.controllers = [
+  CommandController,
   MainController,
 ];
 

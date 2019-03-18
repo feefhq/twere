@@ -1,14 +1,16 @@
 /**
  * The C in MVC
  */
-export default class Controller {
+import Application from './Application';
 
+export default class Controller {
   /**
    * Simply sets up some defaults at the moment.
    */
   constructor() {
     this.template = '';
-    this.fragment = null;
+    this.name = this.constructor.name;
+    this.fragment = document.createDocumentFragment();
   }
 
   /**
@@ -17,11 +19,10 @@ export default class Controller {
    * start to become a concept, and start to consider repainting, caching etc.
    */
   render() {
-    if (this.fragment) this.fragment.remove();
-    this.fragment = document.createDocumentFragment();
-    const content = document.createElement('span');
+    const content = document.createElement('div');
     content.innerHTML = this.template;
+    content.setAttribute('id', `twere-${this.name}`);
     this.fragment.appendChild(content);
-    this.fragment = document.body.appendChild(this.fragment);
+    Application.node.appendChild(this.fragment);
   }
 }

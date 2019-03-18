@@ -13,6 +13,7 @@ export default class Application {
     this.controllerMap = new Map();
     this.views = [];
     this.db = null;
+    this.node = null;
   }
 
   /**
@@ -35,6 +36,10 @@ export default class Application {
    * upgrades.
    */
   static start() {
+    const node = document.createElement('div');
+    node.setAttribute('id', `twere-${this.name}`);
+    this.node = document.body.appendChild(node);
+
     this.db.open().then(() => {
       this.controllerMap.forEach((controller) => {
         controller.list();
