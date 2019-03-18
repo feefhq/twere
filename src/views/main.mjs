@@ -10,8 +10,12 @@ import { f } from '../core/view/helpers';
  * A basic view which includes some params.
  */
 export const main = (testVar = 'Foo', list = []) => `
+  <header>
+    <h1>
+      <span>&lsquo;</span>twere
+    </h1>
+  </header>
   <section>
-    <h1>This is a view template ${f(testVar)}</h1>
     <dl>${f(list)}</dl>
   </section>
 `;

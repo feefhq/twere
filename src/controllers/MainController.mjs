@@ -12,16 +12,18 @@ export default class MainController extends Controller {
   list() {
     Note.getAll().then((result) => {
       this.build(result);
+      return this;
     });
   }
 
   /**
    * This is just a proof-of-concept
    */
-  static new() {
+  new() {
     const note = new Note();
     note.content = 'Something different';
     note.save();
+    return this;
   }
 
   /**
@@ -31,8 +33,8 @@ export default class MainController extends Controller {
   build(result) {
     const items = [];
     result.forEach((item) => {
-      items.push(listItem(`${item.createdAt} : ${item.content}`))
-    })
+      items.push(listItem(`${item.createdAt} : ${item.content}`));
+    });
     const container = main('Bar', items);
     this.template = container;
     this.render();
