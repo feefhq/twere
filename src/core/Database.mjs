@@ -3,43 +3,43 @@
  * experiment in being able to wrap Promises and async/await around the standard
  * indexedDB implementation, which only uses callbacks.
  */
-import Application from './Application';
+import Application from './Application'
 
 export default class Database {
   /**
    * Sets the name of the DB, and returns the instance.
    */
-  constructor(name) {
-    this._models = [];
-    this._name = name;
-    this._db = null;
-    return this;
+  constructor (name) {
+    this._models = []
+    this._name = name
+    this._db = null
+    return this
   }
 
   /**
    * Get the current database version
    */
-  get version() {
-    return this._db.version;
+  get version () {
+    return this._db.version
   }
 
   /**
    * Wraps a promise around the standard indexedDB API, and return `this` for
    * ability to chain.
    */
-  open() {
+  open () {
     return new Promise((resolve) => {
-      const request = indexedDB.open(this._name, 1);
+      const request = indexedDB.open(this._name, 1)
       request.onsuccess = () => {
-        resolve(request.result);
+        resolve(request.result)
       };
-      request.onupgradeneeded = () => this.onupgradeneeded(request.result);
-      request.onerror = () => {};
+      request.onupgradeneeded = () => this.onupgradeneeded(request.result)
+      request.onerror = () => {}
     })
       .then((result) => {
-        this._db = result;
-        return this;
-      });
+        this._db = result
+        return this
+      })
   }
 
   /**
@@ -47,30 +47,30 @@ export default class Database {
    * version whenever the schema changes. It doesn't really do that properly
    * yet.
    */
-  onupgradeneeded(db) {
-    this._db = db;
-    const filtered = Application.models.filter(model => !db.objectStoreNames.contains(model.name));
+  onupgradeneeded (db) {
+    this._db = db
+    const filtered = Application.models.filter(model => !db.objectStoreNames.contains(model.name))
     filtered.forEach((model) => {
-      model.createObjectStore();
-    });
+      model.createObjectStore()
+    })
   }
 
   /**
    * Create an object store. Dubious about this needing to be async
    */
-  createObjectStore(name) {
+  createObjectStore (name) {
     return new Promise((resolve) => {
-      const request = this._db.createObjectStore(name, { autoIncrement: true });
+      const request = this._db.createObjectStore(name, { autoIncrement: true })
       request.onsuccess = () => {
-        resolve(request);
+        resolve(request)
       };
-    }).then(() => this);
+    }).then(() => this)
   }
 
   /**
    * Wrapper around IDB transaction. Clunky, and could do with a Promise.
    */
-  transaction(name, readable) {
-    return this._db.transaction(name, readable);
+  transaction (name, readable) {
+    return this._db.transaction(name, readable)
   }
 }

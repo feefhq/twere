@@ -4,7 +4,7 @@
  * view is pretty gnarly, but at the same time, it would be good not to start
  * bringing in loads of helpers if it can be avoided.
  */
-import { f } from '../core/view/helpers';
+import { f } from '../core/view/helpers.mjs'
 
 /**
  * A basic view which includes some params.
@@ -18,7 +18,7 @@ export const main = (testVar = 'Foo', list = []) => `
   <section>
     <dl>${f(list)}</dl>
   </section>
-`;
+`
 
 /**
  * This is a smaller component view, which gets included multiple times in a
@@ -27,4 +27,4 @@ export const main = (testVar = 'Foo', list = []) => `
 export const listItem = (testVar = 'Foo') => `
   <dt>--</dt>
   <dd>${f(testVar)}</dd>
-`;
+`
