@@ -5,7 +5,7 @@
  */
 export default class Application {
   /**
-   * Set up some basic detaults.
+   * Creates an instance of Application.
    */
   constructor () {
     this.models = []
@@ -27,7 +27,7 @@ export default class Application {
   static set controllers (controllers) {
     this.controllerMap = new Map()
     controllers.forEach((controller) => {
-      this.controllerMap.set(controller.name, new controller())
+      this.controllerMap.set(controller.name, Object.create(controller.prototype))
     })
   }
 

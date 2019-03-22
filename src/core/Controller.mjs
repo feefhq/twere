@@ -10,7 +10,6 @@ export default class Controller {
   constructor () {
     this.template = ''
     this.name = this.constructor.name
-    this.fragment = document.createDocumentFragment()
   }
 
   /**
@@ -19,10 +18,11 @@ export default class Controller {
    * start to become a concept, and start to consider repainting, caching etc.
    */
   render () {
+    const fragment = document.createDocumentFragment()
     const content = document.createElement('div')
     content.innerHTML = this.template
     content.setAttribute('id', `twere-${this.name}`)
-    this.fragment.appendChild(content)
-    Application.node.appendChild(this.fragment)
+    fragment.appendChild(content)
+    Application.node.appendChild(fragment)
   }
 }
