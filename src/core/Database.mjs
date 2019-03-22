@@ -3,7 +3,7 @@
  * experiment in being able to wrap Promises and async/await around the standard
  * indexedDB implementation, which only uses callbacks.
  */
-import Application from './Application'
+import Application from './Application.mjs'
 
 export default class Database {
   /**

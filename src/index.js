@@ -7,9 +7,6 @@ import CommandController from './controllers/CommandController.mjs'
 import MainController from './controllers/MainController.mjs'
 import Note from './models/Note.mjs'
 
-// This is dumb, and only works with webpack. Needs sorting asap.
-import '../css/main.css'
-
 // Instantiate the DB
 const db = new Database('twere')
 
@@ -30,10 +27,3 @@ Application.controllers = [
 // This is temporary, so that we can do some proof of concept.
 // Eventually this will be repalced by a clever router.
 Application.start()
-
-// This is only here for hot loading, and needs to be implemented a little
-// more cleanly.
-if (module.hot) {
-  module.hot.accept(() => {
-  })
-}

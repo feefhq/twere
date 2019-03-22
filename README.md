@@ -16,7 +16,7 @@ Description will be written sometime soon.
 To fire up a development server:
 
 ```
-$ yarn dev
+$ yarn serve
 ```
 
 To run tests:

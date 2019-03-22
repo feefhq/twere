@@ -1,9 +1,9 @@
 /**
  * Main controller. Still just a proof-of-concept.
  */
-import Controller from '../core/Controller'
-import Note from '../models/Note'
-import { main, listItem } from '../views/main'
+import Controller from '../core/Controller.mjs'
+import Note from '../models/Note.mjs'
+import { main, listItem } from '../views/main.mjs'
 
 export default class MainController extends Controller {
   /**
