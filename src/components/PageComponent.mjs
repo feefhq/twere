@@ -1,7 +1,5 @@
-import { Application } from '../core/Application.mjs'
 import { Component } from '../core/Component.mjs'
 import { Note } from '../models/Note.mjs'
-import { Template } from '../core/Template.mjs'
 import { NoteComponent } from './NoteComponent.mjs'
 
 /**
@@ -26,11 +24,8 @@ export class PageComponent extends Component {
     <section>
       <dl>
         ${this.notes.map(note => new NoteComponent(note).template).join('')}
-        <dt class="prompt">--></dt>
-        <dd>
-          <textarea name="name" rows="1" placeholder="..."></textarea>
-        </dd>
       </dl>
+      <twere-commandcomponent></twere-commandcomponent>
     </section>`
   }
 
