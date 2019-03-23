@@ -22,6 +22,7 @@ export class Component extends window.HTMLElement {
   paint () {
     const content = document.createElement('template')
     content.innerHTML = this.template
+    while (this.firstChild) this.removeChild(this.firstChild)
     this.appendChild(content.content);
     return this.innerHTML
   }

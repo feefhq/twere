@@ -11,7 +11,8 @@ import { NoteComponent } from './NoteComponent.mjs'
 export class PageComponent extends Component {
 
   connectedCallback () {
-    this.getAll()
+    this.getNoteList()
+    Note.on('dirty', () => this.getNoteList())
   }
 
   get template () {
@@ -30,11 +31,11 @@ export class PageComponent extends Component {
   }
 
   /**
-   * @description
-   * @memberof Extended
+   * @description Get a list of notes
+   * @memberof PageComponent
    */
-  getAll () {
-    Note.getAll()
+  getNoteList () {
+    Note.list(10)
       .then(result => {
         this.notes = result
         this.paint()
