@@ -1,19 +1,11 @@
 import { Component } from '../core/Component.mjs'
 import { Note } from '../models/Note.mjs'
+import { CommandTemplate } from '../templates/CommandTemplate.mjs'
 
 export class CommandComponent extends Component {
-  get template () {
-    return `
-    <dl>
-      <dt class="prompt">--></dt>
-      <dd>
-        <textarea name="name" rows="1" placeholder="..."></textarea>
-      </dd>
-    </dl>
-    `
-  }
 
   connectedCallback () {
+    this.template = new CommandTemplate(this)
     this.paint()
     this.textarea = this.querySelector('textarea')
     this.addEventListener('keyup', this.onKeyUp)

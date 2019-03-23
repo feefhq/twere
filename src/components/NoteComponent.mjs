@@ -1,21 +1,12 @@
 import { Component } from '../core/Component.mjs'
+import { NoteTemplate } from '../templates/NoteTemplate.mjs'
 
 export class NoteComponent extends Component {
 
   constructor (note) {
     super()
-    this.note = note
+    this.template = new NoteTemplate(this)
+    this.data.note = note
+    this.paint()
   }
-
-  get template () {
-    return `
-      <dt>${new Date(this.note.createdAt).toISOString().slice(0, 10)}</dt>
-      <dd>
-        <article>
-          ${this.note.content}
-        </article>
-      </dd>
-    `
-  }
-
 }

@@ -7,12 +7,13 @@ import { Application } from '../core/Application.mjs'
  */
 export class Component extends window.HTMLElement {
 
-  connectedCallback () {
-    this.paint()
+  constructor () {
+    super()
+    this.data = {}
   }
 
-  get template () {
-    return ``
+  connectedCallback () {
+    // this.paint()
   }
 
   /**
@@ -21,7 +22,7 @@ export class Component extends window.HTMLElement {
    */
   paint () {
     const content = document.createElement('template')
-    content.innerHTML = this.template
+    content.innerHTML = this.template.render()
     while (this.firstChild) this.removeChild(this.firstChild)
     this.appendChild(content.content);
     return this.innerHTML

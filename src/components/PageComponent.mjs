@@ -1,6 +1,6 @@
 import { Component } from '../core/Component.mjs'
 import { Note } from '../models/Note.mjs'
-import { NoteComponent } from './NoteComponent.mjs'
+import { PageTemplate } from '../templates/PageTemplate.mjs'
 
 /**
  * @description Proving that a Component can be extended
@@ -11,23 +11,9 @@ import { NoteComponent } from './NoteComponent.mjs'
 export class PageComponent extends Component {
 
   connectedCallback () {
+    this.template = new PageTemplate(this)
     this.getNoteList()
     Note.on('dirty', () => this.getNoteList())
-  }
-
-  get template () {
-    return `
-    <header>
-      <h1>
-        <span>&lsquo;</span>twere
-      </h1>
-    </header>
-    <section>
-      <dl>
-        ${this.notes.map(note => new NoteComponent(note).template).join('')}
-      </dl>
-      <twere-commandcomponent></twere-commandcomponent>
-    </section>`
   }
 
   /**
@@ -37,7 +23,7 @@ export class PageComponent extends Component {
   getNoteList () {
     Note.list(10)
       .then(result => {
-        this.notes = result
+        this.data.notes = result
         this.paint()
       })
   }
