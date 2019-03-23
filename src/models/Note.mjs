@@ -1,9 +1,9 @@
 /**
  * A Note model.
  */
-import Model from './../core/Model.mjs'
+import { Model } from './../core/Model.mjs'
 
-export default class Note extends Model {
+export class Note extends Model {
   /**
    * Not much needs to be done here, other than defining properties. Anything
    * defined here will be magically turned into data properties in the DB.

@@ -3,9 +3,9 @@
  * experiment in being able to wrap Promises and async/await around the standard
  * indexedDB implementation, which only uses callbacks.
  */
-import Application from './Application.mjs'
+import { Application } from './Application.mjs'
 
-export default class Database {
+export class Database {
   /**
    * Sets the name of the DB, and returns the instance.
    */
@@ -14,6 +14,20 @@ export default class Database {
     this._name = name
     this._db = null
     return this
+  }
+
+  static init () {
+    this.open()
+  }
+
+  /**
+   * @description
+   * @static
+   * @param {*} models
+   * @memberof Database
+   */
+  static register (models) {
+    // models.forEach((model) => console.log(model))
   }
 
   /**
@@ -27,9 +41,9 @@ export default class Database {
    * Wraps a promise around the standard indexedDB API, and return `this` for
    * ability to chain.
    */
-  open () {
+  static open () {
     return new Promise((resolve) => {
-      const request = indexedDB.open(this._name, 1)
+      const request = indexedDB.open(Application.appName, 1)
       request.onsuccess = () => {
         resolve(request.result)
       };
@@ -37,7 +51,7 @@ export default class Database {
       request.onerror = () => {}
     })
       .then((result) => {
-        this._db = result
+        this.db = result
         return this
       })
   }
@@ -70,7 +84,7 @@ export default class Database {
   /**
    * Wrapper around IDB transaction. Clunky, and could do with a Promise.
    */
-  transaction (name, readable) {
-    return this._db.transaction(name, readable)
+  static transaction (name, readable) {
+    return this.db.transaction(name, readable)
   }
 }

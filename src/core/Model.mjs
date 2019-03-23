@@ -1,9 +1,9 @@
 /**
  * The M in MVC
  */
-import Application from './Application.mjs'
+import { Application } from './Application.mjs'
 
-export default class Model {
+export class Model {
   /**
    * Creates a store for this model based on the name. Probably needs a better
    * name to avoid confusion with native function name. This looks as though it
@@ -30,14 +30,15 @@ export default class Model {
   /**
    * Currently obsolete. Will get all entities. Getters will want to be chainable.
    */
-  static getAll () {
+  static async getAll () {
+    await Application.db.open()
     return new Promise((resolve) => {
       const tx = Application.db.transaction(this.prototype.constructor.name, 'readwrite')
       const store = tx.objectStore(this.prototype.constructor.name)
       const request = store.getAll()
       request.onsuccess = (res) => {
         resolve(request)
-      };
+      }
     }).then((request) => {
       return request.result
     })

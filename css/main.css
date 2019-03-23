@@ -25,11 +25,9 @@ html {
   font-weight: 100;
   line-height: 24px;
   color: rgb(255, 255, 255);
-  height: 100%;
 }
 
 body {
-  height: 100%;
   margin: 0;
   font-feature-settings: "calt" 1;
   font-family: "Fira Code";
@@ -67,8 +65,11 @@ header {
 }
 
 section {
-  /* position: fixed;
-  bottom: 0; */
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  overflow: scroll;
 }
 
 h1 {
@@ -84,7 +85,7 @@ header span {
 
 dl {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: min-content auto;
 }
 
 [contenteditable]:focus {

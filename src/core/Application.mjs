@@ -1,49 +1,39 @@
+import { Database } from './Database.mjs';
+
 /**
  * The main Application class. This is designed to be a singleton with only
  * static methods, so that it can maintain state, and be easily injected
  * anywhere.
  */
-export default class Application {
-  /**
-   * Creates an instance of Application.
-   */
+export class Application {
+
   constructor () {
-    this.models = []
-    this.controllers = []
-    this.controllerMap = new Map()
-    this.views = []
+    this.appName = null
     this.db = null
-    this.node = null
+  }
+
+  static init () {
+    this.db = Database
   }
 
   /**
-   * Controllers get passed in as object references, and this takes care of
-   * doing instantiation. Everything is stored in a map, so that references can
-   * be used at any time.
-   *
-   * Why not just instantiate and then pass in? It makes application config
-   * really straightforward.
+   * @description Define the application components
+   * @static
+   * @memberof Application
    */
-  static set controllers (controllers) {
-    this.controllerMap = new Map()
-    controllers.forEach((controller) => {
-      this.controllerMap.set(controller.name, Object.create(controller.prototype))
+  static set components (components) {
+    components.forEach((component) => {
+      component.define()
     })
   }
 
   /**
-   * Fire up the application. A connection to the DB will do any data store
-   * upgrades.
+   * @description Define object models for the application
+   * @static
+   * @memberof Application
    */
-  static start () {
-    const node = document.createElement('div')
-    node.setAttribute('id', `twere-${this.name}`)
-    this.node = document.body.appendChild(node)
-
-    this.db.open().then(() => {
-      this.controllerMap.forEach((controller) => {
-        controller.list()
-      })
-    })
+  static set models (models = []) {
+    if (models.constructor.name !== 'Array') throw new Error(`Modules should be passed in as an array.`)
+    Database.register(models)
   }
 }
