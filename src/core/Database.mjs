@@ -8,7 +8,7 @@ import { Application } from './Application.mjs'
 export class Database {
 
   static register (models) {
-    // models.forEach((model) => console.log(model))
+    this.models = models
   }
 
   /**
@@ -40,18 +40,20 @@ export class Database {
    * version whenever the schema changes. It doesn't really do that properly
    * yet.
    */
-  onupgradeneeded (db) {
+  static onupgradeneeded (db) {
     this.db = db
-    const filtered = Application.models.filter(model => !db.objectStoreNames.contains(model.name))
+    const filtered = this.models.filter(model => !db.objectStoreNames.contains(model.name))
+    console.log(filtered);
+
     filtered.forEach(model => model.createObjectStore())
   }
 
   /**
    * Create an object store. Dubious about this needing to be async
    */
-  createObjectStore (name) {
+  static createObjectStore (name) {
     return new Promise((resolve) => {
-      const request = this._db.createObjectStore(name, { autoIncrement: true })
+      const request = this.db.createObjectStore(name, { autoIncrement: true })
       request.onsuccess = () => resolve(request)
     })
       .then(() => this)
