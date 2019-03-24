@@ -11,7 +11,7 @@ export class PageTemplate extends Template {
     </header>
     <section>
       <dl>
-        ${this.data.notes.map(note => new NoteComponent(note).template.render()).join('')}
+        ${this.data.notes.map(note => new NoteComponent(note)).join('')}
       </dl>
       <twere-commandcomponent></twere-commandcomponent>
     </section>`

@@ -2,11 +2,9 @@ import { Component } from '../core/Component.mjs'
 import { NoteTemplate } from '../templates/NoteTemplate.mjs'
 
 export class NoteComponent extends Component {
-
   constructor (note) {
     super()
-    this.template = new NoteTemplate(this)
+    this.template = NoteTemplate
     this.data.note = note
-    this.paint()
   }
 }

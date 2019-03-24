@@ -6,26 +6,7 @@
 import { Application } from './Application.mjs'
 
 export class Database {
-  /**
-   * Sets the name of the DB, and returns the instance.
-   */
-  constructor (name) {
-    this._models = []
-    this._name = name
-    this._db = null
-    return this
-  }
 
-  static init () {
-    this.open()
-  }
-
-  /**
-   * @description
-   * @static
-   * @param {*} models
-   * @memberof Database
-   */
   static register (models) {
     // models.forEach((model) => console.log(model))
   }
@@ -34,7 +15,7 @@ export class Database {
    * Get the current database version
    */
   get version () {
-    return this._db.version
+    return this.db.version
   }
 
   /**
@@ -43,10 +24,8 @@ export class Database {
    */
   static open () {
     return new Promise((resolve) => {
-      const request = indexedDB.open(Application.appName, 1)
-      request.onsuccess = () => {
-        resolve(request.result)
-      };
+      const request = window.indexedDB.open(Application.appName, 1)
+      request.onsuccess = () => resolve(request.result)
       request.onupgradeneeded = () => this.onupgradeneeded(request.result)
       request.onerror = () => {}
     })
@@ -62,11 +41,9 @@ export class Database {
    * yet.
    */
   onupgradeneeded (db) {
-    this._db = db
+    this.db = db
     const filtered = Application.models.filter(model => !db.objectStoreNames.contains(model.name))
-    filtered.forEach((model) => {
-      model.createObjectStore()
-    })
+    filtered.forEach(model => model.createObjectStore())
   }
 
   /**
@@ -75,16 +52,38 @@ export class Database {
   createObjectStore (name) {
     return new Promise((resolve) => {
       const request = this._db.createObjectStore(name, { autoIncrement: true })
-      request.onsuccess = () => {
-        resolve(request)
-      };
-    }).then(() => this)
+      request.onsuccess = () => resolve(request)
+    })
+      .then(() => this)
   }
 
-  /**
-   * Wrapper around IDB transaction. Clunky, and could do with a Promise.
-   */
-  static transaction (name, readable) {
-    return this.db.transaction(name, readable)
+  static async save (name, obj) {
+    await this.open()
+    return new Promise((resolve) => {
+      const tx = this.db.transaction(name, 'readwrite')
+      const store = tx.objectStore(name)
+      tx.oncomplete = () => resolve()
+      store.add(obj)
+    })
+  }
+
+  static async list (name, count = 1000, order = 'asc') {
+    const direction = (order === 'desc') ? 'prev' : 'next'
+    await this.open()
+    return new Promise((resolve) => {
+      const tx = this.db.transaction(name, 'readwrite')
+      const store = tx.objectStore(name)
+      const cursor = store.openCursor(null, direction)
+      const result = []
+      cursor.onsuccess = (e) => {
+        const cursor = e.target.result
+        if (cursor && result.length < count) {
+          result.push(cursor.value)
+          cursor.continue()
+        } else {
+          resolve(result.reverse())
+        }
+      }
+    })
   }
 }

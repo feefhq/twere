@@ -21,35 +21,15 @@ export class Model extends EventMixin(Base) {
    * Needs lots of error handling to be added.
    */
   save () {
-    return new Promise((resolve) => {
-      const tx = Application.db.transaction(this.constructor.name, 'readwrite')
-      tx.oncomplete = () => resolve(this)
-      const store = tx.objectStore(this.constructor.name)
-      store.add(this.getData())
-      this.constructor.trigger('dirty', this);
-    }).then(() => this)
+    Application.db.save(this.constructor.name, this.getData())
+    this.constructor.trigger('dirty', this)
   }
 
   /**
-   * Currently obsolete. Will get all entities. Getters will want to be chainable.
+   * Currently obsolete. Will get all entities.
    */
-  static async list (count = 1000) {
-    await Application.db.open()
-    return new Promise((resolve) => {
-      const tx = Application.db.transaction(this.prototype.constructor.name, 'readwrite')
-      const store = tx.objectStore(this.prototype.constructor.name)
-      const cursor = store.openCursor(null, 'prev')
-      const result = []
-      cursor.onsuccess = (e) => {
-        const cursor = e.target.result
-        if (cursor && result.length < count) {
-          result.push(cursor.value)
-          cursor.continue()
-        } else {
-          resolve(result)
-        }
-      }
-    }).then(result => result.reverse())
+  static list (count = 1000, order = 'desc') {
+    return Application.db.list(this.prototype.constructor.name, count, order)
   }
 
   /**

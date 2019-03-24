@@ -11,7 +11,7 @@ import { PageTemplate } from '../templates/PageTemplate.mjs'
 export class PageComponent extends Component {
 
   connectedCallback () {
-    this.template = new PageTemplate(this)
+    this.template = PageTemplate
     this.getNoteList()
     Note.on('dirty', () => this.getNoteList())
   }

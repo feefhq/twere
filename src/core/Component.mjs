@@ -12,8 +12,8 @@ export class Component extends window.HTMLElement {
     this.data = {}
   }
 
-  connectedCallback () {
-    // this.paint()
+  toString () {
+    return this.paint()
   }
 
   /**
@@ -21,11 +21,7 @@ export class Component extends window.HTMLElement {
    * @memberof Component
    */
   paint () {
-    const content = document.createElement('template')
-    content.innerHTML = this.template.render()
-    while (this.firstChild) this.removeChild(this.firstChild)
-    this.appendChild(content.content);
-    return this.innerHTML
+    return this.template.new(this).paint()
   }
 
   /**

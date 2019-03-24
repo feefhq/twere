@@ -1,4 +1,4 @@
-import { Template } from "../core/Template.mjs";
+import { Template } from '../core/Template.mjs'
 
 export class CommandTemplate extends Template {
 

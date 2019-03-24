@@ -5,7 +5,7 @@ import { CommandTemplate } from '../templates/CommandTemplate.mjs'
 export class CommandComponent extends Component {
 
   connectedCallback () {
-    this.template = new CommandTemplate(this)
+    this.template = CommandTemplate
     this.paint()
     this.textarea = this.querySelector('textarea')
     this.addEventListener('keyup', this.onKeyUp)
