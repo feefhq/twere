@@ -24,7 +24,7 @@ export class Component extends EventMixin(window.HTMLElement) {
   paint () {
     const render = this.template.new(this).paint()
     this.trigger('paint', this)
-    return render;
+    return render
   }
 
   /**
