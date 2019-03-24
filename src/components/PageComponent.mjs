@@ -14,6 +14,12 @@ export class PageComponent extends Component {
     this.template = PageTemplate
     this.getNoteList()
     Note.on('dirty', () => this.getNoteList())
+    this.on('paint', () => this.doScroll())
+  }
+
+  doScroll () {
+    const section = this.querySelector('section')
+    section.scrollTop = section.scrollHeight
   }
 
   /**
@@ -21,7 +27,7 @@ export class PageComponent extends Component {
    * @memberof PageComponent
    */
   getNoteList () {
-    Note.list(10)
+    Note.list(100)
       .then(result => {
         this.data.notes = result
         this.paint()

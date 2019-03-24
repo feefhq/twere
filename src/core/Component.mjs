@@ -1,11 +1,12 @@
 import { Application } from '../core/Application.mjs'
+import { EventMixin } from './mixins/EventMixin.mjs'
 
 /**
  * @description An isolated component
  * @export
  * @class Component
  */
-export class Component extends window.HTMLElement {
+export class Component extends EventMixin(window.HTMLElement) {
 
   constructor () {
     super()
@@ -21,7 +22,9 @@ export class Component extends window.HTMLElement {
    * @memberof Component
    */
   paint () {
-    return this.template.new(this).paint()
+    const render = this.template.new(this).paint()
+    this.trigger('paint', this)
+    return render;
   }
 
   /**

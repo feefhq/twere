@@ -11,6 +11,12 @@ export const EventMixin = (superclass) => class extends superclass {
     this.handlers[eventName].push(handler)
   }
 
+  on (eventName, handler) {
+    this.handlers = this.handlers || {}
+    this.handlers[eventName] = this.handlers[eventName] || []
+    this.handlers[eventName].push(handler)
+  }
+
   /**
    * @description
    * @static
@@ -26,6 +32,15 @@ export const EventMixin = (superclass) => class extends superclass {
     }
   }
 
+  off (eventName, handler) {
+    if (!this.handlers || this.handlers[eventName]) return
+    for (let i = 0; i < this.handlers.length; i++) {
+      if (this.handlers[i] === handler) {
+        this.handlers.splice(i--, 1)
+      }
+    }
+  }
+
   /**
    * @description
    * @static
@@ -33,6 +48,11 @@ export const EventMixin = (superclass) => class extends superclass {
    * @param {*} args
    */
   static trigger (eventName, ...args) {
+    if (!this.handlers || !this.handlers[eventName]) return
+    this.handlers[eventName].forEach(handler => handler.apply(this, args))
+  }
+
+  trigger (eventName, ...args) {
     if (!this.handlers || !this.handlers[eventName]) return
     this.handlers[eventName].forEach(handler => handler.apply(this, args))
   }
