@@ -63,8 +63,8 @@ header span {
   color: rgb(0, 148, 255);
 }
 
-
 dl {
+  margin: 0;
   display: grid;
   grid-template-columns: min-content auto;
 }
@@ -125,6 +125,7 @@ code {
 }
 
 textarea {
+  outline: none;
   box-sizing: border-box; /* Ensures width can be set exactly */
   border: none;
   color: rgb(255, 255, 255);
