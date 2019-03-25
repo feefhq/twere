@@ -13,6 +13,7 @@
   --code-margin:      8px 0 8px -15px;
   --editable-padding: 8px 12px 8px 12px;
   --editable-margin:  -8px -12px -8px -15px;
+  --base-font-size:        16px;
 }
 
 html {
@@ -22,7 +23,7 @@ html {
   -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
   margin: 0;
   background: var(--main-bg-color);
-  font-size: 16px;
+  font-size: var(--base-font-size);
   font-weight: 100;
   line-height: 24px;
   color: rgb(255, 255, 255);
@@ -139,9 +140,7 @@ textarea {
   box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
   resize: none;
   caret-color: var(--caret-color);
-  /* position: fixed;
-  bottom: 0;
-  left: 0; */
+  font-size: var(--base-font-size);
 }
 
 textarea::selected {
