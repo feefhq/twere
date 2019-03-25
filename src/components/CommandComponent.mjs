@@ -8,6 +8,7 @@ export class CommandComponent extends Component {
     this.template = CommandTemplate
     this.paint()
     this.textarea = this.querySelector('textarea')
+    this.textarea.focus()
     this.addEventListener('keyup', this.onKeyUp)
   }
 
