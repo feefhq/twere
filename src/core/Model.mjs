@@ -24,6 +24,10 @@ export class Model extends EventMixin(Base) {
     Application.db.save(this.constructor.name, this.getData())
     this.constructor.trigger('dirty', this)
   }
+  delete (id) {
+    Application.db.delete(this.constructor.name, id)
+    // this.constructor.trigger('dirty', this)
+  }
 
   /**
    * Currently obsolete. Will get all entities.
