@@ -6,6 +6,7 @@
   "author": "Phil Powell",
   "license": "GPL-3.0",
   "scripts": {
+    "serve": "serve -s",
     "test": "node tests/runner.server.js"
   },
   "devDependencies": {
