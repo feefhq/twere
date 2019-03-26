@@ -3,9 +3,9 @@ import { CommandComponent } from './components/CommandComponent.mjs'
 import { NoteComponent } from './components/NoteComponent.mjs'
 import { PageComponent } from './components/PageComponent.mjs'
 import { Note } from './models/Note.mjs'
+import { PageRouter } from './routers/PageRouter.mjs'
 
 Application.appName = 'twere'
-Application.init()
 
 Application.components = [
   PageComponent,
@@ -15,4 +15,8 @@ Application.components = [
 
 Application.models = [
   Note
+]
+
+Application.routers = [
+  PageRouter
 ]

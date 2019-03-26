@@ -7,13 +7,14 @@ import { Database } from './Database.mjs';
  */
 export class Application {
 
-  constructor () {
-    this.appName = null
-    this.db = null
-  }
-
-  static init () {
-    this.db = Database
+  /**
+   * @description Simply gets a default Database class
+   * @readonly
+   * @static
+   * @memberof Application
+   */
+  static get db () {
+    return Database
   }
 
   /**
@@ -22,9 +23,8 @@ export class Application {
    * @memberof Application
    */
   static set components (components) {
-    components.forEach((component) => {
-      component.define()
-    })
+    if (components.constructor.name !== 'Array') throw new Error(`Components should be passed in as an array.`)
+    components.forEach(component => component.define())
   }
 
   /**
@@ -34,7 +34,6 @@ export class Application {
    */
   static set models (models = []) {
     if (models.constructor.name !== 'Array') throw new Error(`Modules should be passed in as an array.`)
-    Database.register(models)
-    // models.forEach(model => model.on('dirty', (event) => console.log(event)))
+    this.db.register(models)
   }
 }
