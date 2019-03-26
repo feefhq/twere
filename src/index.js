@@ -17,5 +17,5 @@ Application.models = [
 ]
 
 Application.router
-  .add('/note/:id')
-  .add('/note/:id/delete')
+  .add({ route: '/note/:id' })
+  .add({ route: '/note/:id/delete', obj: Note, action: 'DELETE' })

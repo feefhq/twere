@@ -8,8 +8,9 @@ export class Router {
    * @returns
    * @memberof Router
    */
-  static add (route) {
+  static add ({ route = null, obj = null, action = 'GET' }) {
     this.init()
+    console.log(action, route, obj)
     this.routes = this.routes || []
     this.routes.push(route)
     this.routes.sort((a, b) => b.length - a.length)
@@ -35,7 +36,7 @@ export class Router {
   }
 
   /**
-   * @description Initiates the router, registering it's events
+   * @description Initiates the router, registering it's events. Immutable.
    * @static
    * @memberof Router
    */
