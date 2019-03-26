@@ -36,6 +36,7 @@ export class Component extends EventMixin(window.HTMLElement) {
    * https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define
    */
   static define (options = {}) {
+    console.debug('Registering component:', this.name)
     if (!Application.appName) throw new Error(`You need to define a name for the application. Here's how:\n  Applicaiton.appName = 'myapp'`)
     window.customElements.define(`${Application.appName}-${this.name.toLowerCase()}`, this)
   }

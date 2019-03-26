@@ -9,8 +9,9 @@ export class Router {
    * @memberof Router
    */
   static add ({ route = null, obj = null, action = 'GET' }) {
+    if (!route) return
     this.init()
-    console.log(action, route, obj)
+    console.debug('Registering route:', action, route, obj)
     this.routes = this.routes || []
     this.routes.push(route)
     this.routes.sort((a, b) => b.length - a.length)

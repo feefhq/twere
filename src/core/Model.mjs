@@ -13,6 +13,7 @@ export class Model extends EventMixin(Base) {
    * stage.
    */
   static createObjectStore () {
+    console.debug('Creating model object store:', this.name)
     Application.db.createObjectStore(this.name)
   }
 
@@ -41,5 +42,9 @@ export class Model extends EventMixin(Base) {
    */
   getData () {
     return Object.assign({}, this)
+  }
+
+  static toString () {
+    return this.name
   }
 }
