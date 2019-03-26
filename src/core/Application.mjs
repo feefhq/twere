@@ -1,4 +1,5 @@
 import { Database } from './Database.mjs';
+import { Router } from './Router.mjs'
 
 /**
  * The main Application class. This is designed to be a singleton with only
@@ -8,7 +9,7 @@ import { Database } from './Database.mjs';
 export class Application {
 
   /**
-   * @description Simply gets a default Database class
+   * @description Simply gets the default Database class
    * @readonly
    * @static
    * @memberof Application
@@ -18,7 +19,7 @@ export class Application {
   }
 
   /**
-   * @description Define the application components
+   * @description Register components for the application
    * @static
    * @memberof Application
    */
@@ -28,12 +29,21 @@ export class Application {
   }
 
   /**
-   * @description Define object models for the application
+   * @description Register object models for the application
    * @static
    * @memberof Application
    */
   static set models (models = []) {
     if (models.constructor.name !== 'Array') throw new Error(`Modules should be passed in as an array.`)
     this.db.register(models)
+  }
+
+  /**
+   * @description Register routes for the application
+   * @static
+   * @memberof Application
+   */
+  static get router () {
+    return Router
   }
 }

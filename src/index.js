@@ -3,7 +3,6 @@ import { CommandComponent } from './components/CommandComponent.mjs'
 import { NoteComponent } from './components/NoteComponent.mjs'
 import { PageComponent } from './components/PageComponent.mjs'
 import { Note } from './models/Note.mjs'
-import { PageRouter } from './routers/PageRouter.mjs'
 
 Application.appName = 'twere'
 
@@ -17,6 +16,6 @@ Application.models = [
   Note
 ]
 
-Application.routers = [
-  PageRouter
-]
+Application.router
+  .add('/note/:id')
+  .add('/note/:id/delete')

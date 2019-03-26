@@ -94,6 +94,10 @@ dt {
   color: rgba(255, 255, 255, 0.25);
 }
 
+dt a {
+  display: inline;
+}
+
 dt.prompt {
   color: var(--caret-color);
   margin-top: 16px;
