@@ -1,3 +1,6 @@
+import { GET, POST, PUT, DELETE } from './mixins/Actions.mjs'
+
+
 export class Router {
 
   /**
@@ -8,14 +11,19 @@ export class Router {
    * @returns
    * @memberof Router
    */
-  static add ({ route = null, obj = null, action = 'GET' }) {
+  static add (route = null, ...objs) {
     if (!route) return
     this.init()
-    console.debug('Registering route:', action, route, obj)
-    this.routes = this.routes || []
-    this.routes.push(route)
-    this.routes.sort((a, b) => b.length - a.length)
+    this.routes = this.routes || new Map()
+    this.routes.set(route, objs)
     return this
+  }
+
+  /**
+   *
+   */
+  static getSortedRouteArray () {
+    return [...this.routes.keys()].sort((a, b) => b.length - a.length)
   }
 
   /**
@@ -24,13 +32,22 @@ export class Router {
    * @param {*} path
    * @memberof Router
    */
-  static go (path) {
-    const match = this.routes.find(route => {
+  static push (path, method) {
+    const route = this.matchPath(path)
+    if (route) {
+      const finalRoute = route.find(m => m.method.name === method.toLowerCase())
+      finalRoute.push()
+      window.history.pushState({}, 'Updated!', path)
+    }
+  }
+
+  static matchPath (path) {
+    const match = this.getSortedRouteArray().find(route => {
       const match = new RegExp(route.replace(/:[^\s/]+/g, '([\\w-_]+)'))
       return path.match(match)
     })
     if (match) {
-      window.history.pushState({}, 'Updated!', path)
+      return this.routes.get(match)
     } else {
       throw new Error(`No match for path: ${path}`)
     }
@@ -53,13 +70,22 @@ export class Router {
    * @memberof Router
    */
   static interceptClickEvents (event) {
+    event.preventDefault() // Testing
     const href = event.target.getAttribute('href') || ''
-
-    if (event.target.tagName.toLowerCase() !== 'a') return
     if (href.startsWith('http')) return
 
-    event.preventDefault()
+    switch (event.target.tagName.toLowerCase()) {
+      case 'a':
+        this.push(href, event.target.getAttribute('method'))
+        break
+      case 'button':
+      case 'input':
+        this.push(event.target.form.action, event.target.form)
+        break
+      default:
+        return
+    }
 
-    this.go(href)
+    event.preventDefault()
   }
 }

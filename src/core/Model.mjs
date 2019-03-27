@@ -6,6 +6,14 @@ import { Application } from './Application.mjs'
 import { EventMixin } from './mixins/EventMixin.mjs'
 
 export class Model extends EventMixin(Base) {
+  get (params) {
+    console.log('GET', params);
+  }
+
+  delete (params) {
+    console.log('DELETE', params)
+  }
+
   /**
    * Creates a store for this model based on the name. Probably needs a better
    * name to avoid confusion with native function name. This looks as though it
@@ -25,10 +33,10 @@ export class Model extends EventMixin(Base) {
     Application.db.save(this.constructor.name, this.getData())
     this.constructor.trigger('dirty', this)
   }
-  delete (id) {
-    Application.db.delete(this.constructor.name, id)
-    // this.constructor.trigger('dirty', this)
-  }
+  // delete (id) {
+  //   Application.db.delete(this.constructor.name, id)
+  //   // this.constructor.trigger('dirty', this)
+  // }
 
   /**
    * Currently obsolete. Will get all entities.

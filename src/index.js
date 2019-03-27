@@ -3,6 +3,7 @@ import { CommandComponent } from './components/CommandComponent.mjs'
 import { NoteComponent } from './components/NoteComponent.mjs'
 import { PageComponent } from './components/PageComponent.mjs'
 import { Note } from './models/Note.mjs'
+import { GET } from './core/mixins/Actions.mjs'
 
 Application.appName = 'twere'
 
@@ -17,5 +18,5 @@ Application.models = [
 ]
 
 Application.router
-  .add({ route: '/note/:id' })
-  .add({ route: '/note/:id/delete', obj: Note, action: 'DELETE' })
+  .add('/note/:id', Note.GET, Note.DELETE)
+  .add('/note/:id/delete', Note.DELETE)
