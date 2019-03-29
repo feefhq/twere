@@ -18,5 +18,4 @@ Application.models = [
 ]
 
 Application.router
-  .add('/note/:id', Note.GET, Note.DELETE)
-  .add('/note/:id/delete', Note.DELETE)
+  .add('/note/:id', Note.GET, Note.DELETE, Note.POST)

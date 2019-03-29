@@ -1,5 +1,4 @@
 export class Base {
-
   constructor () {
     this.method = ''
   }

@@ -6,10 +6,6 @@ export class Router {
   /**
    * @description Add a route to the application. Is chainable, hooray!
    * Sorts longest to shortest each time, to save energy later on.
-   * @static
-   * @param {*} route
-   * @returns
-   * @memberof Router
    */
   static add (route = null, ...objs) {
     if (!route) return
@@ -20,17 +16,16 @@ export class Router {
   }
 
   /**
-   *
+   * Get a sorted array of route strings. This is useful for finding matches in an
+   * ordered fashion
    */
   static getSortedRouteArray () {
-    return [...this.routes.keys()].sort((a, b) => b.length - a.length)
+    const keys = [...this.routes.keys()]
+    return keys.sort((a, b) => b.length - a.length)
   }
 
   /**
-   * @description Placeholder function for moving to links
-   * @static
-   * @param {*} path
-   * @memberof Router
+   * @description Push the next HTTP state
    */
   static push (path, method) {
     const route = this.matchPath(path)
@@ -41,6 +36,10 @@ export class Router {
     }
   }
 
+  /**
+   * @description Find the first match of the path request. This searches route strings
+   * in order of length, so that it can be greedy.
+   */
   static matchPath (path) {
     const match = this.getSortedRouteArray().find(route => {
       const match = new RegExp(route.replace(/:[^\s/]+/g, '([\\w-_]+)'))
@@ -54,9 +53,8 @@ export class Router {
   }
 
   /**
-   * @description Initiates the router, registering it's events. Immutable.
-   * @static
-   * @memberof Router
+   * @description Initiates the router, registering it's events. Is idempotent to help
+   * with composition.
    */
   static init () {
     if (!this.touched) document.addEventListener('click', event => this.interceptClickEvents(event))
@@ -64,28 +62,38 @@ export class Router {
   }
 
   /**
-   * @description Adds an event listener which intercepts events for relative links
-   * @static
-   * @param {*} event
-   * @memberof Router
+   * @description Adds an event listener which intercepts events for relative links.
+   * Any event which is targeting an external resource will be allowed to just continue
    */
   static interceptClickEvents (event) {
-    event.preventDefault() // Testing
-    const href = event.target.getAttribute('href') || ''
-    if (href.startsWith('http')) return
+    if (!event.target.getAttribute('href') &&
+      !event.target.form) return
+
+    const action = event.target.getAttribute('href') ||
+      event.target.form.action ||
+      ''
+
+    // if (this.isAbsouluteURL(action)) return
 
     switch (event.target.tagName.toLowerCase()) {
       case 'a':
-        this.push(href, event.target.getAttribute('method'))
+        this.push(action, event.target.getAttribute('method'))
         break
       case 'button':
       case 'input':
-        this.push(event.target.form.action, event.target.form)
+        this.push(action, event.target.form.method, event.target.form)
         break
       default:
         return
     }
 
     event.preventDefault()
+  }
+
+  /**
+   * @description
+   */
+  static isAbsouluteURL (path) {
+    return path.startsWith('http')
   }
 }
