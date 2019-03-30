@@ -6,16 +6,6 @@ import { Database } from './Database.mjs';
  * anywhere.
  */
 export class Application {
-
-  constructor () {
-    this.appName = null
-    this.db = null
-  }
-
-  static init () {
-    this.db = Database
-  }
-
   /**
    * @description Define the application components
    * @static
@@ -38,3 +28,6 @@ export class Application {
     // models.forEach(model => model.on('dirty', (event) => console.log(event)))
   }
 }
+
+Application.appName = 'default'
+Application.db = Database

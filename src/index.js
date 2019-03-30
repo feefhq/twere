@@ -5,7 +5,6 @@ import { PageComponent } from './components/PageComponent.mjs'
 import { Note } from './models/Note.mjs'
 
 Application.appName = 'twere'
-Application.init()
 
 Application.components = [
   PageComponent,
