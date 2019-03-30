@@ -15,3 +15,7 @@ Application.components = [
 Application.models = [
   Note
 ]
+
+Application.router
+  .add('/note', Note.PUT)
+  .add('/note/:id', Note.GET, Note.DELETE, Note.POST)

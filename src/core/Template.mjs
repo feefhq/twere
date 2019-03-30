@@ -1,6 +1,7 @@
-export class Template {
+export class Template extends window.HTMLElement {
 
   constructor (component) {
+    super()
     this.component = component
     this.data = component.data
     return this
@@ -28,11 +29,9 @@ export class Template {
    * @memberof Component
    */
   paint () {
-    const content = document.createElement('template')
-    content.innerHTML = this.render()
-    while (this.component.firstChild) this.component.removeChild(this.component.firstChild)
-    this.component.appendChild(content.content);
-    return this.component.innerHTML
+    const template = document.createElement('template')
+    template.innerHTML = this.render()
+    this.component.appendChild(template.content)
+    return this.component
   }
-
 }

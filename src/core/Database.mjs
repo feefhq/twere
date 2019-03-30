@@ -8,6 +8,7 @@ import { Application } from './Application.mjs'
 export class Database {
 
   static register (models) {
+    console.debug('Registering models with Database:', models.join())
     this.models = models
   }
 
@@ -43,8 +44,6 @@ export class Database {
   static onupgradeneeded (db) {
     this.db = db
     const filtered = this.models.filter(model => !db.objectStoreNames.contains(model.name))
-    console.log(filtered);
-
     filtered.forEach(model => model.createObjectStore())
   }
 
