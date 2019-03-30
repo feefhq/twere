@@ -19,7 +19,11 @@ export class CommandComponent extends Component {
   }
 
   submit () {
-    new Note({ content: this.textarea.value }).save()
+    const domEvent = document.createEvent('Event')
+    domEvent.initEvent('submit', false, true)
+    this.textarea.form.dispatchEvent(domEvent)
+
+    // new Note({ content: this.textarea.value }).save()
     this.reset()
   }
 

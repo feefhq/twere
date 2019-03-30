@@ -7,11 +7,15 @@ import { EventMixin } from './mixins/EventMixin.mjs'
 
 export class Model extends EventMixin(Base) {
   get (params) {
-    console.log('GET', params);
+    console.log('GET', params)
   }
 
   delete (params) {
     console.log('DELETE', params)
+  }
+
+  put (params) {
+    console.log('PUT', params)
   }
 
   /**

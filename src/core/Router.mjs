@@ -1,8 +1,4 @@
-import { GET, POST, PUT, DELETE } from './mixins/Actions.mjs'
-
-
 export class Router {
-
   /**
    * @description Add a route to the application. Is chainable, hooray!
    * Sorts longest to shortest each time, to save energy later on.
@@ -10,6 +6,7 @@ export class Router {
   static add (route = null, ...objs) {
     if (!route) return
     this.init()
+    this.handlers = new Map()
     this.routes = this.routes || new Map()
     this.routes.set(route, objs)
     return this
@@ -57,8 +54,24 @@ export class Router {
    * with composition.
    */
   static init () {
-    if (!this.touched) document.addEventListener('click', event => this.interceptClickEvents(event))
+    if (!this.touched) {
+      document.addEventListener('click', event => this.interceptClickEvents(event))
+    }
     this.touched = true
+  }
+
+  /**
+   * @description
+   * @static
+   * @param {HTMLElement} form
+   * @memberof Router
+   */
+  static registerForm (form) {
+    if (this.handlers.has(form.getAttribute('data-uuid'))) return
+    const random = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+    form.setAttribute('data-uuid', random)
+    this.handlers.set(random, form)
+    form.addEventListener('submit', event => this.interceptClickEvents(event))
   }
 
   /**
@@ -66,10 +79,14 @@ export class Router {
    * Any event which is targeting an external resource will be allowed to just continue
    */
   static interceptClickEvents (event) {
+    event.preventDefault()
+
     if (!event.target.getAttribute('href') &&
+      !event.target &&
       !event.target.form) return
 
     const action = event.target.getAttribute('href') ||
+      event.target.action ||
       event.target.form.action ||
       ''
 
@@ -78,6 +95,9 @@ export class Router {
     switch (event.target.tagName.toLowerCase()) {
       case 'a':
         this.push(action, event.target.getAttribute('method'))
+        break
+      case 'form':
+        this.push(action, event.target.method, event.target)
         break
       case 'button':
       case 'input':

@@ -24,7 +24,9 @@ export class Base {
   static delete () {}
 
   static get PUT () {
-    return this.put()
+    const obj = Object.create(this.prototype)
+    obj.method = obj.put
+    return obj
   }
 
   static put () {}

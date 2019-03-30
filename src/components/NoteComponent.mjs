@@ -6,5 +6,6 @@ export class NoteComponent extends Component {
     super()
     this.template = NoteTemplate
     this.data.note = note
+    console.log('New note');
   }
 }

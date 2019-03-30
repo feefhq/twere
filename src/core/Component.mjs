@@ -22,9 +22,11 @@ export class Component extends EventMixin(window.HTMLElement) {
    * @memberof Component
    */
   paint () {
-    const render = this.template.new(this).paint()
+    const template = this.template.new(this).paint()
+    const forms = template.querySelectorAll('form')
+    Array.from(forms).forEach(form => Application.router.registerForm(form))
     this.trigger('paint', this)
-    return render
+    return template.innerHTML
   }
 
   /**
