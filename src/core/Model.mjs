@@ -6,12 +6,21 @@ import { Application } from './Application.mjs'
 import { EventMixin } from './mixins/EventMixin.mjs'
 
 export class Model extends EventMixin(Base) {
+  constructor (...params) {
+    super()
+    this.data = params
+  }
+
   get (params) {
     console.log('GET', params)
   }
 
   delete (params) {
     console.log('DELETE', params)
+  }
+
+  post (params) {
+    console.log('POST', params)
   }
 
   put (params) {

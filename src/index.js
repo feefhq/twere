@@ -4,7 +4,12 @@ import { NoteComponent } from './components/NoteComponent.mjs'
 import { PageComponent } from './components/PageComponent.mjs'
 import { Note } from './models/Note.mjs'
 
-Application.appName = 'twere'
+// Give the application a name
+// Application.appName = 'twere'
+
+Application.router
+  .add('/note', Note.POST)
+  .add('/note/:id', Note.GET, Note.DELETE, Note.POST)
 
 Application.components = [
   PageComponent,
@@ -15,7 +20,3 @@ Application.components = [
 Application.models = [
   Note
 ]
-
-Application.router
-  .add('/note', Note.PUT)
-  .add('/note/:id', Note.GET, Note.DELETE, Note.POST)

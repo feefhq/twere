@@ -8,7 +8,7 @@ export class PageTemplate extends Template {
       <dl>
         ${this.data.notes.map(note => new NoteComponent(note)).join('')}
       </dl>
-      <twere-commandcomponent></twere-commandcomponent>
+      <default-commandcomponent></default-commandcomponent>
     </section>`
   }
 }

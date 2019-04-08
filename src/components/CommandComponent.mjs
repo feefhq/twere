@@ -3,10 +3,11 @@ import { Note } from '../models/Note.mjs'
 import { CommandTemplate } from '../templates/CommandTemplate.mjs'
 
 export class CommandComponent extends Component {
-
-  connectedCallback () {
+  prepare () {
     this.template = CommandTemplate
-    this.paint()
+  }
+
+  ready () {
     this.textarea = this.querySelector('textarea')
     this.textarea.focus()
     this.addEventListener('keyup', this.onKeyUp)

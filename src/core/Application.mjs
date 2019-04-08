@@ -14,7 +14,10 @@ export class Application {
    */
   static set components (components) {
     if (components.constructor.name !== 'Array') throw new Error(`Components should be passed in as an array.`)
-    components.forEach(component => component.define())
+    components.forEach(component => {
+      console.debug('Registering component:', component.name)
+      window.customElements.define(`${this.appName}-${component.name.toLowerCase()}`, component)
+    })
   }
 
   /**
@@ -39,3 +42,5 @@ export class Application {
 
 Application.appName = 'default'
 Application.db = Database
+Application.models = []
+Application.components = []

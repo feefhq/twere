@@ -9,10 +9,13 @@ import { PageTemplate } from '../templates/PageTemplate.mjs'
  * @extends {Component}
  */
 export class PageComponent extends Component {
-
-  connectedCallback () {
+  prepare () {
+    this.data.notes = []
     this.template = PageTemplate
     this.getNoteList()
+  }
+
+  ready () {
     Note.on('dirty', () => this.getNoteList())
     this.on('paint', () => this.doScroll())
   }

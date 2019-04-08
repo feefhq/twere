@@ -32,7 +32,9 @@ export class Base {
   static put () {}
 
   static get POST () {
-    return this.post()
+    const obj = Object.create(this.prototype)
+    obj.method = obj.post
+    return obj
   }
 
   static post () {}

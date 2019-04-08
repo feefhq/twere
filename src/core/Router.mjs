@@ -3,8 +3,9 @@ export class Router {
    * @description Add a route to the application. Is chainable, hooray!
    * Sorts longest to shortest each time, to save energy later on.
    */
-  static add (route = null, ...objs) {
+  static add (route, ...objs) {
     if (!route) return
+    console.log(`Registering route: ${route}`)
     this.init()
     this.handlers = new Map()
     this.routes = this.routes || new Map()
@@ -22,9 +23,10 @@ export class Router {
   }
 
   /**
-   * @description Push the next HTTP state
+   * Push the next HTTP state
    */
   static push (path, method) {
+    console.log(`Pushing new state: ${path} ${method.toUpperCase()}`)
     const route = this.matchPath(path)
     if (route) {
       const finalRoute = route.find(m => m.method.name === method.toLowerCase())
@@ -38,9 +40,11 @@ export class Router {
    * in order of length, so that it can be greedy.
    */
   static matchPath (path) {
+    const url = new URL(path)
+
     const match = this.getSortedRouteArray().find(route => {
       const match = new RegExp(route.replace(/:[^\s/]+/g, '([\\w-_]+)'))
-      return path.match(match)
+      return url.pathname.match(match)
     })
     if (match) {
       return this.routes.get(match)
@@ -79,18 +83,12 @@ export class Router {
    * Any event which is targeting an external resource will be allowed to just continue
    */
   static interceptClickEvents (event) {
-    event.preventDefault()
-
     if (!event.target.getAttribute('href') &&
-      !event.target &&
-      !event.target.form) return
+      !event.target.action) return
 
     const action = event.target.getAttribute('href') ||
       event.target.action ||
-      event.target.form.action ||
       ''
-
-    // if (this.isAbsouluteURL(action)) return
 
     switch (event.target.tagName.toLowerCase()) {
       case 'a':
@@ -110,10 +108,4 @@ export class Router {
     event.preventDefault()
   }
 
-  /**
-   * @description
-   */
-  static isAbsouluteURL (path) {
-    return path.startsWith('http')
-  }
 }
