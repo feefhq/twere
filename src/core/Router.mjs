@@ -1,7 +1,9 @@
+/**
+ * 
+ */
 export class Router {
   /**
-   * @description Add a route to the application. Is chainable, hooray!
-   * Sorts longest to shortest each time, to save energy later on.
+   * Add a route to the application. Is chainable, hooray!
    */
   static add (route, ...objs) {
     if (!route) return
@@ -36,7 +38,7 @@ export class Router {
   }
 
   /**
-   * @description Find the first match of the path request. This searches route strings
+   * Find the first match of the path request. This searches route strings
    * in order of length, so that it can be greedy.
    */
   static matchPath (path) {
@@ -54,7 +56,7 @@ export class Router {
   }
 
   /**
-   * @description Initiates the router, registering it's events. Is idempotent to help
+   * Initiates the router, registering it's events. Is idempotent to help
    * with composition.
    */
   static init () {
@@ -65,10 +67,8 @@ export class Router {
   }
 
   /**
-   * @description
-   * @static
-   * @param {HTMLElement} form
-   * @memberof Router
+   * Register a form by giving it a unique ID and adding it to a map so that it
+   * can be easily found later on.
    */
   static registerForm (form) {
     if (this.handlers.has(form.getAttribute('data-uuid'))) return
@@ -79,7 +79,7 @@ export class Router {
   }
 
   /**
-   * @description Adds an event listener which intercepts events for relative links.
+   * Adds an event listener which intercepts events for relative links.
    * Any event which is targeting an external resource will be allowed to just continue
    */
   static interceptClickEvents (event) {
@@ -107,5 +107,4 @@ export class Router {
 
     event.preventDefault()
   }
-
 }
