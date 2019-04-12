@@ -4,12 +4,11 @@ export class NoteTemplate extends Template {
   render () {
     return `
     <dt>
-      <a href='/note/${this.data.note.id}' method='delete'>
+      <a href='/note/${this.data.note.id}' data-method='delete'>
         ${new Date(this.data.note.createdAt).toISOString().slice(0, 10)}
       </a>
       <form method='post' action='/note/${this.data.note.id}'>
-        <input type='hidden' name='testFormField' value='testValue'>
-        <button>Submit</button>
+        <button data-method="delete">Submit</button>
       </form>
     </dt>
     <dd>

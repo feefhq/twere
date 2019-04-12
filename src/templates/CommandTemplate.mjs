@@ -8,7 +8,7 @@ export class CommandTemplate extends Template {
         <dt class="prompt">--></dt>
         <dd>
           <form method='post' action='/note'>
-            <textarea name="name" rows="1" placeholder="..."></textarea>
+            <textarea name="content" rows="1" placeholder="..."></textarea>
           </form>
         </dd>
       </dl>

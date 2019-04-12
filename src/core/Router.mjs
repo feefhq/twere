@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 export class Router {
   /**
@@ -27,12 +27,17 @@ export class Router {
   /**
    * Push the next HTTP state
    */
-  static push (path, method) {
+  static push (path, method, target) {
     console.log(`Pushing new state: ${path} ${method.toUpperCase()}`)
+    let params = {}
+    if (target instanceof window.HTMLFormElement) {
+      params = new window.FormData(target)
+    }
+
     const route = this.matchPath(path)
     if (route) {
       const finalRoute = route.find(m => m.method.name === method.toLowerCase())
-      finalRoute.push()
+      finalRoute.push(params)
       window.history.pushState({}, 'Updated!', path)
     }
   }
@@ -42,7 +47,7 @@ export class Router {
    * in order of length, so that it can be greedy.
    */
   static matchPath (path) {
-    const url = new URL(path)
+    const url = new URL(path, window.location.origin)
 
     const match = this.getSortedRouteArray().find(route => {
       const match = new RegExp(route.replace(/:[^\s/]+/g, '([\\w-_]+)'))
@@ -83,23 +88,30 @@ export class Router {
    * Any event which is targeting an external resource will be allowed to just continue
    */
   static interceptClickEvents (event) {
+    event.preventDefault()
     if (!event.target.getAttribute('href') &&
-      !event.target.action) return
+      !event.target.action &&
+      !event.target.form) return
 
     const action = event.target.getAttribute('href') ||
       event.target.action ||
+      event.target.form.action ||
       ''
+
+    const method = event.target.getAttribute('data-method') ||
+      event.target.method ||
+      'GET'
 
     switch (event.target.tagName.toLowerCase()) {
       case 'a':
-        this.push(action, event.target.getAttribute('method'))
+        this.push(action, method)
         break
       case 'form':
-        this.push(action, event.target.method, event.target)
+        this.push(action, method, event.target)
         break
       case 'button':
       case 'input':
-        this.push(action, event.target.form.method, event.target.form)
+        this.push(action, method, event.target.form)
         break
       default:
         return

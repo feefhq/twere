@@ -1,5 +1,4 @@
 export class Template extends window.HTMLElement {
-
   constructor (component) {
     super()
     this.component = component

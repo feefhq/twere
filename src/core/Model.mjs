@@ -6,7 +6,7 @@ import { Application } from './Application.mjs'
 import { EventMixin } from './mixins/EventMixin.mjs'
 
 export class Model extends EventMixin(Base) {
-  constructor (...params) {
+  constructor (params = {}) {
     super()
     this.data = params
   }
@@ -16,11 +16,14 @@ export class Model extends EventMixin(Base) {
   }
 
   delete (params) {
-    console.log('DELETE', params)
+    console.log('DELETE', ...params)
   }
 
   post (params) {
-    console.log('POST', params)
+    console.log('POST', ...params)
+    params.forEach((value, key) => { this[key] = value })
+    this.createdAt = new Date()
+    this.save()
   }
 
   put (params) {
@@ -46,10 +49,11 @@ export class Model extends EventMixin(Base) {
     Application.db.save(this.constructor.name, this.getData())
     this.constructor.trigger('dirty', this)
   }
-  // delete (id) {
-  //   Application.db.delete(this.constructor.name, id)
-  //   // this.constructor.trigger('dirty', this)
-  // }
+
+  remove (id) {
+    Application.db.delete(this.constructor.name, id)
+    // this.constructor.trigger('dirty', this)
+  }
 
   /**
    * Currently obsolete. Will get all entities.
@@ -62,9 +66,14 @@ export class Model extends EventMixin(Base) {
    * Gets all enumerable properties and packages them in a clean object
    */
   getData () {
-    return Object.assign({}, this)
+    const dataObj = Object.assign({}, this)
+    delete dataObj.method
+    return dataObj
   }
 
+  /**
+   * Returns the constructor name
+   */
   static toString () {
     return this.name
   }

@@ -23,8 +23,6 @@ export class CommandComponent extends Component {
     const domEvent = document.createEvent('Event')
     domEvent.initEvent('submit', false, true)
     this.textarea.form.dispatchEvent(domEvent)
-
-    // new Note({ content: this.textarea.value }).save()
     this.reset()
   }
 

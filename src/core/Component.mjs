@@ -7,9 +7,9 @@ import { EventMixin } from './mixins/EventMixin.mjs'
  * @class Component
  */
 export class Component extends EventMixin(window.HTMLElement) {
-  constructor () {
+  constructor (data = {}) {
     super()
-    this.data = {}
+    this.data = data
     this.prepare()
   }
 

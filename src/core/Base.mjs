@@ -3,8 +3,8 @@ export class Base {
     this.method = ''
   }
 
-  push () {
-    this.method()
+  push (params) {
+    this.method(params)
   }
 
   static get GET () {
