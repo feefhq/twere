@@ -30,6 +30,9 @@ export class Template extends window.HTMLElement {
   paint () {
     const template = document.createElement('template')
     template.innerHTML = this.render()
+    while (this.component.firstChild) {
+      this.component.removeChild(this.component.firstChild)
+    }
     this.component.appendChild(template.content)
     return this.component
   }
