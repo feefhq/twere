@@ -10,7 +10,7 @@ import { PageTemplate } from '../templates/PageTemplate.mjs'
  */
 export class PageComponent extends Component {
   prepare () {
-    this.data.notes = []
+    this._.notes = []
     this.template = PageTemplate
     this.getNoteList()
   }
@@ -32,7 +32,7 @@ export class PageComponent extends Component {
   getNoteList () {
     Note.list(100)
       .then(result => {
-        this.data.notes = result
+        this._.notes = result
         this.paint()
       })
   }

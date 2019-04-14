@@ -9,13 +9,18 @@ import { EventMixin } from './mixins/EventMixin.mjs'
 export class Component extends EventMixin(window.HTMLElement) {
   constructor (data = {}) {
     super()
-    this.data = data
+    this._ = data
     this.prepare()
   }
 
   connectedCallback () {
     this.paint()
     this.ready()
+  }
+
+  set _ (newValue) {
+    // Can now add a callback here
+    super._ = newValue
   }
 
   prepare () {}

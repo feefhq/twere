@@ -2,14 +2,14 @@ export class Template extends window.HTMLElement {
   constructor (component) {
     super()
     this.component = component
-    this.data = component.data
+    this._ = component._
     return this
   }
 
   static new (component) {
     const obj = Object.create(this.prototype)
     obj.component = component
-    obj.data = component.data
+    obj._ = component._
     return obj
   }
 
