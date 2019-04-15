@@ -3,7 +3,8 @@ import { Note } from '../models/Note.mjs'
 import { CommandTemplate } from '../templates/CommandTemplate.mjs'
 
 export class CommandComponent extends Component {
-  prepare () {
+  constructor () {
+    super()
     this.template = CommandTemplate
   }
 

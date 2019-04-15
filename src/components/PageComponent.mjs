@@ -9,7 +9,8 @@ import { PageTemplate } from '../templates/PageTemplate.mjs'
  * @extends {Component}
  */
 export class PageComponent extends Component {
-  prepare () {
+  constructor () {
+    super()
     this._.notes = []
     this.template = PageTemplate
     this.getNoteList()

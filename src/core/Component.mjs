@@ -10,7 +10,6 @@ export class Component extends EventMixin(window.HTMLElement) {
   constructor (data = {}) {
     super()
     this._ = data
-    this.prepare()
   }
 
   connectedCallback () {
@@ -22,8 +21,6 @@ export class Component extends EventMixin(window.HTMLElement) {
     // Can now add a callback here
     super._ = newValue
   }
-
-  prepare () {}
 
   ready () {}
 
