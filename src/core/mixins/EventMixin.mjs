@@ -1,8 +1,8 @@
 /**
- * 
- * @param superclass 
+ *
+ * @param superclass
  */
-export const EventMixin = (superclass) => class extends superclass {
+export const EventMixin = superclass => class extends superclass {
   /**
    * @description Add an eventhandler
    * @static
