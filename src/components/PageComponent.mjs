@@ -14,9 +14,6 @@ export class PageComponent extends Component {
     this._.notes = []
     this.template = PageTemplate
     this.getNoteList()
-  }
-
-  ready () {
     Note.on('dirty', () => this.getNoteList())
     this.on('paint', () => this.doScroll())
   }

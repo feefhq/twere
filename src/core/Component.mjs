@@ -1,4 +1,3 @@
-import { Application } from '../core/Application.mjs'
 import { EventMixin } from './mixins/EventMixin.mjs'
 
 /**
@@ -14,7 +13,6 @@ export class Component extends EventMixin(window.HTMLElement) {
 
   connectedCallback () {
     this.paint()
-    this.ready()
   }
 
   set _ (newValue) {
@@ -35,8 +33,6 @@ export class Component extends EventMixin(window.HTMLElement) {
   paint () {
     if (!this.template) return
     const template = this.template.new(this).paint()
-    const forms = template.querySelectorAll('form')
-    Array.from(forms).forEach(form => Application.router.registerForm(form))
     this.trigger('paint', this)
     return template.innerHTML
   }

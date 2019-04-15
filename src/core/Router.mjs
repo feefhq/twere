@@ -9,7 +9,6 @@ export class Router {
     if (!route) return
     console.log(`Registering route: ${route}`)
     this.init()
-    this.handlers = new Map()
     this.routes = this.routes || new Map()
     this.routes.set(route, objs)
     return this
@@ -29,14 +28,11 @@ export class Router {
    */
   static push (path, method, target) {
     console.log(`Pushing new state: ${path} ${method.toUpperCase()}`)
-    let params = {}
-    if (target instanceof window.HTMLFormElement) {
-      params = new window.FormData(target)
-    }
-
     const route = this.matchPath(path)
+
     if (route) {
-      const finalRoute = route.find(m => m.method.name === method.toLowerCase())
+      const finalRoute = this.routes.get(route).find(m => m.method.name === method.toLowerCase())
+      const params = this.buildParams(target, path, route)
       finalRoute.push(params)
       window.history.pushState({}, 'Updated!', path)
     }
@@ -48,13 +44,12 @@ export class Router {
    */
   static matchPath (path) {
     const url = new URL(path, window.location.origin)
-
     const match = this.getSortedRouteArray().find(route => {
       const match = new RegExp(route.replace(/:[^\s/]+/g, '([\\w-_]+)'))
       return url.pathname.match(match)
     })
     if (match) {
-      return this.routes.get(match)
+      return match
     } else {
       throw new Error(`No match for path: ${path}`)
     }
@@ -66,57 +61,79 @@ export class Router {
    */
   static init () {
     if (!this.touched) {
-      document.addEventListener('click', event => this.interceptClickEvents(event))
+      document.addEventListener('click', event => this.interceptRoutableEvents(event))
+      document.addEventListener('submit', event => this.interceptRoutableEvents(event))
     }
     this.touched = true
-  }
-
-  /**
-   * Register a form by giving it a unique ID and adding it to a map so that it
-   * can be easily found later on.
-   */
-  static registerForm (form) {
-    if (this.handlers.has(form.getAttribute('data-uuid'))) return
-    const random = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-    form.setAttribute('data-uuid', random)
-    this.handlers.set(random, form)
-    form.addEventListener('submit', event => this.interceptClickEvents(event))
   }
 
   /**
    * Adds an event listener which intercepts events for relative links.
    * Any event which is targeting an external resource will be allowed to just continue
    */
-  static interceptClickEvents (event) {
+  static interceptRoutableEvents (event) {
+    if (!this.isRoutableEvent(event)) return
+
     event.preventDefault()
-    if (!event.target.getAttribute('href') &&
-      !event.target.action &&
-      !event.target.form) return
 
-    const action = event.target.getAttribute('href') ||
+    const action = this.inferAction(event)
+    const method = this.inferMethod(event)
+    const target = this.inferTarget(event)
+
+    this.push(action, method, target)
+  }
+
+  static isRoutableEvent (event) {
+    switch (event.type) {
+      case 'click':
+        return event.target.getAttribute('href')
+      case 'submit':
+        return event.target.action
+    }
+  }
+
+  static inferAction (event) {
+    return event.target.getAttribute('href') ||
       event.target.action ||
-      event.target.form.action ||
-      ''
+      (event.target.form &&
+      event.target.form.action)
+  }
 
-    const method = event.target.getAttribute('data-method') ||
+  static inferMethod (event) {
+    return event.target.getAttribute('data-method') ||
       event.target.method ||
       'GET'
+  }
 
+  static inferTarget (event) {
     switch (event.target.tagName.toLowerCase()) {
       case 'a':
-        this.push(action, method)
-        break
+        return
       case 'form':
-        this.push(action, method, event.target)
-        break
+        return event.target
       case 'button':
       case 'input':
-        this.push(action, method, event.target.form)
-        break
-      default:
-        return
+        return event.target.form
     }
+  }
 
-    event.preventDefault()
+  static buildParams (target, path, route) {
+    const data = new window.FormData(target)
+    this.extractParamsFromPath(path, route)
+      .forEach((value, key) => data.append(key, value))
+    return data
+  }
+
+  static extractParamsFromPath (path, route) {
+    const params = new window.FormData()
+    const url = new URL(path, window.location.origin)
+    const routeUrl = new URL(route, window.location.origin)
+    const urlParts = url.pathname.split('/')
+    const routeParts = routeUrl.pathname.split('/')
+    urlParts.forEach((part, index) => {
+      const paramName = routeParts[index].slice(1)
+      if (~routeParts[index].indexOf(':')) params.append(paramName, part)
+    })
+    return params
   }
 }

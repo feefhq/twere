@@ -6,12 +6,13 @@ export class CommandComponent extends Component {
   constructor () {
     super()
     this.template = CommandTemplate
+    this.addEventListener('keyup', this.onKeyUp)
   }
 
-  ready () {
+  connectedCallback () {
+    super.connectedCallback()
     this.textarea = this.querySelector('textarea')
     this.textarea.focus()
-    this.addEventListener('keyup', this.onKeyUp)
   }
 
   onKeyUp (event) {
@@ -21,9 +22,8 @@ export class CommandComponent extends Component {
   }
 
   submit () {
-    const domEvent = document.createEvent('Event')
-    domEvent.initEvent('submit', false, true)
-    this.textarea.form.dispatchEvent(domEvent)
+    const event = new window.Event('submit', { bubbles: true, cancelable: true })
+    this.textarea.form.dispatchEvent(event)
     this.reset()
   }
 

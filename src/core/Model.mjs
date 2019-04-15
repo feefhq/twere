@@ -17,6 +17,8 @@ export class Model extends EventMixin(Base) {
 
   delete (params) {
     console.log('DELETE', ...params)
+    params.forEach((value, key) => { this[key] = value })
+    this.remove(this.id)
   }
 
   post (params) {
@@ -52,7 +54,7 @@ export class Model extends EventMixin(Base) {
 
   remove (id) {
     Application.db.delete(this.constructor.name, id)
-    // this.constructor.trigger('dirty', this)
+    this.constructor.trigger('dirty', this)
   }
 
   /**

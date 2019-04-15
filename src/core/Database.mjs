@@ -52,7 +52,7 @@ export class Database {
    */
   static createObjectStore (name) {
     return new Promise((resolve) => {
-      const request = this.db.createObjectStore(name, {keyPath: 'id', autoIncrement:true})
+      const request = this.db.createObjectStore(name, { keyPath: 'id', autoIncrement: true })
       request.onsuccess = () => resolve(request)
     })
       .then(() => this)
@@ -72,9 +72,11 @@ export class Database {
     await this.open()
     return new Promise((resolve) => {
       const tx = this.db.transaction(name, 'readwrite')
+      tx.oncomplete = (result) => {
+        resolve()
+      }
       const store = tx.objectStore(name)
-      tx.oncomplete = () => resolve()
-      store.delete(id)
+      store.delete(Number(id))
     })
   }
 
