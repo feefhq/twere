@@ -2,7 +2,7 @@
 @import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css');
 
 :root {
-  --main-bg-color:    hsl(212, 8%, 25%);
+  --main-bg-color:    hsl(222, 16%, 16%);
   --main-color:       rgb(255, 255, 255);
   --header-bg-color:  hsl(212, 8%, 22%);
   --caret-color:      rgb(0, 148, 255);
@@ -13,7 +13,7 @@
   --code-margin:      8px 0 8px -15px;
   --editable-padding: 8px 12px 8px 12px;
   --editable-margin:  -8px -12px -8px -15px;
-  --base-font-size:        16px;
+  --base-font-size:   15px;
 }
 
 html {
@@ -25,13 +25,13 @@ html {
   background: var(--main-bg-color);
   font-size: var(--base-font-size);
   font-weight: 100;
-  line-height: 24px;
+  line-height: 1.5;
   color: rgb(255, 255, 255);
 }
 
 body {
   height: 100%;
-  margin: 0;
+  margin: 0.5em 0 0;
   font-feature-settings: "calt" 1;
   font-family: "Fira Code";
 }
@@ -88,24 +88,30 @@ textarea::selection {
 
 dt {
   white-space: nowrap;
-  margin: 8px 16px 8px 16px;
+  padding: .5em 1em .5em 1em;
+  margin: 0;
   text-align: right;
-  font-weight: 600;
+  /* font-weight: 600; */
+}
+
+dt, dt a {
   color: rgba(255, 255, 255, 0.25);
 }
 
 dt a {
   display: inline;
+  border: none;
 }
 
 dt.prompt {
   color: var(--caret-color);
-  margin-top: 16px;
-  min-width: 96px; /* This is a temporary kludge */
+  padding-top: 1em;
+  min-width: 6em; /* This is a temporary kludge */
 }
 
 dd {
-  margin: 8px 16px;
+  margin: 0;
+  padding: .5em 1em;
 }
 
 pre {
@@ -136,11 +142,13 @@ textarea {
   color: rgb(255, 255, 255);
   background: rgba(0, 0, 0, 0.025);
   font-family: "Fira Code";
-  line-height: 24px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
+  -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
   width: 100%;
-  border-left: 3px solid var(--caret-color);
-  padding: 8px 15px 8px 12px;
-  margin: 0 0 0 -15px;
+  border-left: 0.15em solid var(--caret-color);
+  padding: 0.5em 1em;
+  margin: 0 0 0 -1.075em;
   box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
   resize: none;
   caret-color: var(--caret-color);
