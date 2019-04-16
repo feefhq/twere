@@ -6,13 +6,13 @@ export class CommandComponent extends Component {
   constructor () {
     super()
     this.template = CommandTemplate
-    this.addEventListener('keyup', this.onKeyUp)
   }
 
   connectedCallback () {
     super.connectedCallback()
     this.textarea = this.querySelector('textarea')
     this.textarea.focus()
+    this.addEventListener('keyup', this.onKeyUp)
   }
 
   onKeyUp (event) {
