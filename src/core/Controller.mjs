@@ -1,9 +1,9 @@
 /**
  * The C in MVC
  */
-import Application from './Application.mjs'
+import { Application } from './Application.mjs'
 
-export default class Controller {
+export class Controller {
   /**
    * Simply sets up some defaults at the moment.
    */
