@@ -1,4 +1,5 @@
 import { Template } from '../core/Template.mjs'
+import { Markdown } from './../core/utils/Markdown.mjs'
 
 export class NoteTemplate extends Template {
   render () {
@@ -10,7 +11,7 @@ export class NoteTemplate extends Template {
     </dt>
     <dd>
       <article>
-        ${this._.note.content}
+        ${Markdown.toHTML(this._.note.content)}
       </article>
     </dd>`
   }
