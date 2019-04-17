@@ -1,7 +1,7 @@
 export class Markdown {
-  constructor (md) {
+  constructor (md = '') {
     this.md = md
-    this.flux = md
+    this.flux = this.md
   }
 
   static toHTML (md) {
