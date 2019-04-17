@@ -7,7 +7,7 @@ module.exports = function (config) {
     files: [
       { pattern: 'src/**/*.mjs', type: 'module' }
     ],
-    reporters: ['progress'],
+    reporters: ['mocha'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
