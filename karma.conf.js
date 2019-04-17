@@ -5,7 +5,6 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['mocha', 'chai'],
     files: [
-      { pattern: 'src/**/*.spec.js', type: 'module' },
       { pattern: 'src/**/*.mjs', type: 'module' }
     ],
     reporters: ['progress'],
