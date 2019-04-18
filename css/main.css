@@ -60,6 +60,14 @@ h1 {
   padding: 8px 16px;
 }
 
+p {
+  margin: 0 0 0.5em;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
 strong {
   font-weight: 600;
 }

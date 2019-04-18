@@ -6,7 +6,8 @@ export class Markdown {
 
   static toHTML (md) {
     const processed = new Markdown(md)
-    processed.vanillaBR()
+    processed.vanillaParagraph()
+      .vanillaBR()
       .bold()
     return processed.result
   }
@@ -16,8 +17,14 @@ export class Markdown {
     return this
   }
 
+  vanillaParagraph () {
+    const result = this.flux.replace(/\n([ \t]*\n)+/g, '</p><p>')
+    this.flux = (result === this.flux) ? this.flux : `<p>${result}</p>`
+    return this
+  }
+
   vanillaBR () {
-    return this.mutate(/\n/g, '<br>\n')
+    return this.mutate(/\n/g, '<br>')
   }
 
   bold () {

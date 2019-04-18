@@ -18,7 +18,15 @@ describe('Markdown', () => {
     Markdown.toHTML('**mighty**').should.equal('<strong>mighty</strong>')
   })
 
+  it('should convert double line break to <p></p>', () => {
+    Markdown.toHTML('Paragraph 1\n\nPragraph 2').should.equal('<p>Paragraph 1</p><p>Pragraph 2</p>')
+  })
+
+  it('should convert double line break to <p></p> multiple times', () => {
+    Markdown.toHTML('Paragraph 1\n\nParagraph 2\n\nParagraph 3').should.equal('<p>Paragraph 1</p><p>Paragraph 2</p><p>Paragraph 3</p>')
+  })
+
   it('should convert single line break to <br>', () => {
-    Markdown.toHTML('Line one\nLine two').should.equal('Line one<br>\nLine two')
+    Markdown.toHTML('Line one\nLine two').should.equal('Line one<br>Line two')
   })
 })
