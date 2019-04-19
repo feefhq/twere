@@ -153,7 +153,9 @@ code {
 textarea {
   outline: none;
   box-sizing: border-box; /* Ensures width can be set exactly */
+  resize: none;
   border: none;
+  overflow-y: hidden;
   color: rgb(255, 255, 255);
   background: rgba(0, 0, 0, 0.025);
   font-family: "Fira Code";
