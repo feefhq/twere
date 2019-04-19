@@ -30,8 +30,7 @@ export class Markdown {
 
   codeBlock () {
     return this.mutate(/``` *(\w*)\n([\s\S]*?)\n```/g, (match, p1, p2) => {
-      const outdent = p2.match(/^(\t| )+/) || ''
-      p2 = p2.replace(RegExp(`^${outdent[0]}`, 'gm'), '')
+      p2 = p2.replace(RegExp(`^${p2.match(/^(\t| )+/)[0] || ''[0]}`, 'gm'), '')
       return `<pre>${p2.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`
     })
   }
