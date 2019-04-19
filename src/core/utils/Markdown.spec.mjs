@@ -29,4 +29,8 @@ describe('Markdown', () => {
   it('should convert single line break to <br>', () => {
     Markdown.toHTML('Line one\nLine two').should.equal('Line one<br>Line two')
   })
+
+  it('should convert code to block', () => {
+    Markdown.toHTML('```\nSome code\n```').should.equal('<pre>Some code</pre>')
+  })
 })

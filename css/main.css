@@ -9,8 +9,8 @@
   --code-background:  rgba(255, 255, 255, 0.02);
   --code-color:       rgba(255, 255, 255, 0.75);
   --code-box-shadow:  0 0 2px rgba(0, 0, 0, .1);
-  --code-padding:     16px 15px 16px 12px;
-  --code-margin:      8px 0 8px -15px;
+  --code-padding:     0.25em 1em 0.25em .75em;
+  --code-margin:      -0.25em 0 -0.25em -1.075em;
   --editable-padding: 8px 12px 8px 12px;
   --editable-margin:  -8px -12px -8px -15px;
   --base-font-size:   15px;
@@ -128,10 +128,13 @@ dd {
 
 pre {
   display: inline-block;
+  white-space: pre;
+  -moz-tab-size: 4;
+  tab-size: 1;
   margin: var(--code-margin);
   padding: var(--code-padding);
   background: var(--code-background);
-  border-left: 3px solid rgb(255, 255, 255, 0.1);
+  border-left: 0.15em solid rgb(255, 255, 255, 0.1);
   box-shadow: var(--code-box-shadow);
   color: var(--code-color);
   font-family: "Fira Code";
