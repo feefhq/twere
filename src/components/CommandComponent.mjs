@@ -12,6 +12,7 @@ export class CommandComponent extends Component {
     super.connectedCallback()
     this.textarea = this.querySelector('textarea')
     this.textarea.focus()
+    window.scrollBy(0, 5000)
     this.addEventListener('input', this.onInput)
     this.addEventListener('keyup', this.onKeyUp)
   }
@@ -19,6 +20,7 @@ export class CommandComponent extends Component {
   onInput (event) {
     this.textarea.style.height = 'auto'
     this.textarea.style.height = `${this.textarea.scrollHeight}px`
+    window.scrollBy(0, 5000)
   }
 
   onKeyUp (event) {
