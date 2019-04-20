@@ -28,10 +28,28 @@ export class Markdown {
     return this
   }
 
+  /**
+   * Tidy up any ragged spaced or tabbed outdents
+   * @param {String} str String to be tidied
+   */
+  outdent (str) {
+    const firstLine = str.match(/^(\t| )+/) || []
+    const regex = RegExp(`^${firstLine[0]}`, 'gm')
+    return str.replace(regex, '')
+  }
+
+  /**
+   * Escape any disruptive characters, such as chevrons
+   * @param {String} str String to be escaped
+   */
+  escape (str) {
+    return str.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  }
+
   codeBlock () {
     return this.mutate(/``` *(\w*)\n([\s\S]*?)\n```/g, (match, p1, p2) => {
-      p2 = p2.replace(RegExp(`^${p2.match(/^(\t| )+/)[0] || ''[0]}`, 'gm'), '')
-      return `<pre>${p2.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`
+      p2 = this.outdent(p2)
+      return `<pre>${this.escape(p2)}</pre>`
     })
   }
 
@@ -51,7 +69,7 @@ export class Markdown {
   }
 
   bold () {
-    return this.mutate(/\*\*(\S[\s\S]*?)\*\*/g, (match, capture) =>
+    return this.mutate(/\*{2}(\S[\s\S]*?)\*{2}/g, (match, capture) =>
       (/\S$/.test(capture)) ? `<strong>${capture}</strong>` : match
     )
   }
