@@ -22,7 +22,10 @@ export class CommandComponent extends Component {
   }
 
   onKeyUp (event) {
-    if (event.shiftKey && event.key === 'Enter') this.submit()
+    if (event.shiftKey && event.key === 'Enter') {
+      event.preventDefault()
+      this.submit()
+    }
   }
 
   submit () {
