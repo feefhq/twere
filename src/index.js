@@ -4,7 +4,7 @@ import { NoteComponent } from './components/NoteComponent.js'
 import { PageComponent } from './components/PageComponent.js'
 import { Note } from './models/Note.js'
 
-Application.appName = 'twere'
+Application.name = 'twere'
 
 Application.router
   .add('/note', Note.POST)

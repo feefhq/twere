@@ -2,45 +2,52 @@ import { Database } from './Database.js'
 import { Router } from './Router.js'
 
 /**
- * The main Application class. This is designed to be a singleton with only
- * static methods, so that it can maintain state, and be easily injected
+ * The main Application class. This is designed to be a constant with only
+ * static methods, so that it can martial state, and be easily injected
  * anywhere.
  */
 export class Application {
   /**
-   * @description Register components for the application
-   * @static
-   * @memberof Application
+   * @type {string}
    */
-  static set components (components) {
+  static get name () {
+    return Application.appName || 'default'
+  }
+
+  static set name (appName) {
+    Application.appName = appName
+  }
+
+  /**
+   * @type {Comopnent[]}
+   */
+  static set components (components = []) {
     if (components.constructor.name !== 'Array') throw new Error(`Components should be passed in as an array.`)
     components.forEach(component => {
       console.debug('Registering component:', component.name)
-      window.customElements.define(`${this.appName}-${component.name.toLowerCase()}`, component)
+      window.customElements.define(`${Application.appName}-${component.name.toLowerCase()}`, component)
     })
   }
 
   /**
-   * @description Register object models for the application
-   * @static
-   * @memberof Application
+   * @type {Model[]}
    */
   static set models (models = []) {
     if (models.constructor.name !== 'Array') throw new Error(`Modules should be passed in as an array.`)
-    this.db.register(models)
+    Database.register(models)
   }
 
   /**
-   * @description Register routes for the application
-   * @static
-   * @memberof Application
+   * @type {Database}
+   */
+  static get db () {
+    return Database
+  }
+
+  /**
+   * @type {Router}
    */
   static get router () {
     return Router
   }
 }
-
-Application.appName = 'default'
-Application.db = Database
-Application.models = []
-Application.components = []

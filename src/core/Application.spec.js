@@ -2,12 +2,12 @@
 import { Application } from './Application.js'
 
 describe('Application', () => {
-  it('should have default appName', () => {
-    Application.appName.should.equal('default')
+  it('should have default name', () => {
+    Application.name.should.equal('default')
   })
 
-  it('should allow change of appName', () => {
-    Application.appName = 'testname'
-    Application.appName.should.equal('testname')
+  it('should allow change of name', () => {
+    Application.name = 'testname'
+    Application.name.should.equal('testname')
   })
 })
