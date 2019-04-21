@@ -1,5 +1,4 @@
 import { Component } from '../core/Component.mjs'
-import { Note } from '../models/Note.mjs'
 import { CommandTemplate } from '../templates/CommandTemplate.mjs'
 
 export class CommandComponent extends Component {
@@ -18,6 +17,7 @@ export class CommandComponent extends Component {
   }
 
   onInput (event) {
+    this.linkHelp()
     this.textarea.style.height = 'auto'
     this.textarea.style.height = `${this.textarea.scrollHeight}px`
     window.scrollBy(0, 5000)
@@ -38,5 +38,11 @@ export class CommandComponent extends Component {
 
   reset () {
     this.textarea.value = ''
+  }
+
+  linkHelp () {
+    if (/(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g.test(this.textarea.value)) {
+      this.textarea.value = `@link ${this.textarea.value}`
+    }
   }
 }
