@@ -1,7 +1,7 @@
 /**
  * The C in MVC
  */
-import { Application } from './Application.mjs'
+import { Application } from './Application.js'
 
 export class Controller {
   /**

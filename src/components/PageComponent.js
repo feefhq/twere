@@ -1,6 +1,6 @@
-import { Component } from '../core/Component.mjs'
-import { Note } from '../models/Note.mjs'
-import { PageTemplate } from '../templates/PageTemplate.mjs'
+import { Component } from '../core/Component.js'
+import { Note } from '../models/Note.js'
+import { PageTemplate } from '../templates/PageTemplate.js'
 
 /**
  * @description Proving that a Component can be extended

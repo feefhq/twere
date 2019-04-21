@@ -1,9 +1,9 @@
 /**
  * The M in MVC
  */
-import { Base } from './Base.mjs'
-import { Application } from './Application.mjs'
-import { EventMixin } from './mixins/EventMixin.mjs'
+import { Base } from './Base.js'
+import { Application } from './Application.js'
+import { EventMixin } from './mixins/EventMixin.js'
 
 export class Model extends EventMixin(Base) {
   constructor (params = {}) {

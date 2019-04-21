@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Application } from './Application.mjs'
+import { Application } from './Application.js'
 
 describe('Application', () => {
   it('should have default appName', () => {

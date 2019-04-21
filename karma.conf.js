@@ -5,7 +5,7 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['mocha', 'chai'],
     files: [
-      { pattern: 'src/**/*.mjs', type: 'module' }
+      { pattern: 'src/**/!(index).js', type: 'module' }
     ],
     reporters: ['mocha'],
     port: 9876,

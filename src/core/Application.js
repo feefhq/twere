@@ -1,5 +1,5 @@
-import { Database } from './Database.mjs';
-import { Router } from './Router.mjs'
+import { Database } from './Database.js'
+import { Router } from './Router.js'
 
 /**
  * The main Application class. This is designed to be a singleton with only

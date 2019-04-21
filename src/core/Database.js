@@ -3,10 +3,9 @@
  * experiment in being able to wrap Promises and async/await around the standard
  * indexedDB implementation, which only uses callbacks.
  */
-import { Application } from './Application.mjs'
+import { Application } from './Application.js'
 
 export class Database {
-
   static register (models) {
     console.debug('Registering models with Database:', models.join())
     this.models = models

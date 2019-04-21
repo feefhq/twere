@@ -1,5 +1,5 @@
-import { Component } from '../core/Component.mjs'
-import { CommandTemplate } from '../templates/CommandTemplate.mjs'
+import { Component } from '../core/Component.js'
+import { CommandTemplate } from '../templates/CommandTemplate.js'
 
 export class CommandComponent extends Component {
   constructor () {

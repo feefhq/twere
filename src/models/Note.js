@@ -1,7 +1,7 @@
 /**
  * A Note model.
  */
-import { Model } from './../core/Model.mjs'
+import { Model } from './../core/Model.js'
 
 export class Note extends Model {
   /**

@@ -1,4 +1,4 @@
-import { EventMixin } from './mixins/EventMixin.mjs'
+import { EventMixin } from './mixins/EventMixin.js'
 
 /**
  * @description An isolated component
