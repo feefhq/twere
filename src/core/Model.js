@@ -1,10 +1,10 @@
-/**
- * The M in MVC
- */
 import { Base } from './Base.js'
 import { Application } from './Application.js'
 import { EventMixin } from './mixins/EventMixin.js'
 
+/**
+ * Base class to be extended to define models.
+ */
 export class Model extends EventMixin(Base) {
   constructor (params = {}) {
     super()
