@@ -10,7 +10,7 @@
   --code-color:       rgba(255, 255, 255, 0.75);
   --code-box-shadow:  0 0 2px rgba(0, 0, 0, .1);
   --code-padding:     0.25em 1em 0.25em 1em;
-  --code-margin:      -0.25em 0 -0.25em -1.075em;
+  --code-margin:      -0.25em 0 .25em -1.075em;
   --editable-padding: 8px 12px 8px 12px;
   --editable-margin:  -8px -12px -8px -15px;
   --base-font-size:   15px;

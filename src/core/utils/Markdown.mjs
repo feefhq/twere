@@ -5,7 +5,7 @@
  */
 export class Markdown {
   constructor (md = '') {
-    this.md = `${md}\n\n`
+    this.md = `${md}`
     this.flux = this.md
   }
 
@@ -47,21 +47,36 @@ export class Markdown {
   }
 
   codeBlock () {
-    return this.mutate(/``` *(\w*)\n([\s\S]*?)\n```/g, (match, p1, p2) => {
+    return this.mutate(/``` *(\w*)\n([\s\S]*?)\n```\n*/g, (match, p1, p2) => {
       p2 = this.outdent(p2)
-      return `<pre>${this.escape(p2)}</pre>`
+      return `<pre>${this.escape(p2)}</pre>\n`
     })
   }
 
   vanillaParagraph () {
-    const multi = this.flux.match(/(.*)\n\n/g)
-    if (multi.length > 1) this.mutate(/(.*)\n\n/g, '<p>$1</p>')
-    this.flux = this.flux.trim()
+    let negate = false
+    const paras = this.flux.split(/\n{2}/)
+    if (paras.length === 1) return this
+    this.flux = paras.map(para => {
+      if (/^(<pre>|`{3})/.test(para.trim())) negate = true
+      const returnVal = (negate) ? `${para}\n\n` : `<p>${para.trim()}</p>`
+      if (/(<\/pre>|`{3}$)/.test(para.trim())) negate = false
+      return returnVal
+    }).join('').trim()
     return this
   }
 
   vanillaBR () {
-    return this.mutate(/\n/g, '<br>')
+    let negate = false
+    const lines = this.flux.trim().split(/\n/)
+    this.flux = lines.map((line, index, array) => {
+      if (index === array.length - 1) return line
+      if (/^(<pre|`{3})/.test(line.trim())) negate = true
+      const returnValue = (negate) ? `${line}\n` : `${line}<br>`
+      if (/(<\/pre>|`{3}$)/.test(line.trim())) negate = false
+      return returnValue
+    }).join('').trim()
+    return this
   }
 
   vanillaURL () {

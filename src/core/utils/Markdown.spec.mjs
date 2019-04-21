@@ -33,4 +33,8 @@ describe('Markdown', () => {
   it('should convert code to block', () => {
     Markdown.toHTML('```\nSome code\n```').should.equal('<pre>Some code</pre>')
   })
+
+  it('should reatin line breaks in code blocks', () => {
+    Markdown.toHTML('```\nSome code\n\nAnother line of code\n```').should.equal('<pre>Some code\n\nAnother line of code</pre>')
+  })
 })
