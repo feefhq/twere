@@ -1,13 +1,13 @@
 /**
- *
- * @param superclass
+ * Provide common event listeneres. Includes static and instance functions. At
+ * the moment, all of the member functions get routed to static functions. This
+ * needs a review, as it may have adverse effects.
  */
 export const EventMixin = superclass => class extends superclass {
   /**
-   * @description Add an eventhandler
-   * @static
-   * @param {*} eventName
-   * @param {*} handler
+   * Add an event listener
+   * @param {string} eventName
+   * @param {function} handler
    */
   static on (eventName, handler) {
     this.handlers = this.handlers || {}
@@ -15,15 +15,19 @@ export const EventMixin = superclass => class extends superclass {
     this.handlers[eventName].push(handler)
   }
 
+  /**
+   * Add an event listener
+   * @param {string} eventName
+   * @param {function} handler
+   */
   on (eventName, handler) {
     this.constructor.on(eventName, handler)
   }
 
   /**
-   * @description
-   * @static
-   * @param {*} eventName
-   * @param {*} handler
+   * Remove an event listener
+   * @param {string} eventName
+   * @param {function} handler
    */
   static off (eventName, handler) {
     if (!this.handlers || this.handlers[eventName]) return
@@ -34,14 +38,18 @@ export const EventMixin = superclass => class extends superclass {
     }
   }
 
+  /**
+   * Remove an event listener
+   * @param {string} eventName
+   * @param {function} handler
+   */
   off (eventName, handler) {
     this.constructor.off(eventName, handler)
   }
 
   /**
-   * @description
-   * @static
-   * @param {*} eventName
+   * Trigger an event, and propagate to relevant event handlers
+   * @param {string} eventName
    * @param {*} args
    */
   static trigger (eventName, ...args) {
@@ -49,6 +57,11 @@ export const EventMixin = superclass => class extends superclass {
     this.handlers[eventName].forEach(handler => handler.apply(this, args))
   }
 
+  /**
+   * Trigger an event, and propagate to relevant event handlers
+   * @param {string} eventName
+   * @param {*} args
+   */
   trigger (eventName, ...args) {
     this.constructor.trigger(eventName, ...args)
   }
