@@ -106,12 +106,7 @@ dt a {
   border: none;
 }
 
-dt.prompt {
-  color: var(--caret-color);
-  padding-top: 1em;
-  padding-bottom: 0;
-  min-width: 6em; /* This is a temporary kludge */
-}
+
 
 dd {
   margin: 0;
