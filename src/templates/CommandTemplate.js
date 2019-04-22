@@ -16,7 +16,7 @@ export class CommandTemplate extends Template {
           color: var(--caret-color);
           padding-top: 1em;
           padding-bottom: 0;
-          min-width: 6em; /* This is a temporary kludge */
+          min-width: 3em; /* This is a temporary kludge */
         }
         dt.prompt.out {
           animation: 0.1s ease-in 0s prompt_out;
