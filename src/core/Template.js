@@ -1,3 +1,5 @@
+import { Application } from './Application.js'
+
 export class Template extends window.HTMLElement {
   constructor (component) {
     super()
@@ -29,6 +31,7 @@ export class Template extends window.HTMLElement {
    */
   paint () {
     const template = document.createElement('template')
+    template.setAttribute('id', `${Application.appName}-${this.component.constructor.name.toLowerCase()}`)
     template.innerHTML = this.render()
     while (this.component.firstChild) {
       this.component.removeChild(this.component.firstChild)

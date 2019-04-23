@@ -13,9 +13,14 @@ export class PageComponent extends Component {
     super()
     this._.notes = []
     this.template = PageTemplate
-    this.getNoteList()
     Note.on('dirty', () => this.getNoteList())
     this.on('paint', () => this.doScroll())
+  }
+
+  connectedCallback () {
+    console.log('connected', this);
+
+    this.getNoteList()
   }
 
   doScroll () {
