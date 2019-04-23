@@ -18,7 +18,7 @@ But almost all of the things we _do_, and the things we _learn_ — including t
 
 Notebooks, note apps, reading lists, task managers, bookmarks, calendars, are all really useful tools. **`twere** aims to augment the best of these traditional tools, and then sprinkle in the ability to easily grab things you've stowed, or forgotten about, and even to help you work healthier through break reminders, or [Pomodoro](https://en.wikipedia.org/wiki/Pomodoro_Technique).
 
-It's early days for the project, and there are plenty of challenges ahead. But the hope is that **`twere** can become a tool which allows us, as developers, to be nourished by the things we find, learn and do — and to have an opportunity to reflect on the great things we _did_ as much as the great things we going to _do_.
+It's early days for the project, and there are plenty of challenges ahead. But the hope is that **`twere** can become a tool which allows us, as developers, to be nourished by the things we find, learn and do — and to have an opportunity to reflect on the great things we _did_ as much as the great things we are going to _do_.
 
 ## Principles
 
@@ -30,7 +30,7 @@ It's early days for the project, and there are plenty of challenges ahead. But t
 
 ### Keep it simple stupid
 
-[KISS](https://en.wikipedia.org/wiki/KISS_principle) is a valuable design principle. The application is being written using vanillaz JavaScript modules and web componentns, with zero deployment dependencies. It's intended to be easy to understand and maintain, by aspiring to [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy) and the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). No frameworks, no cruft; low bandwidth, fast runtime.
+[KISS](https://en.wikipedia.org/wiki/KISS_principle) is a valuable design principle. The application is being written using vanilla JavaScript modules and web components, with zero deployment dependencies. It's intended to be easy to understand and maintain, by aspiring to [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy) and the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself). No frameworks, no cruft; low bandwidth, fast runtime.
 
 ### Modern && Accessible
 
