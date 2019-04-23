@@ -42,7 +42,7 @@ But what about an aspirational startup in a developing country; a disabled perso
 
 ### Avoid noise
 
-**\`twere** is being designed to stay out of your way; but be close to hand when you need it. Notification noise is a huge problem nowadays: apps resort to pestering and nagging us in a faux-friendly manner, and we all only have so much attention. The UI for **\`twere** will be obsessively simple; it is command-led and will only prompt you when absolutely necessary, or on your terms.
+**\`twere** is being designed to stay out of your way; but be close to hand when you need it. Notification noise is a huge problem nowadays: apps resort to pestering and nagging us in a faux-friendly manner, and we all only have so much attention. The UI for **\`twere** will be obsessively simple; it is command-led and will only prompt you when absolutely necessary, or on your terms. It is being designed to infer the context of your interactions, and where your attention is focused.
 
 ## Development
 
@@ -69,3 +69,5 @@ To run tests:
 ```
 $ yarn test
 ```
+
+Testing is currently focused on Firefox, Chrome and Safari desktop browsers. Internet Explorer, Edge and mobile will be added soon.
