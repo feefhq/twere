@@ -19,10 +19,17 @@ export class Markdown {
       .vanillaURL()
       .vanillaParagraph()
       .vanillaBR()
+      .inlineCode()
       .bold()
     return processed.result.trim()
   }
 
+  /**
+   * Mutate the currently parsed string based on a regexp replacement. Can be
+   * either a string replacement or a callback.
+   * @param {RegExp} regexp a regular expression to match
+   * @param {*} newSubstr either a string replacement, or a callback fucntion
+   */
   mutate (regexp, newSubstr) {
     this.flux = this.flux.replace(regexp, newSubstr)
     return this
@@ -86,6 +93,15 @@ export class Markdown {
   bold () {
     return this.mutate(/\*{2}(\S[\s\S]*?)\*{2}/g, (match, capture) =>
       (/\S$/.test(capture)) ? `<strong>${capture}</strong>` : match
+    )
+  }
+
+  /**
+   * Convert `` to <code></code>
+   */
+  inlineCode () {
+    return this.mutate(/`(\S[\s\S]*?)`/g, (match, capture) =>
+      (/\S$/.test(capture)) ? `<code>${capture}</code>` : match
     )
   }
 

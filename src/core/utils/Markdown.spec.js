@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { Markdown } from './Markdown.js'
 
-describe('Markdown', () => {
+describe('Markdown basic', () => {
   it('should return same vanilla string', () => {
     Markdown.toHTML('vanilla').should.equal('vanilla')
   })
@@ -29,12 +29,35 @@ describe('Markdown', () => {
   it('should convert single line break to <br>', () => {
     Markdown.toHTML('Line one\nLine two').should.equal('Line one<br>Line two')
   })
+})
 
+describe('Markdown code', () => {
   it('should convert code to block', () => {
     Markdown.toHTML('```\nSome code\n```').should.equal('<pre>Some code</pre>')
   })
 
-  it('should reatin line breaks in code blocks', () => {
+  it('should retain line breaks in code blocks', () => {
     Markdown.toHTML('```\nSome code\n\nAnother line of code\n```').should.equal('<pre>Some code\n\nAnother line of code</pre>')
+  })
+
+  it('shoudl convert `inline code` in middle of a para', () => {
+    Markdown.toHTML('A para with `some code` in it').should.equal('A para with <code>some code</code> in it')
+  })
+
+  it('shoudl convert `inline code` at start of a para', () => {
+    Markdown.toHTML('`some code` at start of a para').should.equal('<code>some code</code> at start of a para')
+  })
+
+  it('shoudl convert `inline code` at end of a para', () => {
+    Markdown.toHTML('Para has code `at the end`').should.equal('Para has code <code>at the end</code>')
+  })
+
+  it('shoudl convert `inline code` twice in a para', () => {
+    Markdown.toHTML('Para has code `here` and also `here`').should.equal('Para has code <code>here</code> and also <code>here</code>')
+  })
+
+  it('shoudl convert `inline code` across paras', () => {
+    Markdown.toHTML('Para has code `here` and also `here`\n\n`And more code` in a second `para` hurrah!')
+      .should.equal('<p>Para has code <code>here</code> and also <code>here</code></p><p><code>And more code</code> in a second <code>para</code> hurrah!</p>')
   })
 })
