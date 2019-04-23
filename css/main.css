@@ -137,6 +137,7 @@ code {
   background: var(--code-background);
   color: var(--code-color);
   font-family: "Fira Code";
+  font-weight: 500;
 }
 
 textarea {
