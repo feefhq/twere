@@ -18,8 +18,6 @@ export class PageComponent extends Component {
   }
 
   connectedCallback () {
-    console.log('connected', this);
-
     this.getNoteList()
   }
 
