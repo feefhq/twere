@@ -1,17 +1,107 @@
-# &lsquo;twere
+# `twere
 
-Description will be written sometime soon.
+**`twere** is a journalling webapp for developers. It's intended to be an
+everyday work tool which allows you to keep track of the things you're doing, a
+place to save code snippets and useful links, and to help you keep track of
+the things you want to get done.
+
+The more you use **`twere**, it will become a rich resource you can easily
+search for retrieving the useful things which your brain has evicted from it's
+RAM, and to give you insights and hints about the work you do.
+
+**`twere** is a vanilla JavaScript applicaiton which runs exclusively in the browser.
+Data stays with you, on your device, works offline and doesn't require any kind
+of login (unless you want the option to lock your data).
+
+At the moment **`twere** is a very early proof of concept and is in a pre-alpha
+state. The plan is to have an alpha release ready for testing as quickly as
+possible, closely followed by a more formal beta release. Watch this >< space!
+
+## Some backgorund
+
+**`twere** is being developed as an open-source progressive web application
+(PWA). All of your data is stored locally, and is intended to be a ridiculously
+simple tool which you are using all day, every day.
+
+The idea was inspired in part by the idea of a `did.txt` file created by
+[Patrick}(https://theptrk.com/2018/07/11/did-txt-file/). It also came from my
+frustration with traditional task trackers and GTD applications. Almost every
+modern application will focus on the things you are _going_ to get done. The
+onus is always on forward momentum, completing tasks and then discarding then.
+
+But almost all of the things we do, and the things we learn — including the
+mistakes we make — have value. Ww should be able to refer back to a clever
+command snippet, or a useful link about something or other, or a
+headache-inducing gotcha. And it's useful to be able to put a pin in something
+during a busy period, or to be reminded of something useful to learn.
+
+Notebooks, reading lists, task managers, bookmarks calendars are all really
+useful tools. **`twere** aims to augment the best of these traditional tools,
+and sprinkling in the ability to easily grab things you've stowed, and even to
+help you work healthier through break reminders, or Pomodoro.
+
+It's early days for the project, and there are plenty of challenges ahead. But
+my hope is that **`twere** can become a tool which allows us, as developers, to
+be nourished by the things we find, learn and do — and to have an opportunity to
+reflect on the great things we _did_ as much as the great things we need to
+_do_.
+
+## Principles
+
+**`twere** is being developed with some important guiding principles.
+
+### Privacy by design
+
+**`twere** is an application which runs exclusively in your browser, and data is
+stored on your computer. The server is only contacted when the application
+assets need to be updated. There are no cookies, there is no need to
+authenicate. Your data is kept where it belongs: with you. You can even run it
+offline.
+
+### Keep it simple stupid
+
+[KISS](https://en.wikipedia.org/wiki/KISS_principle) is a valuable design
+principle. The application is being written using JavaScript modules and web
+componentns, with zero deployment dependencies. It's intended to be easy to
+understand and maintain, by aspiring to
+[Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)
+and the [DRY principle](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
+
+### Modern && Accessible
+
+This application aims to take advantage of exciting, modern web APIs, and will
+require a modern, mainstream browser. Considering the core target user, that's
+fine.
+
+But what about an aspirational startup in a developing country; a disabled
+person doing great things in their profession; somebody who has no desire to
+conform to being "upwardly mobile", but is nonetheless impassioned to use
+technology to inspire change?
+
+**`twere** is designed to be a modern web app. But there is also an aspiration
+to make it as accessible and progressive. A difficult, but important task.
+
+### Avoid noise
+
+**`twere** is being designed to stay out of your way; but be close to hand when
+you need it. Notification noise is a huge problem nowadays: apps resort to
+pestering and nagging us in a faux-friendly manner, and we all only have so much
+attention. The UI for **`twere** will be obsessively simple; it is command-led
+and will only prompt you when absolutely necessary, or on your terms.
 
 ## Development
 
 ### Tooling
 
-- https://yarnpkg.com/
-- https://eslint.org/
-- https://github.com/ccampbell/luna
-- https://github.com/airbnb/javascript
+The following is a list of some of the development tools being used:
 
-### Development server
+- https://yarnpkg.com/
+- https://standardjs.com/
+- https://github.com/zeit/serve
+- https://karma-runner.github.io/3.0/index.html
+- https://pptr.dev/
+
+### Running a development environmane
 
 To fire up a development server:
 
