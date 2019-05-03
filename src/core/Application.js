@@ -51,3 +51,18 @@ export class Application {
     return Router
   }
 }
+
+/**
+ * Not really keen on this being here, because it feels detached and isn't
+ * intuitive. Will find a better home soon. Also: not great for control of
+ * application flow.
+ */
+if ('serviceWorker' in navigator) {
+  console.log('Regisering service worker')
+  navigator.serviceWorker.register('/src/service-worker.js')
+    .then(reg => {
+      console.log('Service worker registration succeeded. Scope is ' + reg.scope)
+    }).catch(error => {
+      console.log('Service worker egistration failed with ' + error)
+    })
+}
