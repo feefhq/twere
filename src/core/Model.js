@@ -6,9 +6,18 @@ import { EventMixin } from './mixins/EventMixin.js'
  * Base class to be extended to define models.
  */
 export class Model extends EventMixin(Base) {
-  constructor (params = {}) {
+  /**
+   * Create a new instance with optional object properties applied. Still some
+   * work to be done here to make instantiation cleaner, more intuitive and
+   * robust
+   *
+   * @param {Object} obj An optional object which will have it's properties
+   * mapped one to one to the instance
+   */
+  constructor (obj = {}) {
     super()
-    this.data = params
+    const props = new Map(Object.entries(obj))
+    props.forEach((value, key) => Reflect.defineProperty(this, key, { value, writable: true }))
   }
 
   get (params) {
@@ -58,10 +67,17 @@ export class Model extends EventMixin(Base) {
   }
 
   /**
-   * Currently obsolete. Will get all entities.
+   * Gets a list of entities. Needs more work.
+   * @returns {Promise} Promise object represents an array of model objects
    */
   static list (count = 1000, order = 'desc') {
-    return Application.db.list(this.prototype.constructor.name, count, order)
+    return new Promise(resolve => {
+      Application.db.list(this.prototype.constructor.name, count, order)
+        .then(result => {
+          const instances = result.map(obj => Reflect.construct(this.prototype.constructor, [obj]))
+          resolve(instances)
+        })
+    })
   }
 
   /**

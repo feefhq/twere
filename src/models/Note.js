@@ -10,9 +10,8 @@ export class Note extends Model {
    * Setters and getters are implied — that's the beauty of using native
    * properties, rather than building some convoluted `field` mechanism.
    */
-  constructor (obj) {
-    super()
-    this.createdAt = Date.now()
-    this.content = obj.content
+  constructor (params) {
+    super(params)
+    this.createdAt = this.createdAt || Date.now()
   }
 }
