@@ -6,6 +6,7 @@
 export class Markdown {
   constructor (md = '') {
     this.md = `${md}`
+    /** @type {string} */
     this.flux = this.md
   }
 
@@ -15,7 +16,8 @@ export class Markdown {
    */
   static toHTML (md) {
     const processed = new Markdown(md)
-    processed.codeBlock()
+    processed.trim()
+      .codeBlock()
       .vanillaURL()
       .vanillaParagraph()
       .vanillaBR()
@@ -51,6 +53,14 @@ export class Markdown {
    */
   escape (str) {
     return str.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  }
+
+  /**
+   * Strip any leading or trailing whitepace
+   */
+  trim () {
+    this.flux = this.flux.trim()
+    return this
   }
 
   codeBlock () {

@@ -14,6 +14,18 @@ describe('Markdown basic', () => {
     Markdown.toHTML(undefined).should.equal('')
   })
 
+  it('should trim whitespace', () => {
+    Markdown.toHTML('\nStarts here').should.equal('Starts here')
+    Markdown.toHTML('\n\nStarts here').should.equal('Starts here')
+    Markdown.toHTML('\n\n\nStarts here').should.equal('Starts here')
+    Markdown.toHTML('Starts here\n').should.equal('Starts here')
+    Markdown.toHTML('Starts here\n\n').should.equal('Starts here')
+    Markdown.toHTML('Starts here\n\n\n').should.equal('Starts here')
+    Markdown.toHTML('\nStarts here\n').should.equal('Starts here')
+    Markdown.toHTML('\n\nStarts here\n\n').should.equal('Starts here')
+    Markdown.toHTML('\n\nStarts here\n\nNew para\n\n').should.equal('<p>Starts here</p><p>New para</p>')
+  })
+
   it('should convert **mighty** to <strong/>', () => {
     Markdown.toHTML('**mighty**').should.equal('<strong>mighty</strong>')
   })
