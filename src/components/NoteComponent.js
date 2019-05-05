@@ -5,6 +5,11 @@ export class NoteComponent extends Component {
   constructor (args) {
     super(args)
     this.template = NoteTemplate
-    // this.addEventListener('mouseover', () => console.log(this))
+  }
+
+  connectedCallback () {
+    if (this.previousSibling.querySelector && this.previousSibling.querySelector('dt').getAttribute('relative-time') === this.querySelector('dt').getAttribute('relative-time')) {
+      this.classList.add('group')
+    }
   }
 }

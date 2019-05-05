@@ -82,12 +82,24 @@ dl {
   margin: 0;
   display: grid;
   grid-template-columns: 0fr auto;
-
 }
 
 twere-notecomponent,
 twere-commandcomponent {
   display: contents;
+}
+
+twere-notecomponent.group dt {
+  opacity: 0;
+}
+
+twere-notecomponent.group dt:hover {
+  opacity: 0.5;
+}
+
+twere-notecomponent:not(.group) dt,
+twere-notecomponent:not(.group) dd {
+  margin-top: 0.5rem;
 }
 
 dt {

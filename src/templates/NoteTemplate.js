@@ -4,7 +4,7 @@ import { Markdown } from './../core/utils/Markdown.js'
 export class NoteTemplate extends Template {
   render () {
     return `
-    <dt>
+    <dt relative-time='${this._.note.relativeCreatedAt}'>
       <a href='/note/${this._.note.id}' data-method='delete'>
         ${this._.note.relativeCreatedAt}
       </a>
