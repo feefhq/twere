@@ -2,6 +2,7 @@
  * A Note model.
  */
 import { Model } from './../core/Model.js'
+import { Time } from '../core/utils/Time.js'
 
 export class Note extends Model {
   /**
@@ -13,5 +14,9 @@ export class Note extends Model {
   constructor (params) {
     super(params)
     this.createdAt = this.createdAt || Date.now()
+  }
+
+  get relativeCreatedAt () {
+    return Time.relativeTime(this.createdAt)
   }
 }

@@ -9,12 +9,12 @@ export class Template {
    */
   paint () {
     const template = document.createElement('template')
-    try {
+    // try {
       template.innerHTML = this.render()
-    } catch (error) {
-      console.warn('There was a rendering problem')
-      return ''
-    }
+    // } catch (error) {
+    //   console.warn('There was a rendering problem')
+    //   return ''
+    // }
     while (this.component.firstChild) {
       this.component.removeChild(this.component.firstChild)
     }

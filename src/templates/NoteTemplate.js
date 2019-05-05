@@ -6,7 +6,7 @@ export class NoteTemplate extends Template {
     return `
     <dt>
       <a href='/note/${this._.note.id}' data-method='delete'>
-        ${this._.note.createdAt.toISOString().slice(11, 16)}
+        ${this._.note.relativeCreatedAt}
       </a>
     </dt>
     <dd>

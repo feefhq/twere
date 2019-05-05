@@ -5,5 +5,6 @@ export class NoteComponent extends Component {
   constructor (args) {
     super(args)
     this.template = NoteTemplate
+    // this.addEventListener('mouseover', () => console.log(this))
   }
 }
