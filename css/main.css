@@ -54,6 +54,10 @@ footer span {
   font-weight: 900;
 }
 
+footer a {
+  border: none;
+}
+
 h1 {
   font-size: 28px;
   font-weight: 400;
