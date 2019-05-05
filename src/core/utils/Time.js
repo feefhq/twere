@@ -22,6 +22,6 @@ export class Time {
                      (delta >= -spans.month && [delta / spans.day, 'day']) ||
                      (delta >= -spans.year && [delta / spans.month, 'month']) ||
                      [delta / spans.year]
-    return rtf.format(Math.floor(relative[0]), relative[1])
+    return rtf.format(Math.round(relative[0]), relative[1])
   }
 }
