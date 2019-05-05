@@ -93,7 +93,7 @@ twere-notecomponent.group dt {
   opacity: 0;
 }
 
-twere-notecomponent.group dt:hover {
+twere-notecomponent.group:hover dt {
   opacity: 0.5;
 }
 
