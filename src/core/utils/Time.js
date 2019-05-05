@@ -7,7 +7,7 @@ export class Time {
    * @param {Date} date A relative date to now
    */
   static relativeTime (date = new Date()) {
-    const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' })
+    const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' })
     const delta = (date - Date.now()) / 1000
     const spans = {
       minute: 60,
