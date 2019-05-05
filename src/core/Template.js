@@ -1,42 +1,24 @@
-import { Application } from './Application.js'
-
-export class Template extends window.HTMLElement {
+export class Template {
   constructor (component) {
-    super()
     this.component = component
     this._ = component._
-    return this
-  }
-
-  static new (component) {
-    const obj = Object.create(this.prototype)
-    obj.component = component
-    obj._ = component._
-    return obj
   }
 
   /**
-   * @description
-   * @static
-   * @returns
-   * @memberof Template
-   */
-  toString () {
-    return this.paint()
-  }
-
-  /**
-   * @description Paint the element into the DOM
-   * @memberof Component
+   * Paint the element into the DOM
    */
   paint () {
     const template = document.createElement('template')
-    template.setAttribute('id', `${Application.appName}-${this.component.constructor.name.toLowerCase()}`)
-    template.innerHTML = this.render()
+    try {
+      template.innerHTML = this.render()
+    } catch (error) {
+      console.warn('There was a rendering problem')
+      return ''
+    }
     while (this.component.firstChild) {
       this.component.removeChild(this.component.firstChild)
     }
     this.component.appendChild(template.content)
-    return this.component
+    return this.component.outerHTML
   }
 }

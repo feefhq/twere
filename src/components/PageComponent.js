@@ -3,10 +3,7 @@ import { Note } from '../models/Note.js'
 import { PageTemplate } from '../templates/PageTemplate.js'
 
 /**
- * @description Proving that a Component can be extended
- * @export
- * @class Extended
- * @extends {Component}
+ * Page component provides the overall page layout
  */
 export class PageComponent extends Component {
   constructor () {
@@ -14,10 +11,7 @@ export class PageComponent extends Component {
     this._.notes = []
     this.template = PageTemplate
     Note.on('dirty', () => this.getNoteList())
-    this.on('paint', () => this.doScroll())
-  }
-
-  connectedCallback () {
+    // this.on('paint', () => this.doScroll())
     this.getNoteList()
   }
 

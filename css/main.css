@@ -75,6 +75,10 @@ strong {
 
 dl {
   margin: 0;
+}
+
+twere-notecomponent,
+twere-commandcomponent dl {
   display: grid;
   grid-template-columns: 0fr auto;
 }

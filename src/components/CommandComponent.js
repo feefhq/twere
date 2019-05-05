@@ -16,7 +16,7 @@ export class CommandComponent extends Component {
    * function which we're overriding and it feels icky.
    */
   connectedCallback () {
-    super.connectedCallback()
+    this.paint()
     this.textarea = this.querySelector('textarea')
     this.textarea.focus()
     this.scrollDown()
