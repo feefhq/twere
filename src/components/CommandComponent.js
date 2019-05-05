@@ -21,7 +21,7 @@ export class CommandComponent extends Component {
     this.textarea.focus()
     this.scrollDown()
     this.addEventListener('input', this.onInput)
-    this.addEventListener('keyup', this.onKeyUp)
+    this.addEventListener('keydown', this.onKeyUp)
   }
 
   /**
@@ -42,7 +42,7 @@ export class CommandComponent extends Component {
    * @param {Event} event The source event
    */
   onKeyUp (event) {
-    if (event.shiftKey && event.key === 'Enter') {
+    if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
       event.preventDefault()
       this.submit()
     }
