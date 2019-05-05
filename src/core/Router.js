@@ -1,5 +1,6 @@
 /**
- *
+ * The core Router. This is designed to be a static class which acts as a
+ * constant source of truth. TODO: add tests and docs.
  */
 export class Router {
   /**
@@ -72,8 +73,7 @@ export class Router {
    * Any event which is targeting an external resource will be allowed to just continue
    */
   static interceptRoutableEvents (event) {
-    if (!this.isRoutableEvent(event)) return
-
+    if (!this.isRoutableEvent(event) || !this.matchesOrigin(event)) return
     event.preventDefault()
 
     const action = this.inferAction(event)
@@ -81,6 +81,16 @@ export class Router {
     const target = this.inferTarget(event)
 
     this.push(action, method, target)
+  }
+
+  /**
+   * Checks whether the event target matches the current origin. Needs more work
+   * to handle events other than href's
+   * @param {Event} event The event being evaluated
+   */
+  static matchesOrigin (event) {
+    const url = new URL(event.target.getAttribute('href'), window.location.origin)
+    return url.origin === window.location.origin
   }
 
   static isRoutableEvent (event) {
