@@ -56,7 +56,7 @@ The following is a list of some of the development tools being used:
 - https://karma-runner.github.io/3.0/index.html
 - https://pptr.dev/
 
-### Running a development environmane
+### Running a development environment
 
 To fire up a development server:
 
