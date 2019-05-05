@@ -13,8 +13,9 @@ export class CommandTemplate extends Template {
         dt.prompt {
           color: var(--caret-color);
           padding-top: 1em;
+          line-height: 1.5;
           padding-bottom: 0;
-          min-width: 3em; /* This is a temporary kludge */
+          font-size: 1rem;
         }
         dt.prompt.out {
           animation: 0.1s ease-in 0s prompt_out;
