@@ -3,6 +3,6 @@ import { Time } from './Time.js'
 
 describe('Relative time', () => {
   it('should return relative time string', () => {
-    Time.relativeTime(new Date()).should.equal('1 second ago')
+    Time.relativeTime(new Date()).should.equal('now')
   })
 })
