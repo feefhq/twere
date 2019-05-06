@@ -25,7 +25,7 @@ export class Application {
     if (components.constructor.name !== 'Array') throw new Error(`Components should be passed in as an array.`)
     components.forEach(component => {
       console.debug('Registering component:', component.name)
-      window.customElements.define(`${Application.appName}-${component.name.toLowerCase()}`, component)
+      window.customElements.define(`${Application.name}-${component.name.toLowerCase()}`, component)
     })
   }
 
