@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,400');
-@import url('https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.206/distr/fira_code.css');
+@import url('./../fonts/fira_code.css');
 
 :root {
   --main-bg-color:    hsl(222, 16%, 16%);
