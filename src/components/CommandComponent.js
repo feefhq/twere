@@ -97,6 +97,8 @@ export class CommandComponent extends Component {
       context = '&lt;/&gt;'
     } else if (/^\?/g.test(this.textarea.value)) {
       context = '!=='
+    } else if (/^[L|l]isten/g.test(this.textarea.value)) {
+      context = '&#9836;'
     }
     if (context !== this.context) this.changeContext(context)
   }
