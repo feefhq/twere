@@ -63,6 +63,6 @@ if ('serviceWorker' in navigator) {
     .then(reg => {
       console.log('Service worker registration succeeded. Scope is ' + reg.scope)
     }).catch(error => {
-      console.log('Service worker egistration failed with ' + error)
+      console.log('Service worker registration failed with ' + error)
     })
 }
