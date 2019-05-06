@@ -6,13 +6,13 @@ The more you use **`twere**, it will become a rich resource you can easily searc
 
 **`twere** is a vanilla JavaScript applicaiton which runs exclusively in the browser. Data stays with you, on your device, works offline and doesn't require any kind of login (unless you want the option to lock your data).
 
-At the moment **`twere** is a very early proof of concept and is in a pre-alpha state. The plan is to have an alpha release ready for testing as quickly as possible, closely followed by a more formal beta release. Watch this >< space!
+At the moment **`twere** is a very early proof of concept and is in a pre-alpha state — a straw man implementation. The plan is to have an alpha release ready for testing as quickly as possible, closely followed by a more formal beta release. Watch this >< space!
 
 ## Some backgorund
 
 **`twere** is being developed as an open-source progressive web application (PWA). All of your data is stored locally, and is intended to be a ridiculously simple tool which you are using all day, every day.
 
-The idea was inspired in part by the idea of a `did.txt` file, which was created and implemented by [Patrick](https://theptrk.com/2018/07/11/did-txt-file/). It also emerged from a frustration with traditional task trackers and GTD applications. Almost every modern application will focus on the things you are _going_ to get _done_. The onus is always on forward momentum, completing tasks and then discarding then. [iA Writer](https://ia.net/writer) is also an ispiration: the clean, distraction-free interface, with a focus on beautriful typographic design is something which works well in a development toolset.
+The idea was inspired in part by the idea of a `did.txt` file, which was created and implemented by [Patrick](https://theptrk.com/2018/07/11/did-txt-file/). It also emerged from a frustration with traditional task trackers and GTD applications. Almost every modern application will focus on the things you are _going_ to get _done_. The onus is always on forward momentum, completing tasks and then discarding then. [iA Writer](https://ia.net/writer) is also an ispiration: the clean, distraction-free interface, with a focus on beautriful typographic design is something which works well in a development toolset. [Fira Code](https://github.com/tonsky/FiraCode) and it's typographic ligatures also opened up the idea of a text-only application.
 
 But almost all of the things we _do_, and the things we _learn_ — including the _mistakes_ we make — have value. We should be able to refer back to a clever command snippet, or a useful link about something or other, or a headache-inducing gotcha — because they are useful things we have experienced or _learned_ from. And it's useful to be able to put a pin in something during a busy period, or to be reminded of something useful to return to and absorb when we have more head space available.
 
