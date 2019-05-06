@@ -9,8 +9,8 @@
   --code-background:  rgba(255, 255, 255, 0.02);
   --code-color:       rgba(255, 255, 255, 0.75);
   --code-box-shadow:  0 0 2px rgba(0, 0, 0, .1);
-  --code-padding:     0.25em 1em 0.25em 1em;
-  --code-margin:      0 0 .5em -1.15em;
+  --code-padding:     0.25em 1em 0.25em .6em;
+  --code-margin:      -0.25em 0 .5em -.15em;
   --editable-padding: 8px 12px 8px 12px;
   --editable-margin:  -8px -12px -8px -15px;
   --base-font-size:   15px;
@@ -71,6 +71,10 @@ p {
 
 p:last-child {
   margin-bottom: 0;
+}
+
+p + pre {
+  margin-top: 0;
 }
 
 strong {
