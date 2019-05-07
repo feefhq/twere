@@ -47,9 +47,9 @@ export class Model extends EventMixin(Base) {
    * is extra cruft at the moment, but we will want to define indexes at a later
    * stage.
    */
-  static createObjectStore () {
-    console.debug('Creating model object store:', this.name)
-    Application.db.createObjectStore(this.name)
+  static createObjectStore (db) {
+    console.debug('Creating model object store:', this.name, db)
+    Application.db.createObjectStore(this.name, db)
   }
 
   /**

@@ -38,7 +38,7 @@ export class Database {
    */
   static onupgradeneeded (db) {
     const filtered = this.models.filter(model => !db.objectStoreNames.contains(model.name))
-    filtered.forEach(model => model.createObjectStore())
+    filtered.forEach(model => model.createObjectStore(db))
   }
 
   /**
@@ -89,8 +89,8 @@ export class Database {
    * Create an object store. Dubious about this needing to be async
    * @param {string} name the name of the object store
    */
-  static async createObjectStore (name) {
-    const db = await this.open()
+  static async createObjectStore (name, db) {
+    console.log('Creating object store', name, db)
     return new Promise((resolve) => {
       const request = db.createObjectStore(name, { keyPath: 'id', autoIncrement: true })
       request.onsuccess = () => resolve(request)
