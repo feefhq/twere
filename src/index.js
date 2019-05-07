@@ -5,7 +5,7 @@ import { NoteComponent } from './components/NoteComponent.js'
 import { PageComponent } from './components/PageComponent.js'
 import { Note } from './models/Note.js'
 
-ServiceWorker.register()
+Application.worker = ServiceWorker
 
 Application.name = 'twere'
 

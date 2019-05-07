@@ -8,6 +8,14 @@ import { Router } from './Router.js'
  */
 export class Application {
   /**
+   * Add a service worker and register it.
+   * @param {ServiceWorker} worker A service worker prototype
+   */
+  static set worker (worker) {
+    worker.register()
+  }
+
+  /**
    * @type {string}
    */
   static get name () {
