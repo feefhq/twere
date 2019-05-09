@@ -1,7 +1,14 @@
+/**
+ * Templates are tightly coupled with Components, for rendering.
+ */
 export class Template {
+  /**
+   * @param {*} component
+   */
   constructor (component) {
     this.component = component
     this._ = component._
+
   }
 
   /**
@@ -9,12 +16,7 @@ export class Template {
    */
   paint () {
     const template = document.createElement('template')
-    // try {
-      template.innerHTML = this.render()
-    // } catch (error) {
-    //   console.warn('There was a rendering problem')
-    //   return ''
-    // }
+    template.innerHTML = this.render()
     while (this.component.firstChild) {
       this.component.removeChild(this.component.firstChild)
     }
