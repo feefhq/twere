@@ -29,6 +29,7 @@ html {
 
 body {
   margin: 0;
+  padding-top: 0.5em;
   font-feature-settings: "calt" 1;
   font-family: "Fira Code";
 }
