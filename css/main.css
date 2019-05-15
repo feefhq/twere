@@ -12,9 +12,15 @@
   --elevation-12dp:   linear-gradient(hsla(0, 0%, 100%, 0.14), hsla(0, 0%, 100%, 0.14)), var(--elevation-00dp);
   --elevation-16dp:   linear-gradient(hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0.15)), var(--elevation-00dp);
   --elevation-24dp:   linear-gradient(hsla(0, 0%, 100%, 0.16), hsla(0, 0%, 100%, 0.16)), var(--elevation-00dp);
-  --main-color:       rgb(255, 255, 255);
+
+  --color-high:       hsla(255, 0%, 100%, 0.87);
+  --color-medium:     hsla(255, 0%, 100%, 0.6);
+  --color-low:        hsla(255, 0%, 100%, 0.38);
+
   --header-bg-color:  hsl(212, 8%, 22%);
-  --caret-color:      rgb(0, 148, 255);
+  --caret-color:      hsl(205, 100%, 50%);
+  --caret-color-mute: hsla(205, 100%, 50%, 0.5);
+
   --link-color:       rgba(0, 148, 255, 0.15);
   --code-background:  rgba(255, 255, 255, 0.02);
   --code-color:       rgba(255, 255, 255, 0.75);
@@ -34,7 +40,7 @@ html {
   font-size: var(--base-font-size);
   font-weight: 100;
   line-height: 1.5;
-  color: rgb(255, 255, 255);
+  color: var(--color-medium);
 }
 
 body {
@@ -108,12 +114,17 @@ twere-notecomponent.group dt {
   opacity: 0;
 }
 
-twere-notecomponent.group:hover dt {
-  opacity: 0.5;
+twere-notecomponent.group dt a {
+  color: var(--caret-color-mute);
+}
+
+twere-notecomponent.group:hover dt,
+twere-notecomponent.group:hover dt a {
+  opacity: 1;
 }
 
 twere-notecomponent:hover dd {
-  border-color: hsla(255, 100%, 100%, .25);
+  border-color: var(--caret-color-mute);
 }
 
 dt {
@@ -124,11 +135,11 @@ dt {
   font-size: 0.75em;
   line-height: 2.3;
   text-transform: uppercase;
-  transition: opacity 250ms;
+  transition: opacity 150ms;
 }
 
 dt, dt a {
-  color: rgba(255, 255, 255, 0.25);
+  color: var(--color-low);
 }
 
 dt a {
@@ -140,7 +151,7 @@ dd {
   border-left: 0.15em solid hsla(255, 100%, 100%, .025);
   margin: 0.25em 0;
   padding: 0.25em 1em;
-  transition: border-color 250ms;
+  transition: border-color 150ms;
 }
 
 dd.prompt {
@@ -164,11 +175,12 @@ pre {
 
 code {
   display: inline-block;
-  padding: 0 4px;
+  padding: 0.1rem 0.25rem;
+  margin: 0 -0.25rem;
   line-height: 1.2em;
   box-shadow: var(--code-box-shadow);
-  background: var(--code-background);
-  color: var(--code-color);
+  background: var(--elevation-01dp);
+  color: var(--color-medium);
   font-family: "Fira Code";
   font-weight: 500;
 }
@@ -200,9 +212,21 @@ textarea::selected {
 }
 
 a {
-  color: var(--main-color);
+  color: var(--color-high);
   text-decoration: none;
-  border-bottom: 2px solid var(--link-color);
+}
+
+dd a {
+  padding: 0 0.25rem;
+  margin: 0 -0.25rem;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 500ms;
+}
+
+dd a:hover {
+  background-color: hsla(255, 100%, 100%, 0.05);
+  border-color: transparent;
 }
 
 cite {
