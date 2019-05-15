@@ -1,7 +1,17 @@
 @import url('./../fonts/fira_code.css');
 
 :root {
-  --main-bg-color:    hsl(222, 16%, 16%);
+  --background:       hsl(0, 0%, 7%);
+  --elevation-00dp:   linear-gradient(var(--background), var(--background));
+  --elevation-01dp:   linear-gradient(hsla(0, 0%, 100%, 0.05), hsla(0, 0%, 100%, 0.05)), var(--elevation-00dp);
+  --elevation-02dp:   linear-gradient(hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0.07)), var(--elevation-00dp);
+  --elevation-03dp:   linear-gradient(hsla(0, 0%, 100%, 0.08), hsla(0, 0%, 100%, 0.08)), var(--elevation-00dp);
+  --elevation-04dp:   linear-gradient(hsla(0, 0%, 100%, 0.09), hsla(0, 0%, 100%, 0.09)), var(--elevation-00dp);
+  --elevation-06dp:   linear-gradient(hsla(0, 0%, 100%, 0.11), hsla(0, 0%, 100%, 0.11)), var(--elevation-00dp);
+  --elevation-08dp:   linear-gradient(hsla(0, 0%, 100%, 0.12), hsla(0, 0%, 100%, 0.12)), var(--elevation-00dp);
+  --elevation-12dp:   linear-gradient(hsla(0, 0%, 100%, 0.14), hsla(0, 0%, 100%, 0.14)), var(--elevation-00dp);
+  --elevation-16dp:   linear-gradient(hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0.15)), var(--elevation-00dp);
+  --elevation-24dp:   linear-gradient(hsla(0, 0%, 100%, 0.16), hsla(0, 0%, 100%, 0.16)), var(--elevation-00dp);
   --main-color:       rgb(255, 255, 255);
   --header-bg-color:  hsl(212, 8%, 22%);
   --caret-color:      rgb(0, 148, 255);
@@ -20,7 +30,7 @@ html {
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
   -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
   margin: 0 0;
-  background: var(--main-bg-color);
+  background: var(--background);
   font-size: var(--base-font-size);
   font-weight: 100;
   line-height: 1.5;
@@ -43,7 +53,7 @@ footer {
   bottom: 0;
   left: 0;
   width: 100%;
-  background: hsl(222, 16%, 12%);
+  background-image: var(--elevation-02dp);
   font-weight: 500;
   color: hsla(255, 100%, 100%, .75);
   padding: 0.25em 1em 0.25em 0.35em;
@@ -169,7 +179,7 @@ textarea {
   border: none;
   overflow-y: hidden;
   color: rgb(255, 255, 255);
-  background: rgba(0, 0, 0, 0.025);
+  background-image: var(--elevation-01dp);
   font-family: "Fira Code";
   line-height: 1.5;
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
@@ -178,7 +188,7 @@ textarea {
   border-left: 0.15em solid var(--caret-color);
   padding: 0.5em 1em;
   margin: 0 0 3em -1.15em;
-  box-shadow: inset 0 0 2px rgba(0, 0, 0, .1);
+  /* box-shadow: inset 0 0 2px rgba(0, 0, 0, .1); */
   resize: none;
   caret-color: var(--caret-color);
   font-size: var(--base-font-size);
