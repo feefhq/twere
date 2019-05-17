@@ -124,13 +124,13 @@ twere-notecomponent.group:hover dt a {
 }
 
 twere-notecomponent:hover dd {
-  border-color: var(--caret-color-mute);
+  border-left-color: var(--caret-color-mute);
+  background-color: hsla(255, 0%, 100%, 0.01);
 }
 
 dt {
   white-space: nowrap;
   padding: .5rem 1rem .5rem 2rem;
-  margin: 0;
   text-align: right;
   font-size: 0.75em;
   line-height: 2.3;
@@ -201,7 +201,7 @@ textarea {
   border-left: 0.15em solid var(--caret-color);
   padding: 0.5em 1em;
   margin: 0 0 3em -1.15em;
-  /* box-shadow: inset 0 0 2px rgba(0, 0, 0, .1); */
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.7);
   resize: none;
   caret-color: var(--caret-color);
   font-size: var(--base-font-size);
