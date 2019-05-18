@@ -225,7 +225,6 @@ dd a {
   margin: 0 -0.25rem;
   position: relative;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 500ms;
 }
 
 dd a:hover {
