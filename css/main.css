@@ -207,8 +207,14 @@ textarea {
   font-size: var(--base-font-size);
 }
 
-textarea::selected {
+dd *::selection {
   background: var(--caret-color);
+  color: hsla(0, 0%, 0%, 1);
+}
+
+textarea::selection {
+  background: var(--caret-color);
+  color: hsla(0, 0%, 0%, 1)
 }
 
 a {
