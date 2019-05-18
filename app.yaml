@@ -1,0 +1,11 @@
+runtime: nodejs10
+handlers:
+- url: /css
+  static_dir: css
+- url: /src
+  static_dir: src
+- url: /fonts
+  static_dir: fonts
+- url: /.*
+  static_files: index.html
+  upload: index.html
