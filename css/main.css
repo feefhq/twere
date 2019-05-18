@@ -125,7 +125,7 @@ twere-notecomponent.group:hover dt a {
 
 twere-notecomponent:hover dd {
   border-left-color: var(--caret-color-mute);
-  background-color: hsla(255, 0%, 100%, 0.01);
+  background-color: hsla(255, 100%, 100%, 0.01);
 }
 
 dt {
@@ -135,7 +135,6 @@ dt {
   font-size: 0.75em;
   line-height: 2.3;
   text-transform: uppercase;
-  transition: opacity 150ms;
 }
 
 dt, dt a {
@@ -151,7 +150,6 @@ dd {
   border-left: 0.15em solid hsla(255, 100%, 100%, .025);
   margin: 0.25em 0;
   padding: 0.25em 1em;
-  transition: border-color 150ms;
 }
 
 dd.prompt {
@@ -208,7 +206,7 @@ textarea {
 }
 
 dd *::selection {
-  background: var(--caret-color);
+  background: var(--caret-color-mute);
   color: hsla(0, 0%, 0%, 1);
 }
 
