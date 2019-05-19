@@ -30,6 +30,8 @@
   --editable-padding: 8px 12px 8px 12px;
   --editable-margin:  -8px -12px -8px -15px;
   --base-font-size:   15px;
+
+  --inline-border-radius: 0.15rem;
 }
 
 html {
@@ -67,9 +69,17 @@ footer {
   box-shadow: 0 0 2px rgba(0, 0, 0, .1);
 }
 
-footer span {
+span.brand {
+  font-weight: 400;
+  color: hsl(255, 0%, 100%);
+}
+
+span.brand::before {
+  content: '`';
   color: rgb(0, 148, 255);
   font-weight: 900;
+  position: absolute;
+  margin-left: -.35rem;
 }
 
 footer a {
@@ -130,10 +140,10 @@ twere-notecomponent:hover dd {
 
 dt {
   white-space: nowrap;
-  padding: .5rem 1rem .5rem 2rem;
+  margin: 0.25rem 0;
+  padding: .55rem 1rem .15rem 2rem;
   text-align: right;
-  font-size: 0.75em;
-  line-height: 2.3;
+  font-size: 0.75rem;
   text-transform: uppercase;
 }
 
@@ -162,25 +172,51 @@ pre {
   white-space: pre;
   -moz-tab-size: 4;
   tab-size: 1;
-  margin: var(--code-margin);
-  padding: var(--code-padding);
-  background: var(--code-background);
-  border-left: 0.15em solid rgb(255, 255, 255, 0.1);
-  box-shadow: var(--code-box-shadow);
-  color: var(--code-color);
+  margin: 0.5rem 0 0.5rem -1rem;
+  padding: 0.25rem 1rem;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 0.15rem,
+    hsla(255, 100%, 100%, .05) 0.15rem,
+    hsla(255, 100%, 100%, .05) 0.3rem
+  );
+  background-color: hsla(0, 0%, 100%, 0.05);
+  background-repeat: repeat-x;
+  background-position-y: top;
+  background-size: 100% 0.1rem;
+  color: var(--color-low);
   font-family: "Fira Code";
 }
 
+pre:first-child {
+  margin-top: -0.25rem;
+}
+
+pre:last-child {
+  margin-bottom: -0.25rem;
+}
+
 code {
-  display: inline-block;
-  padding: 0.1rem 0.25rem;
+  box-decoration-break: clone;
+  padding: 0 0.25rem;
   margin: 0 -0.25rem;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 0.15rem,
+    hsla(255, 100%, 100%, .05) 0.15rem,
+    hsla(255, 100%, 100%, .05) 0.3rem
+  );
+  background-color: hsla(0, 0%, 100%, 0.05);
+  background-repeat: repeat-x;
+  background-position-y: top;
+  background-size: 100% 0.1rem;
+  border-radius: var(--inline-border-radius);
+  border-image-slice: 1;
   line-height: 1.2em;
-  box-shadow: var(--code-box-shadow);
-  background: var(--elevation-01dp);
-  color: var(--color-medium);
+  color: var(--color-low);
   font-family: "Fira Code";
-  font-weight: 500;
 }
 
 textarea {
@@ -196,13 +232,17 @@ textarea {
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
   -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
   width: 100%;
-  border-left: 0.15em solid var(--caret-color);
+  border-left: 0.15em solid hsla(255, 100%, 100%, .025);
   padding: 0.5em 1em;
   margin: 0 0 3em -1.15em;
   box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.7);
   resize: none;
   caret-color: var(--caret-color);
   font-size: var(--base-font-size);
+}
+
+textarea:focus {
+  border-color: var(--caret-color);
 }
 
 dd *::selection {
@@ -224,12 +264,13 @@ dd a {
   padding: 0 0.25rem;
   margin: 0 -0.25rem;
   position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  box-decoration-break: clone;
+  background: var(--elevation-01dp);
+  border-radius: var(--inline-border-radius);
 }
 
 dd a:hover {
-  background-color: hsla(255, 100%, 100%, 0.05);
-  border-color: transparent;
+  background: var(--elevation-02dp);
 }
 
 cite {

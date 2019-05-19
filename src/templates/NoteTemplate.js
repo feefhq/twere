@@ -10,9 +10,7 @@ export class NoteTemplate extends Template {
       </a>
     </dt>
     <dd>
-      <article>
         ${Markdown.toHTML(this._.note.content)}
-      </article>
     </dd>`
   }
 }
