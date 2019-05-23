@@ -238,6 +238,7 @@ textarea {
   color: rgb(255, 255, 255);
   background-image: var(--elevation-01dp);
   font-family: "Fira Code";
+  font-weight: 100;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
   -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */

@@ -12,9 +12,7 @@ export class CommandTemplate extends Template {
       <style>
         dt.prompt {
           color: var(--caret-color);
-          padding-top: 1em;
-          line-height: 1.5;
-          padding-bottom: 0;
+          line-height: 2;
           font-size: 1rem;
         }
         dt.prompt.out {
