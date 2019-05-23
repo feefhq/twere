@@ -7,15 +7,24 @@ export class PageTemplate extends Template {
     return `
     <section>
       <dl>
-      <dt>Welcome</dt><dd>
+        <dt></dt>
+        <dd class='info'>
           <p>
-            Welcome to <span class='brand'>twere</span>. This is an open souce
-            journalling app for developers, with all of your data stored locally.
+            <span class='brand large'>twere</span>
+          </p>
+        </dd>
+        <dt></dt>
+        <dd class='info'>
+          <p>
+            An open source
+            journalling app for developers, which stores all of your data stored locally.
           </p>
           <p>
             It aspires to be a natural, everyday work tool which allows you to keep
-            track of the things you're doing, a place to save code snippets and useful
-            links, and to help you keep track of the things you want to get done.
+            track of the things you're doing; the things you want to get done; a place
+            to save snippets, links, ideas, aspirations. Over time, <span class='brand'>twere</span>
+            will help you to curate everything you've <em>done</em>, to help you achieve what
+            you really want to <em>do</em>.
           </p>
           <p>
             At the moment <span class='brand'>twere</span> is a very early proof of
@@ -25,8 +34,8 @@ export class PageTemplate extends Template {
             <a href='https://github.com/feefhq/twere'>https://github.com/feefhq/twere</a>.
           </p>
         </dd>
-        <dt>Start</dt>
-        <dd>
+        <dt></dt>
+        <dd class='info'>
           <p>
             The best way to use <span class='brand'>twere</span> is to keep it open in a
             tab throughout your day. Whatever you write will be saved on your device —

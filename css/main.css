@@ -70,8 +70,13 @@ footer {
 }
 
 span.brand {
-  font-weight: 400;
+  position: relative;
+  font-weight: 500;
   color: hsl(255, 0%, 100%);
+}
+
+span.brand.large {
+  font-size: 2rem;
 }
 
 span.brand::before {
@@ -79,7 +84,8 @@ span.brand::before {
   color: rgb(0, 148, 255);
   font-weight: 900;
   position: absolute;
-  margin-left: -.35rem;
+  margin-right: -.25em;
+  right: 100%;
 }
 
 footer a {
@@ -160,6 +166,10 @@ dd {
   border-left: 0.15em solid hsla(255, 100%, 100%, .025);
   margin: 0.25em 0;
   padding: 0.25em 1em;
+}
+
+dd.info {
+  border-left: 0.15em solid rgba(158, 168, 16, 0.329);
 }
 
 dd.prompt {
