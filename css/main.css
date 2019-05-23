@@ -256,7 +256,8 @@ textarea:focus {
   border-color: var(--caret-color);
 }
 
-dd *::selection {
+dd::selection,
+dd > *::selection {
   background: var(--caret-color-mute);
   color: hsla(0, 0%, 0%, 1);
 }
@@ -276,6 +277,7 @@ dd a {
   margin: 0 -0.25rem;
   position: relative;
   box-decoration-break: clone;
+
   background: var(--elevation-01dp);
   border-radius: var(--inline-border-radius);
 }
