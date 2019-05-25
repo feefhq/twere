@@ -60,6 +60,8 @@ export class Markdown {
    */
   trim () {
     this.flux = this.flux.trim()
+    this.flux = this.flux.endsWith('/') ? this.flux.slice(0, -1) : this.flux
+    this.flux = this.flux.endsWith('#') ? this.flux.slice(0, -1) : this.flux
     return this
   }
 
@@ -97,7 +99,18 @@ export class Markdown {
   }
 
   vanillaURL () {
-    return this.mutate(/(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g, `<a href='$&' target='_blank'>$&</a>`)
+    return this.mutate(/(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g, (match, capture) =>
+      `<a href='${match}' target='_blank'>${this.prettifyURL(match)}</a>`
+    )
+  }
+
+  prettifyURL (url) {
+    const urlParts = new URL(url)
+    return `<i class='protocol'>${urlParts.protocol}</i>` +
+      `<i class='host'>${urlParts.host}</i>` +
+      `${urlParts.pathname.replace(/[/]/g, `<i class='split'>$&</i>`).replace(/[-_]/g, `<i class='delimiter'>$&</i>`)}` +
+      `<i class='search'>${urlParts.search}</i>` +
+      `${urlParts.hash}`
   }
 
   bold () {

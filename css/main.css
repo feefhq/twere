@@ -20,6 +20,7 @@
   --header-bg-color:  hsl(212, 8%, 22%);
   --caret-color:      hsl(205, 100%, 50%);
   --caret-color-mute: hsla(205, 100%, 50%, 0.5);
+  --caret-color-faint: hsla(205, 100%, 50%, 0.25);
 
   --link-color:       rgba(0, 148, 255, 0.15);
   --code-background:  rgba(255, 255, 255, 0.02);
@@ -273,13 +274,50 @@ a {
 }
 
 dd a {
+  color: hsl(146, 81%, 72%);
+  font-weight: 400;
   padding: 0 0.25rem;
   margin: 0 -0.25rem;
   position: relative;
   box-decoration-break: clone;
+  box-shadow: 0 -0.1rem hsla(147, 100%, 49%, 0.1) inset;
+}
 
-  background: var(--elevation-01dp);
-  border-radius: var(--inline-border-radius);
+dd a i {
+  font-style: normal;
+}
+
+dd a .protocol {
+  display: none;
+}
+
+dd a .host {
+  font-weight: 100;
+  color: hsla(147, 100%, 49%, 0.5);
+}
+
+dd a .delimiter {
+  display: inline-block;
+  transform: scale(0.6);
+  transform-origin: center 65%;
+  color: hsla(146, 81%, 72%, 0.25);
+}
+
+dd a .split {
+  display: inline-block;
+  transform: scale(0.6);
+  transform-origin: center 65%;
+}
+
+dd a .split::before,
+dd a .split::after {
+  content: ' ';
+  display: inline-block;
+  width: 0.3rem;
+}
+
+dd a .search {
+  color: hsla(146, 81%, 72%, 0.25);
 }
 
 dd a:hover {
