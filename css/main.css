@@ -1,6 +1,10 @@
 @import url('./../fonts/fira_code.css');
 
 :root {
+  --body-max-width:   1200px;
+  --body-margin:      0.5rem auto;
+  --body-padding:     0.5rem 0 0;
+
   --background:       hsl(0, 0%, 7%);
   --elevation-00dp:   linear-gradient(var(--background), var(--background));
   --elevation-01dp:   linear-gradient(hsla(0, 0%, 100%, 0.05), hsla(0, 0%, 100%, 0.05)), var(--elevation-00dp);
@@ -13,11 +17,10 @@
   --elevation-16dp:   linear-gradient(hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0.15)), var(--elevation-00dp);
   --elevation-24dp:   linear-gradient(hsla(0, 0%, 100%, 0.16), hsla(0, 0%, 100%, 0.16)), var(--elevation-00dp);
 
-  --color-high:       hsla(255, 0%, 100%, 0.87);
-  --color-medium:     hsla(255, 0%, 100%, 0.6);
+  --color-high:       hsla(0, 0%, 100%, 0.87);
+  --color-default:    hsla(255, 0%, 100%, 0.6);
   --color-low:        hsla(255, 0%, 100%, 0.38);
 
-  --header-bg-color:  hsl(212, 8%, 22%);
   --caret-color:      hsl(205, 100%, 50%);
   --caret-color-mute: hsla(205, 100%, 50%, 0.5);
   --caret-color-faint: hsla(205, 100%, 50%, 0.25);
@@ -38,20 +41,20 @@
 html {
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
   -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
-  margin: 0 0;
+  margin: 0;
   background: var(--background);
   font-size: var(--base-font-size);
-  font-weight: 100;
   line-height: 1.5;
-  color: var(--color-medium);
+  font-weight: 100;
+  font-feature-settings: "calt" 1;
+  font-family: "Fira Code";
+  color: var(--color-default);
 }
 
 body {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 0.5em;
-  font-feature-settings: "calt" 1;
-  font-family: "Fira Code";
+  max-width: var(--body-max-width);
+  margin: var(--body-margin);
+  padding: var(--body-padding);
 }
 
 section {
