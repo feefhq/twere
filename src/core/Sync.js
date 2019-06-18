@@ -1,4 +1,4 @@
-/* global WebSocket, RTCPeerConnection */
+/* global WebSocket, RTCPeerConnection, RTCIceCandidate */
 
 export class Sync {
   static get url () {
@@ -9,6 +9,7 @@ export class Sync {
     this.socket = new WebSocket(this.url)
     this.socket.onopen = (event) => this.onopen(event)
     this.socket.onmessage = (event) => this.onmessage(event)
+    this.initRTC()
   }
 
   static onopen (event) {
@@ -29,6 +30,8 @@ export class Sync {
       case 'answer':
         this.handleAnswer(msg.sdp)
         break
+      case 'candidate':
+        this.handleCandidate(msg.candidate)
     }
   }
 
@@ -41,13 +44,28 @@ export class Sync {
   }
 
   static initRTC () {
-    this.connection = this.connection || new RTCPeerConnection()
+    this.connection = new RTCPeerConnection({
+      'iceServers': [
+        { 'urls': 'stun:stun.l.google.com:19302' }
+      ]
+    })
+    this.connection.onicecandidate = event => this.sendCandidate(event.candidate)
+    this.channel = this.connection.createDataChannel('chat', { negotiated: true, id: 0 })
+
+    this.channel.onopen = (event) => {
+      console.log('Sending on channel')
+      this.channel.send('Hi!')
+    }
+    this.channel.onmessage = (event) => {
+      console.log(event.data)
+    }
+
+    console.log('Channel', this.channel)
   }
 
   static createOffer () {
     console.log('Creating an offer')
-    this.initRTC()
-    this.connection.createOffer()
+    this.connection.createOffer({ iceRestart: true })
       .then(offer => this.connection.setLocalDescription(offer))
       .then(() => {
         const msg = {
@@ -60,7 +78,6 @@ export class Sync {
 
   static async handleOffer (sdp) {
     console.log('Handling an offer')
-    this.initRTC()
     await this.connection.setRemoteDescription(sdp)
     this.connection.createAnswer()
       .then(answer => this.connection.setLocalDescription(answer))
@@ -75,7 +92,21 @@ export class Sync {
 
   static async handleAnswer (sdp) {
     console.log('Handling an answer')
-    this.initRTC()
     await this.connection.setRemoteDescription(sdp)
+  }
+
+  static sendCandidate (candidate) {
+    if (!candidate) return
+    console.log('Send candidate', candidate)
+    const msg = {
+      type: 'candidate',
+      candidate: candidate
+    }
+    this.socket.send(JSON.stringify(msg))
+  }
+
+  static handleCandidate (candidate) {
+    console.log('Got candidate', candidate)
+    this.connection.addIceCandidate(new RTCIceCandidate(candidate))
   }
 }
