@@ -1,5 +1,6 @@
 import { Base } from './Base.js'
 import { Application } from './Application.js'
+import { Database2 } from './storage/Database.js'
 import { EventMixin } from './mixins/EventMixin.js'
 
 /**
@@ -57,12 +58,13 @@ export class Model extends EventMixin(Base) {
    * Needs lots of error handling to be added.
    */
   save () {
-    Application.db.save(this.constructor.name, this.getData())
+    Database2.set(this.getData())
     this.constructor.trigger('dirty', this)
   }
 
   remove (id) {
-    Application.db.delete(this.constructor.name, id)
+    Database2.delete(id)
+    // Application.db.delete(this.constructor.name, id)
     this.constructor.trigger('dirty', this)
   }
 
