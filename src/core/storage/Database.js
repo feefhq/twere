@@ -5,7 +5,7 @@ export class Database2 {
     return Application.name
   }
 
-  static async promise () {
+  static async promiseForDB () {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.open(this.name, 1)
       request.onsuccess = () => {
@@ -28,7 +28,7 @@ export class Database2 {
   }
 
   static async query (mode, request, mutator) {
-    this.database = this.database || await this.promise()
+    this.database = this.database || await this.promiseForDB()
     const transaction = this.database.transaction('Note', mode)
     const store = transaction.objectStore('Note')
     return request(transaction, store)
@@ -86,10 +86,7 @@ export class Database2 {
   static forEach (cursor, callback) {
     return new Promise((resolve, reject) => {
       const iterate = () => {
-        if (!cursor.request.result) {
-          resolve()
-          return
-        }
+        if (!cursor.request.result) return
         callback(cursor.request.result.value)
         this.continue(cursor).then(iterate, reject)
       }
