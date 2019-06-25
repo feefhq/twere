@@ -19,41 +19,81 @@ export class Database2 {
     })
   }
 
-  static async promiseForRequest (request) {
+  static async promiseForRequest (request, mutator = (result) => result) {
     return new Promise((resolve, reject) => {
-      request.onsuccess = () => {
-        const result = request.result
-        resolve(result)
+      request.onsuccess = (event) => {
+        resolve(request.result)
       }
-      request.onerror = () => reject(request.error)
     })
   }
 
-  static async query (mode, request) {
+  static async query (mode, request, mutator) {
     this.database = this.database || await this.promise()
     const transaction = this.database.transaction('Note', mode)
     const store = transaction.objectStore('Note')
-    return this.promiseForRequest(request(transaction, store))
+    return request(transaction, store)
   }
 
   static async get (key) {
     return this.query('readonly', (transaction, store) => {
-      return store.get(key)
+      return this.promiseForRequest(store.get(key))
     })
   }
 
   static async set (value) {
     return this.query('readwrite', (transaction, store) => {
-      return store.put(value)
+      return this.promiseForRequest(store.put(value))
     })
   }
 
   static async delete (key) {
     return this.query('readwrite', (transaction, store) => {
-      return store.delete(Number(key))
+      return this.promiseForRequest(store.delete(Number(key)))
     })
   }
 
   static async list (criteria) {
+    const list = []
+    return this.query('readonly', (transaction, store) => {
+      return this.openCursor(store)
+        .then((cursor) => {
+          this.forEach(cursor, (result) => {
+            list.push(result)
+          })
+          return list
+        })
+    })
+  }
+
+  static openCursor (store) {
+    return new Promise((resolve, reject) => {
+      const cursor = store.openCursor()
+      cursor.onsuccess = () => {
+        if (cursor.result) cursor.result.request = cursor
+        resolve(cursor.result)
+      }
+    })
+  }
+
+  static continue (cursor) {
+    return new Promise((resolve, reject) => {
+      cursor.request.onsuccess = () => resolve(cursor.result)
+      cursor.request.onerror = () => reject(cursor.error)
+      cursor.continue()
+    })
+  }
+
+  static forEach (cursor, callback) {
+    return new Promise((resolve, reject) => {
+      const iterate = () => {
+        if (!cursor.request.result) {
+          resolve()
+          return
+        }
+        callback(cursor.request.result.value)
+        this.continue(cursor).then(iterate, reject)
+      }
+      iterate()
+    })
   }
 }

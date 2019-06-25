@@ -73,6 +73,8 @@ export class Model extends EventMixin(Base) {
    * @returns {Promise} Promise object represents an array of model objects
    */
   static list (count = 1000, order = 'desc') {
+    Database2.get(1).then(result => console.log(result))
+    Database2.list().then(result => console.log(result))
     return new Promise(resolve => {
       Application.db.list(this.prototype.constructor.name, count, order)
         .then(result => {
