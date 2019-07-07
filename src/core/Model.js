@@ -1,6 +1,6 @@
 import { Base } from './Base.js'
 import { Application } from './Application.js'
-import { Database2 } from './storage/Database.js'
+import { DB } from './storage/DB.js'
 import { EventMixin } from './mixins/EventMixin.js'
 
 /**
@@ -58,12 +58,12 @@ export class Model extends EventMixin(Base) {
    * Needs lots of error handling to be added.
    */
   save () {
-    Database2.set(this.getData())
+    DB.set(this.getData())
     this.constructor.trigger('dirty', this)
   }
 
   remove (id) {
-    Database2.delete(id)
+    DB.delete(id)
     // Application.db.delete(this.constructor.name, id)
     this.constructor.trigger('dirty', this)
   }
@@ -73,8 +73,8 @@ export class Model extends EventMixin(Base) {
    * @returns {Promise} Promise object represents an array of model objects
    */
   static list (count = 1000, order = 'desc') {
-    Database2.get(1).then(result => console.log(result))
-    Database2.list().then(result => console.log(result))
+    // DB.get(1).then(result => console.log(result))
+    DB.list().then(result => console.log(result))
     return new Promise(resolve => {
       Application.db.list(this.prototype.constructor.name, count, order)
         .then(result => {

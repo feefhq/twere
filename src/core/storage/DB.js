@@ -1,13 +1,27 @@
 import { Application } from '../Application.js'
+import { Transaction } from './Transaction.js'
 
-export class Database2 {
-  static get name () {
-    return Application.name
+export class DB {
+  constructor (name) {
+    this.name = name
+    this.database = null
+    return this
   }
 
-  static async promiseForDB () {
+  static new (name) {
+    return new DB(name)
+  }
+
+  async open () {
+    DB.open(this.name).then((result) => {
+      this.database = result
+      return this
+    })
+  }
+
+  static open (name) {
     return new Promise((resolve, reject) => {
-      const request = window.indexedDB.open(this.name, 1)
+      const request = window.indexedDB.open(name, 1)
       request.onsuccess = () => {
         const database = request.result
         database.onclose = () => {}
@@ -15,8 +29,28 @@ export class Database2 {
         resolve(database)
       }
       request.onerror = () => reject(request.error)
-      request.onupgradeneeded = () => {}
+      request.onupgradeneeded = () => this.onupgradeneeded
     })
+  }
+
+  static deleteDatabase (name) {
+    window.indexedDB.deleteDatabase(name)
+  }
+
+  onupgradeneeded (event) {
+    console.log('Upgrade!')
+  }
+
+  createObjectStore (name) {
+    this.database.createObjectStore(name)
+  }
+
+  transaction (name) {
+    try {
+      return new Transaction(this.database, name)
+    } catch (error) {
+      throw new Error(`Oops ${error}`)
+    }
   }
 
   static async promiseForRequest (request, mutator = (result) => result) {
@@ -28,7 +62,7 @@ export class Database2 {
   }
 
   static async query (mode, request, mutator) {
-    this.database = this.database || await this.promiseForDB()
+    this.database = this.database || await this.open()
     const transaction = this.database.transaction('Note', mode)
     const store = transaction.objectStore('Note')
     return request(transaction, store)

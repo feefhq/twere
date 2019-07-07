@@ -1,5 +1,5 @@
 import { Database } from './Database.js'
-
+import { DB } from './storage/DB.js'
 import { Router } from './Router.js'
 
 /**
@@ -50,7 +50,7 @@ export class Application {
    * @type {Database}
    */
   static get db () {
-    return Database
+    return DB
   }
 
   /**
