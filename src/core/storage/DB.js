@@ -43,7 +43,7 @@ export class DB {
    * Delete the database. Will only happen once all connections to the DB have been
    * closed, which should be handled by the DB's `onversionchange` event handler.
    */
-  async deleteStore () {
+  async deleteDatabase () {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.deleteDatabase(this.name)
       request.onsuccess = () => resolve(this)
