@@ -12,33 +12,33 @@ export class DB {
     return new DB(name)
   }
 
-  async open () {
-    DB.open(this.name).then((result) => {
-      this.database = result
-      return this
-    })
-  }
-
-  static open (name) {
+  async open (version = 1) {
     return new Promise((resolve, reject) => {
-      const request = window.indexedDB.open(name, 1)
+      const request = window.indexedDB.open(this.name, version)
       request.onsuccess = () => {
-        const database = request.result
-        database.onclose = () => {}
-        database.onversionchange = () => {}
-        resolve(database)
+        this.database = request.result
+        this.database.onversionchange = (event) => {
+          if (!event.version) this.database.close()
+        }
+        resolve(this)
       }
       request.onerror = () => reject(request.error)
-      request.onupgradeneeded = () => this.onupgradeneeded
+      request.onupgradeneeded = () => {
+        // resolve(this)
+      }
     })
   }
 
-  static deleteDatabase (name) {
-    window.indexedDB.deleteDatabase(name)
+  async deleteDatabase () {
+    return new Promise((resolve, reject) => {
+      const request = window.indexedDB.deleteDatabase(this.name)
+      request.onsuccess = () => resolve(this)
+      request.onerror = () => reject(request)
+    })
   }
 
   onupgradeneeded (event) {
-    console.log('Upgrade!')
+    console.log('Upgrade!', event)
   }
 
   createObjectStore (name) {
