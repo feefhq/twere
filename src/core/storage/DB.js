@@ -5,6 +5,7 @@ export class DB {
   constructor (name) {
     this.name = name
     this.database = null
+    this.upgradeQueries = []
     return this
   }
 
@@ -12,6 +13,18 @@ export class DB {
     return new DB(name)
   }
 
+  get version () {
+    return this.database.version
+  }
+
+  get storeNames () {
+    return this.database.objectStoreNames
+  }
+
+  /**
+   * Opens a database connection.
+   * @param {number} version
+   */
   async open (version = 1) {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.open(this.name, version)
@@ -23,26 +36,44 @@ export class DB {
         resolve(this)
       }
       request.onerror = () => reject(request.error)
-      request.onupgradeneeded = () => {
-        // resolve(this)
-      }
+      request.onupgradeneeded = (event) => this.onupgradeneeded(event)
     })
   }
 
-  async deleteDatabase () {
+  /**
+   * Delete the database. Will only happen once all connections to the DB have been
+   * closed, which should be handled by the DB's `onversionchange` event handler.
+   */
+  async delete () {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.deleteDatabase(this.name)
       request.onsuccess = () => resolve(this)
-      request.onerror = () => reject(request)
     })
   }
 
+  /**
+   * Callback used for upgrading the database
+   * @param {IDBVersionChangeEvent} event
+   */
   onupgradeneeded (event) {
-    console.log('Upgrade!', event)
+    this.upgradeQueries.forEach(async name => {
+      await new Promise((resolve, reject) => {
+        event.target.result.createObjectStore(name, { keyPath: 'id', autoIncrement: true })
+      })
+    })
+    this.upgradeQueries = []
   }
 
-  createObjectStore (name) {
-    this.database.createObjectStore(name)
+  async triggerUpgrade () {
+    await this.open(this.database.version + 1)
+  }
+
+  async createObjectStore (name) {
+    this.upgradeQueries.push(name)
+    return new Promise(async (resolve, reject) => {
+      await this.triggerUpgrade()
+      resolve(this)
+    })
   }
 
   transaction (name) {

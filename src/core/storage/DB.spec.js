@@ -2,14 +2,11 @@
 import { DB } from './DB.js'
 
 describe('DB', () => {
-  let db = null
-
-  beforeEach(() => {
-    db = DB.new('testname')
-  })
+  const dbname = 'testdb'
+  const db = DB.new(dbname)
 
   afterEach(async () => {
-    await db.deleteDatabase('testname')
+    await db.delete(dbname)
   })
 
   it('should return a Promise for open()', async () => {
@@ -24,11 +21,23 @@ describe('DB', () => {
   })
 
   it('should catch missing store for a transaction', async () => {
-    const mydb = await db.open()
-    should.throw(() => mydb.transaction('testname'), Error)
+    const connection = await db.open()
+    should.throw(() => connection.transaction('testname'), Error)
   })
 
-  it('should do an upgrade', async () => {
-    const mydb = await db.open(2)
+  it('should create an object store', async () => {
+    const connection = await db.open()
+    await connection.createObjectStore('teststore')
+    const storeNames = [...db.storeNames]
+    storeNames.should.contain('teststore')
+  })
+
+  it('should create multiple object stores', async () => {
+    const connection = await db.open()
+    await connection.createObjectStore('teststore')
+    await connection.createObjectStore('teststore2')
+    const storeNames = [...db.storeNames]
+    storeNames.should.contain('teststore')
+    storeNames.should.contain('teststore2')
   })
 })
