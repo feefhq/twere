@@ -3,7 +3,7 @@ import { Transaction } from './Transaction.js'
 export class DB {
   constructor (name) {
     this.name = name
-    this.database = null
+    this.db = null
     this.upgradeQueries = []
     return this
   }
@@ -13,11 +13,11 @@ export class DB {
   }
 
   get version () {
-    return this.database.version
+    return this.db.version
   }
 
   get storeNames () {
-    return this.database.objectStoreNames
+    return this.db.objectStoreNames
   }
 
   /**
@@ -27,21 +27,21 @@ export class DB {
   async open (version) {
     return new Promise((resolve, reject) => {
       this.close() // Don't like this; must be a better way
-      const request = window.indexedDB.open(this.name, version)
-      request.onsuccess = () => {
-        this.database = request.result
-        this.database.onversionchange = (event) => {
-          if (!event.version) this.database.close()
+      const db = window.indexedDB.open(this.name, version)
+      db.onsuccess = () => {
+        this.db = db.result
+        this.db.onversionchange = (event) => {
+          if (!event.version) this.db.close()
         }
         resolve(this)
       }
-      request.onerror = () => reject(request.error)
-      request.onupgradeneeded = (event) => this.onupgradeneeded(event)
+      db.onerror = () => reject(db.error)
+      db.onupgradeneeded = (event) => this.onupgradeneeded(event)
     })
   }
 
   close () {
-    !this.database || this.database.close()
+    !this.db || this.db.close()
   }
 
   /**
@@ -75,7 +75,7 @@ export class DB {
    * Shortcut to trigger an upgrade.
    */
   async triggerUpgrade () {
-    await this.open(this.database.version + 1)
+    await this.open(this.db.version + 1)
   }
 
   /**
@@ -96,7 +96,7 @@ export class DB {
    */
   transaction (name) {
     try {
-      return new Transaction(this.database, name)
+      return new Transaction(this.db, name)
     } catch (error) {
       throw new Error(`Oops ${error}`)
     }
@@ -124,7 +124,7 @@ export class DB {
    */
   async query (storeName, mode, request, mutator) {
     await this.open()
-    const transaction = this.database.transaction(storeName, mode)
+    const transaction = this.db.transaction(storeName, mode)
     const store = transaction.objectStore(storeName)
     return request(transaction, store)
   }

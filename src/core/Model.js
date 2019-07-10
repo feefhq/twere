@@ -57,12 +57,12 @@ export class Model extends EventMixin(Base) {
    * Needs lots of error handling to be added.
    */
   save () {
-    Application.db.set(this.getData())
+    Application.db.set(this.constructor.name, this.getData())
     this.constructor.trigger('dirty', this)
   }
 
   remove (id) {
-    Application.db.delete(id)
+    Application.db.delete(this.constructor.name, id)
     this.constructor.trigger('dirty', this)
   }
 
