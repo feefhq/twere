@@ -1,4 +1,3 @@
-import { Database } from './Database.js'
 import { DB } from './storage/DB.js'
 import { Router } from './Router.js'
 
@@ -43,7 +42,7 @@ export class Application {
    */
   static set models (models = []) {
     if (models.constructor.name !== 'Array') throw new Error(`Modules should be passed in as an array.`)
-    Database.register(models)
+    // Database.register(models)
   }
 
   /**

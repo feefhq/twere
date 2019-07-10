@@ -1,6 +1,5 @@
 import { Base } from './Base.js'
 import { Application } from './Application.js'
-import { DB } from './storage/DB.js'
 import { EventMixin } from './mixins/EventMixin.js'
 
 /**
