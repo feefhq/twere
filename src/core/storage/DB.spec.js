@@ -26,8 +26,7 @@ describe('DB', () => {
   })
 
   it('should create an object store', async () => {
-    const connection = await db.open()
-    await connection.createObjectStore('teststore')
+    await db.createObjectStore('teststore')
     const storeNames = [...db.storeNames]
     storeNames.should.contain('teststore')
   })
@@ -39,5 +38,18 @@ describe('DB', () => {
     const storeNames = [...db.storeNames]
     storeNames.should.contain('teststore')
     storeNames.should.contain('teststore2')
+  })
+
+  it('should set a value', async () => {
+    await db.createObjectStore('teststore')
+    const result = await db.set('teststore', { 'data': 'something' })
+    result.should.equal(1)
+  })
+
+  it('should set and get a value', async () => {
+    await db.createObjectStore('teststore')
+    await db.set('teststore', { 'data': 'something' })
+    const result = await db.get('teststore', 1)
+    result.data.should.equal('something')
   })
 })

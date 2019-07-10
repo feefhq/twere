@@ -24,8 +24,9 @@ export class DB {
    * Opens a database connection.
    * @param {number} version
    */
-  async open (version = 1) {
+  async open (version) {
     return new Promise((resolve, reject) => {
+      this.close() // Don't like this; must be a better way
       const request = window.indexedDB.open(this.name, version)
       request.onsuccess = () => {
         this.database = request.result
@@ -39,6 +40,10 @@ export class DB {
     })
   }
 
+  close () {
+    !this.database || this.database.close()
+  }
+
   /**
    * Delete the database. Will only happen once all connections to the DB have been
    * closed, which should be handled by the DB's `onversionchange` event handler.
@@ -47,6 +52,9 @@ export class DB {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.deleteDatabase(this.name)
       request.onsuccess = () => resolve(this)
+      request.onblocked = (e) => {
+        console.log('Blocked')
+      }
     })
   }
 
@@ -99,11 +107,12 @@ export class DB {
    * @param {*} request the DB request
    * @param {*} mutator optionally mutate the results
    */
-  async promiseForRequest (request, mutator = (result) => result) {
+  async promiseForRequest (request, mutator = result => result) {
     return new Promise((resolve, reject) => {
-      request.onsuccess = (event) => {
+      request.onsuccess = event => {
         resolve(request.result)
       }
+      request.onerror = event => reject(request)
     })
   }
 
@@ -113,35 +122,35 @@ export class DB {
    * @param {*} request
    * @param {*} mutator
    */
-  async query (mode, request, mutator) {
+  async query (storeName, mode, request, mutator) {
     await this.open()
-    const transaction = this.database.transaction('Note', mode)
-    const store = transaction.objectStore('Note')
+    const transaction = this.database.transaction(storeName, mode)
+    const store = transaction.objectStore(storeName)
     return request(transaction, store)
   }
 
-  async get (key) {
-    return this.query('readonly', (transaction, store) => {
+  async get (storeName, key) {
+    return this.query(storeName, 'readonly', (transaction, store) => {
       return this.promiseForRequest(store.get(key))
     })
   }
 
-  async set (value) {
-    return this.query('readwrite', (transaction, store) => {
+  async set (storeName, value, key) {
+    return this.query(storeName, 'readwrite', (transaction, store) => {
       return this.promiseForRequest(store.put(value))
     })
   }
 
-  async delete (key) {
-    return this.query('readwrite', (transaction, store) => {
+  async delete (storeName, key) {
+    return this.query(storeName, 'readwrite', (transaction, store) => {
       return this.promiseForRequest(store.delete(Number(key)))
     })
   }
 
-  async list (criteria) {
+  async list (storeName, criteria) {
     return new Promise((resolve, reject) => {
       const list = []
-      this.query('readonly', (transaction, store) => {
+      this.query(storeName, 'readonly', (transaction, store) => {
         return this.openCursor(store)
           .then(async (cursor) => {
             await this.forEach(cursor, (result) => {
