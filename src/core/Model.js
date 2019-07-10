@@ -57,12 +57,12 @@ export class Model extends EventMixin(Base) {
    * Needs lots of error handling to be added.
    */
   save () {
-    Application.db.save(this.constructor.name, this.getData())
+    Application.db.set(this.getData())
     this.constructor.trigger('dirty', this)
   }
 
   remove (id) {
-    Application.db.delete(this.constructor.name, id)
+    Application.db.delete(id)
     this.constructor.trigger('dirty', this)
   }
 
@@ -74,7 +74,9 @@ export class Model extends EventMixin(Base) {
     return new Promise(resolve => {
       Application.db.list(this.prototype.constructor.name, count, order)
         .then(result => {
-          const instances = result.map(obj => Reflect.construct(this.prototype.constructor, [obj]))
+          const instances = result.map(obj => {
+            return Reflect.construct(this.prototype.constructor, [obj])
+          })
           resolve(instances)
         })
     })

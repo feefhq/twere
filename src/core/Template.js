@@ -15,6 +15,7 @@ export class Template {
    * Paint the element into the DOM
    */
   paint () {
+
     const template = document.createElement('template')
     template.innerHTML = this.render()
     while (this.component.firstChild) {
