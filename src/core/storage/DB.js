@@ -92,8 +92,8 @@ export class DB {
     })
   }
 
-  static async query (mode, request, mutator) {
-    this.database = this.database || await this.open()
+  async query (mode, request, mutator) {
+    await this.open()
     const transaction = this.database.transaction('Note', mode)
     const store = transaction.objectStore('Note')
     return request(transaction, store)
@@ -117,20 +117,22 @@ export class DB {
     })
   }
 
-  static async list (criteria) {
-    const list = []
-    return this.query('readonly', (transaction, store) => {
-      return this.openCursor(store)
-        .then((cursor) => {
-          this.forEach(cursor, (result) => {
-            list.push(result)
+  async list (criteria) {
+    return new Promise((resolve, reject) => {
+      const list = []
+      this.query('readonly', (transaction, store) => {
+        return this.openCursor(store)
+          .then(async (cursor) => {
+            await this.forEach(cursor, (result) => {
+              list.push(result)
+            })
+            resolve(list)
           })
-          return list
-        })
+      })
     })
   }
 
-  static openCursor (store) {
+  openCursor (store) {
     return new Promise((resolve, reject) => {
       const cursor = store.openCursor()
       cursor.onsuccess = () => {
@@ -140,7 +142,7 @@ export class DB {
     })
   }
 
-  static continue (cursor) {
+  continue (cursor) {
     return new Promise((resolve, reject) => {
       cursor.request.onsuccess = () => resolve(cursor.result)
       cursor.request.onerror = () => reject(cursor.error)
@@ -148,10 +150,13 @@ export class DB {
     })
   }
 
-  static forEach (cursor, callback) {
+  forEach (cursor, callback) {
     return new Promise((resolve, reject) => {
       const iterate = () => {
-        if (!cursor.request.result) return
+        if (!cursor.request.result) {
+          resolve(this)
+          return
+        }
         callback(cursor.request.result.value)
         this.continue(cursor).then(iterate, reject)
       }

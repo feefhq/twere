@@ -50,7 +50,7 @@ export class Application {
    * @type {Database}
    */
   static get db () {
-    return DB
+    return new DB(Application.name)
   }
 
   /**
