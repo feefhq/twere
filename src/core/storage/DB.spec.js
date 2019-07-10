@@ -6,7 +6,7 @@ describe('DB', () => {
   const db = DB.new(dbname)
 
   afterEach(async () => {
-    await db.delete(dbname)
+    await db.deleteStore(dbname)
   })
 
   it('should return a Promise for open()', async () => {

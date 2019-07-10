@@ -1,4 +1,3 @@
-import { Application } from '../Application.js'
 import { Transaction } from './Transaction.js'
 
 export class DB {
@@ -44,7 +43,7 @@ export class DB {
    * Delete the database. Will only happen once all connections to the DB have been
    * closed, which should be handled by the DB's `onversionchange` event handler.
    */
-  async delete () {
+  async deleteStore () {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.deleteDatabase(this.name)
       request.onsuccess = () => resolve(this)
@@ -64,10 +63,17 @@ export class DB {
     this.upgradeQueries = []
   }
 
+  /**
+   * Shortcut to trigger an upgrade.
+   */
   async triggerUpgrade () {
     await this.open(this.database.version + 1)
   }
 
+  /**
+   * Creates a new object store by triggering an upgrade
+   * @param {string} name
+   */
   async createObjectStore (name) {
     this.upgradeQueries.push(name)
     return new Promise(async (resolve, reject) => {
@@ -76,6 +82,10 @@ export class DB {
     })
   }
 
+  /**
+   * Very experimental interface to Transaction objects
+   * @param {string} name
+   */
   transaction (name) {
     try {
       return new Transaction(this.database, name)
@@ -84,7 +94,12 @@ export class DB {
     }
   }
 
-  static async promiseForRequest (request, mutator = (result) => result) {
+  /**
+   * Wrapperr for simple queries. Likely to be replaced with a Transaction interface.
+   * @param {*} request the DB request
+   * @param {*} mutator optionally mutate the results
+   */
+  async promiseForRequest (request, mutator = (result) => result) {
     return new Promise((resolve, reject) => {
       request.onsuccess = (event) => {
         resolve(request.result)
@@ -92,6 +107,12 @@ export class DB {
     })
   }
 
+  /**
+   * Execute a DB query. Will almost certainly be coupled with Transaction interface.
+   * @param {*} mode
+   * @param {*} request
+   * @param {*} mutator
+   */
   async query (mode, request, mutator) {
     await this.open()
     const transaction = this.database.transaction('Note', mode)
@@ -99,19 +120,19 @@ export class DB {
     return request(transaction, store)
   }
 
-  static async get (key) {
+  async get (key) {
     return this.query('readonly', (transaction, store) => {
       return this.promiseForRequest(store.get(key))
     })
   }
 
-  static async set (value) {
+  async set (value) {
     return this.query('readwrite', (transaction, store) => {
       return this.promiseForRequest(store.put(value))
     })
   }
 
-  static async delete (key) {
+  async delete (key) {
     return this.query('readwrite', (transaction, store) => {
       return this.promiseForRequest(store.delete(Number(key)))
     })
