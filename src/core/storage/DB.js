@@ -1,6 +1,7 @@
 import { Transaction } from './Transaction.js'
 
 export class DB {
+
   constructor (name) {
     this.name = name
     this.db = null
@@ -30,13 +31,11 @@ export class DB {
       const db = window.indexedDB.open(this.name, version)
       db.onsuccess = () => {
         this.db = db.result
-        this.db.onversionchange = (event) => {
-          if (!event.version) this.db.close()
-        }
+        this.db.onversionchange = e => e.version || this.db.close()
         resolve(this)
       }
       db.onerror = () => reject(db.error)
-      db.onupgradeneeded = (event) => this.onupgradeneeded(event)
+      db.onupgradeneeded = e => this.onupgradeneeded(e)
     })
   }
 
@@ -52,21 +51,17 @@ export class DB {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.deleteDatabase(this.name)
       request.onsuccess = () => resolve(this)
-      request.onblocked = (e) => {
-        console.log('Blocked')
-      }
+      request.onblocked = e => reject(e.error)
     })
   }
 
   /**
    * Callback used for upgrading the database
-   * @param {IDBVersionChangeEvent} event
+   * @param {IDBVersionChangeEvent} e
    */
-  onupgradeneeded (event) {
+  onupgradeneeded (e) {
     this.upgradeQueries.forEach(async name => {
-      await new Promise((resolve, reject) => {
-        event.target.result.createObjectStore(name, { keyPath: 'id', autoIncrement: true })
-      })
+      e.target.result.createObjectStore(name, { keyPath: 'id', autoIncrement: true })
     })
     this.upgradeQueries = []
   }
@@ -105,14 +100,11 @@ export class DB {
   /**
    * Wrapperr for simple queries. Likely to be replaced with a Transaction interface.
    * @param {*} request the DB request
-   * @param {*} mutator optionally mutate the results
    */
-  async promiseForRequest (request, mutator = result => result) {
+  async promiseForRequest (request) {
     return new Promise((resolve, reject) => {
-      request.onsuccess = event => {
-        resolve(request.result)
-      }
-      request.onerror = event => reject(request)
+      request.onsuccess = () => resolve(request.result)
+      request.onerror = () => reject(request.error)
     })
   }
 
@@ -120,37 +112,57 @@ export class DB {
    * Execute a DB query. Will almost certainly be coupled with Transaction interface.
    * @param {*} mode
    * @param {*} request
-   * @param {*} mutator
    */
-  async query (storeName, mode, request, mutator) {
+  async query (storeName, mode, request) {
     await this.open()
-    const transaction = this.db.transaction(storeName, mode)
-    const store = transaction.objectStore(storeName)
-    return request(transaction, store)
+    const tx = this.db.transaction(storeName, mode)
+    const store = tx.objectStore(storeName)
+    return request(tx, store)
   }
 
+  /**
+   * Get a single record from a datastore
+   * @param {string} storeName
+   * @param {number} key
+   */
   async get (storeName, key) {
-    return this.query(storeName, 'readonly', (transaction, store) => {
+    return this.query(storeName, 'readonly', (tx, store) => {
       return this.promiseForRequest(store.get(key))
     })
   }
 
+  /**
+   * Add or update a value in a data store.
+   * @param {string} storeName
+   * @param {*} value
+   * @param {number} key
+   */
   async set (storeName, value, key) {
-    return this.query(storeName, 'readwrite', (transaction, store) => {
+    return this.query(storeName, 'readwrite', (tx, store) => {
       return this.promiseForRequest(store.put(value))
     })
   }
 
+  /**
+   * Delete a record in a datastore
+   * @param {string} storeName
+   * @param {number} key
+   */
   async delete (storeName, key) {
-    return this.query(storeName, 'readwrite', (transaction, store) => {
+    return this.query(storeName, 'readwrite', (tx, store) => {
       return this.promiseForRequest(store.delete(Number(key)))
     })
   }
 
-  async list (storeName, criteria) {
+  /**
+   * Get an array of records in a datastore, with criteria applied. Very basic at the
+   * moment, and will likely get a separate Criteria interface.
+   * @param {string} storeName
+   */
+  async list (storeName) {
     return new Promise((resolve, reject) => {
       const list = []
-      this.query(storeName, 'readonly', (transaction, store) => {
+      this.query(storeName, 'readonly', (tx, store) => {
         return this.openCursor(store)
           .then(async (cursor) => {
             await this.forEach(cursor, (result) => {
