@@ -1,4 +1,5 @@
 // Karma configuration
+const path = require('path')
 
 module.exports = function (config) {
   config.set({
@@ -7,13 +8,22 @@ module.exports = function (config) {
     files: [
       { pattern: 'src/**/!(index).js', type: 'module' }
     ],
-    reporters: ['mocha'],
-    port: 9876,
+    reporters: ['mocha', 'coverage-istanbul'],
+    port: 9999,
     colors: true,
     logLevel: config.LOG_INFO,
-    // autoWatch: true,
     browsers: ['ChromeHeadless'],
     singleRun: true,
-    concurrency: Infinity
+    concurrency: Infinity,
+    preprocessors: {
+      'src/**/!(*.spec.*).js': ['karma-coverage-istanbul-instrumenter']
+    },
+    coverageIstanbulInstrumenter: {
+      esModules: true
+    },
+    coverageIstanbulReporter: {
+      reports: ['html', 'lcovonly', 'text-summary'],
+      dir: path.join(__dirname, 'coverage')
+    }
   })
 }
