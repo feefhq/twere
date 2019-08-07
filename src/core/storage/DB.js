@@ -158,6 +158,7 @@ export class DB {
    * Get an array of records in a datastore, with criteria applied. Very basic at the
    * moment, and will likely get a separate Criteria interface.
    * @param {string} storeName
+   * @returns {Array} something
    */
   async list (storeName) {
     return new Promise((resolve, reject) => {
@@ -195,7 +196,7 @@ export class DB {
   forEach (cursor, callback) {
     return new Promise((resolve, reject) => {
       const iterate = () => {
-        if (!cursor.request.result) {
+        if (!cursor || !cursor.request.result) {
           resolve(this)
           return
         }

@@ -60,4 +60,25 @@ describe('DB', () => {
       result.data.should.equal('something')
     })
   })
+
+  describe('#list()', () => {
+    beforeEach(async () => {
+      await db.createObjectStore('teststore')
+    })
+
+    it('should return a promise', () => {
+      const list = db.list()
+      list.should.be.instanceOf(Promise)
+    })
+
+    it('should return an array', async () => {
+      const list = await db.list('teststore')
+      list.should.be.instanceOf(Array)
+    })
+
+    it('should return an empty array', async () => {
+      const list = await db.list('teststore')
+      list.length.should.be.equal(0)
+    })
+  })
 })
