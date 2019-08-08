@@ -35,9 +35,8 @@ describe('DB', () => {
     })
 
     it('should create multiple object stores', async () => {
-      const connection = await db.open()
-      await connection.createObjectStore('teststore')
-      await connection.createObjectStore('teststore2')
+      await db.createObjectStore('teststore')
+      await db.createObjectStore('teststore2')
       const storeNames = [...db.storeNames]
       storeNames.should.contain('teststore')
       storeNames.should.contain('teststore2')

@@ -42,7 +42,7 @@ export class Application {
    */
   static set models (models = []) {
     if (models.constructor.name !== 'Array') throw new Error(`Modules should be passed in as an array.`)
-    // Database.register(models)
+    models.forEach(model => this.db.createObjectStore(model.name))
   }
 
   /**

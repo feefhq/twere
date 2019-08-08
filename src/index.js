@@ -13,12 +13,12 @@ Application.router
   .add('/note', Note.POST)
   .add('/note/:id', Note.GET, Note.DELETE, Note.POST)
 
+Application.models = [
+  Note
+]
+
 Application.components = [
   PageComponent,
   NoteComponent,
   CommandComponent
-]
-
-Application.models = [
-  Note
 ]

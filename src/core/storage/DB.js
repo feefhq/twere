@@ -29,13 +29,15 @@ export class DB {
     return new Promise((resolve, reject) => {
       this.close() // Don't like this; must be a better way
       const db = window.indexedDB.open(this.name, version)
-      db.onsuccess = () => {
+      db.onsuccess = (e) => {
         this.db = db.result
         this.db.onversionchange = e => e.version || this.db.close()
         resolve(this)
       }
       db.onerror = () => reject(db.error)
-      db.onupgradeneeded = e => this.onupgradeneeded(e)
+      db.onupgradeneeded = e => {
+        this.onupgradeneeded(e)
+      }
     })
   }
 
@@ -70,7 +72,7 @@ export class DB {
    * Shortcut to trigger an upgrade.
    */
   async triggerUpgrade () {
-    await this.open(this.db.version + 1)
+    await this.open((this.db) ? this.db.version + 1 : 1)
   }
 
   /**
