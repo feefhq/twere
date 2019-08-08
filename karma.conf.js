@@ -12,7 +12,7 @@ module.exports = function (config) {
     port: 9999,
     colors: true,
     logLevel: config.LOG_INFO,
-    browsers: ['ChromeHeadless', 'Firefox'],
+    browsers: ['ChromeHeadless', 'Firefox', 'Safari'],
     singleRun: true,
     concurrency: Infinity,
     preprocessors: {
