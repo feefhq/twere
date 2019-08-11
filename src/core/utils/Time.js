@@ -4,24 +4,24 @@
 export class Time {
   /**
    * Returns a string representing a humanized version of a relative time delta.
+   *
+   * The duration delimiters here are inspired by
+   * [Moment.js](https://github.com/moment/moment/blob/13a61b285c095bda7ea8e33156090ea5ccfeaef1/src/test/moment/duration.js#L426)
    * @param {Date} date A relative date to now
    */
   static relativeTime (date = new Date()) {
-    const rtf = new Intl.RelativeTimeFormat(undefined, { numeric: 'auto' })
-    const delta = (date - Date.now()) / 1000
-    const spans = {
-      minute: 60,
-      hour: 60 * 60,
-      day: 60 * 60 * 24,
-      month: 60 * 60 * 24 * 30,
-      year: 60 * 60 * 24 * 30 * 365
-    }
-    const relative = (delta >= -spans.minute && [delta, 'second']) ||
-                     (delta >= -spans.hour && [delta / spans.minute, 'minute']) ||
-                     (delta >= -spans.day && [delta / spans.hour, 'hour']) ||
-                     (delta >= -spans.month && [delta / spans.day, 'day']) ||
-                     (delta >= -spans.year && [delta / spans.month, 'month']) ||
-                     [delta / spans.year]
-    return rtf.format(Math.round(relative[0]), relative[1])
+    const delta = Math.floor(-(date - Date.now()) / 1000)
+    const duration = (delta <= 44 && 'a few seconds') ||
+           (delta <= 89 && 'a minute') ||
+           (delta <= 44 * 60 && `${Math.ceil(delta / 60)} minutes`) ||
+           (delta <= 89 * 60 && 'an hour') ||
+           (delta <= 21 * 60 * 60 && `${Math.ceil(delta / 60 / 60)} hours`) ||
+           (delta <= 35 * 60 * 60 && 'a day') ||
+           (delta <= 25 * 24 * 60 * 60 && `${Math.ceil(delta / 24 / 60 / 60)} days`) ||
+           (delta <= 45 * 24 * 60 * 60 && 'a month') ||
+           (delta <= 344 * 24 * 60 * 60 && `${Math.ceil(delta / 30 / 24 / 60 / 60)} months`) ||
+           (delta <= 547 * 24 * 60 * 60 && 'a year') ||
+           (delta <= 548 * 24 * 60 * 60 && `${Math.ceil(delta / 365 / 24 / 60 / 60)} years`)
+    return `${duration} ago`
   }
 }
