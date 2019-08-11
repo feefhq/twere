@@ -12,6 +12,8 @@ module.exports = function (config) {
     port: 9999,
     colors: true,
     logLevel: config.LOG_INFO,
+    // Using a different launcher until this issue is resolved
+    // https://github.com/karma-runner/karma-safari-launcher/issues/29
     browsers: ['ChromeHeadless', 'Firefox', 'Safari'],
     singleRun: true,
     concurrency: Infinity,
