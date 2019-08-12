@@ -1,7 +1,13 @@
 import { Transaction } from './Transaction.js'
 
+/**
+ * A wrapper around `window.indexedDB` which uses promises.
+ */
 export class DB {
-
+  /**
+   * Constructs a new instance
+   * @param {string} name the name of the DB
+   */
   constructor (name) {
     this.name = name
     this.db = null
@@ -9,21 +15,24 @@ export class DB {
     return this
   }
 
+  /**
+   * Alternative static constructor
+   * @param {string} name the name of the DB
+   */
   static new (name) {
     return new DB(name)
   }
 
-  get version () {
-    return this.db.version
-  }
-
+  /**
+   * Get the names of all stores in the DB
+   */
   get storeNames () {
     return this.db.objectStoreNames
   }
 
   /**
    * Opens a database connection.
-   * @param {number} version
+   * @param {number} version version of DB to open
    */
   async open (version) {
     return new Promise((resolve, reject) => {
@@ -41,6 +50,9 @@ export class DB {
     })
   }
 
+  /**
+   * Close the DB connection if it is open.
+   */
   close () {
     !this.db || this.db.close()
   }
@@ -160,7 +172,6 @@ export class DB {
    * Get an array of records in a datastore, with criteria applied. Very basic at the
    * moment, and will likely get a separate Criteria interface.
    * @param {string} storeName
-   * @returns {Array} something
    */
   async list (storeName) {
     return new Promise((resolve, reject) => {
@@ -177,32 +188,40 @@ export class DB {
     })
   }
 
+  /**
+   * Open an iterative cursor for a DB request. This ough to be a much more private
+   * function.
+   * @param {string} store
+   */
   openCursor (store) {
     return new Promise((resolve, reject) => {
       const cursor = store.openCursor()
-      cursor.onsuccess = () => {
-        if (cursor.result) cursor.result.request = cursor
-        resolve(cursor.result)
-      }
+      cursor.onsuccess = () => resolve(cursor)
     })
   }
 
-  continue (cursor) {
+  /**
+   * Progresses a cursor. Needs to be made more private.
+   * @param {*} request
+   */
+  continue (request) {
     return new Promise((resolve, reject) => {
-      cursor.request.onsuccess = () => resolve(cursor.result)
-      cursor.request.onerror = () => reject(cursor.error)
-      cursor.continue()
+      request.onsuccess = () => resolve(request.result)
+      request.onerror = () => reject(request.error)
+      request.result.continue()
     })
   }
 
+  /**
+   * Iterates over a cursor and returns the rows to a callback.
+   * @param {*} cursor
+   * @param {*} callback
+   */
   forEach (cursor, callback) {
     return new Promise((resolve, reject) => {
       const iterate = () => {
-        if (!cursor || !cursor.request.result) {
-          resolve(this)
-          return
-        }
-        callback(cursor.request.result.value)
+        if (!cursor.result) return resolve(this)
+        callback(cursor.result.value)
         this.continue(cursor).then(iterate, reject)
       }
       iterate()

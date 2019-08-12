@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+/* eslint-disable no-unused-expressions */
 import { DB } from './DB.js'
 
 describe('DB', () => {
@@ -7,6 +8,12 @@ describe('DB', () => {
 
   afterEach(async () => {
     await db.deleteDatabase(dbname)
+  })
+
+  describe('#constructor()', () => {
+    it('should set `name` property', () => {
+      db.name.should.equal('testdb')
+    })
   })
 
   describe('#open()', () => {
@@ -60,6 +67,18 @@ describe('DB', () => {
     })
   })
 
+  describe('#delete()', () => {
+    it('should delete a value', async () => {
+      await db.createObjectStore('teststore')
+      const key = await db.set('teststore', { 'data': 'something' })
+      let get = await db.get('teststore', key)
+      get.should.eql({ data: 'something', id: 1 } )
+      await db.delete('teststore', key)
+      get = await db.get('teststore', key)
+      expect(get).to.be.undefined
+    })
+  })
+
   describe('#list()', () => {
     beforeEach(async () => {
       await db.createObjectStore('teststore')
@@ -78,6 +97,13 @@ describe('DB', () => {
     it('should return an empty array', async () => {
       const list = await db.list('teststore')
       list.length.should.be.equal(0)
+    })
+
+    it('should return a list', async () => {
+      await db.set('teststore', { 'data': 'something' })
+      await db.set('teststore', { 'data': 'something2' })
+      const list = await db.list('teststore')
+      list.length.should.be.equal(2)
     })
   })
 })
