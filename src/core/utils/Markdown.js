@@ -66,7 +66,7 @@ export class Markdown {
   }
 
   codeBlock () {
-    return this.mutate(/``` *(\w*)\n([\s\S]*?)\n```\n*/g, (match, p1, p2) => {
+    return this.mutate(/```\s*(\w*)\n([\s\S]*?)\n```\n*/g, (match, p1, p2) => {
       p2 = this.outdent(p2)
       return `<pre>${this.escape(p2)}</pre>\n`
     })
