@@ -2,11 +2,12 @@
  * Here be a service worker. This is where caching, fetch recovery and all sorts
  * of other useful offline tooling will happen.
  */
+
 export class ServiceWorker {
-  static register () {
+  static register (url) {
     if ('serviceWorker' in navigator) {
       console.log('Regisering service worker')
-      navigator.serviceWorker.register('/src/service-worker.js')
+      navigator.serviceWorker.register(url)
         .then(reg => {
           console.log('Service worker registration succeeded. Scope is ' + reg.scope)
         }).catch(error => {

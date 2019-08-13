@@ -1,5 +1,6 @@
 import { DB } from './storage/DB.js'
 import { Router } from './Router.js'
+import { ServiceWorker } from './ServiceWorker.js'
 
 /**
  * The main Application class. This is designed to be a constant with only
@@ -9,10 +10,10 @@ import { Router } from './Router.js'
 export class Application {
   /**
    * Add a service worker and register it.
-   * @param {ServiceWorker} worker A service worker prototype
+   * @param {string} worker A service worker prototype
    */
-  static set worker (worker) {
-    worker.register()
+  static set worker (url) {
+    ServiceWorker.register(url)
   }
 
   /**

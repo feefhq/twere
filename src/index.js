@@ -1,11 +1,10 @@
-import { ServiceWorker } from './core/ServiceWorker.js'
 import { Application } from './core/Application.js'
 import { CommandComponent } from './components/CommandComponent.js'
 import { NoteComponent } from './components/NoteComponent.js'
 import { PageComponent } from './components/PageComponent.js'
 import { Note } from './models/Note.js'
 
-Application.worker = ServiceWorker
+Application.worker = './../sw.js'
 
 Application.name = 'twere'
 
