@@ -98,9 +98,12 @@ export class Markdown {
     return this
   }
 
+  /**
+   * Convert URLs to safe cross-origin URLs. `noreferrer` ensures optimum performance.
+   */
   vanillaURL () {
     return this.mutate(/(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g, (match, capture) =>
-      `<a href='${match}' target='_blank'>${this.prettifyURL(match)}</a>`
+      `<a href='${match}' target='_blank' rel='noreferrer'>${this.prettifyURL(match)}</a>`
     )
   }
 
