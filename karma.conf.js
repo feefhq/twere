@@ -3,20 +3,22 @@ const path = require('path')
 
 module.exports = function (config) {
   config.set({
-    basePath: '',
+    customLaunchers: {
+      FirefoxHeadless: {
+        base: 'Firefox',
+        flags: ['-headless'],
+        displayName: 'FirefoxHeadless'
+      }
+    },
     frameworks: ['mocha', 'chai'],
     files: [
       { pattern: 'src/**/!(index).js', type: 'module' }
     ],
     reporters: ['mocha', 'coverage-istanbul'],
     port: 9999,
-    colors: true,
-    logLevel: config.LOG_INFO,
     // Using a different launcher until this issue is resolved
     // https://github.com/karma-runner/karma-safari-launcher/issues/29
-    browsers: ['ChromeHeadless', 'Firefox', 'Safari'],
-    singleRun: true,
-    concurrency: Infinity,
+    browsers: ['ChromeHeadless', 'FirefoxHeadless', 'Safari'],
     preprocessors: {
       'src/**/!(*.spec.*).js': ['karma-coverage-istanbul-instrumenter']
     },
@@ -24,8 +26,9 @@ module.exports = function (config) {
       esModules: true
     },
     coverageIstanbulReporter: {
-      reports: ['html', 'lcovonly', 'text-summary'],
+      reports: ['lcovonly'],
       dir: path.join(__dirname, 'coverage')
-    }
+    },
+    restartOnFileChange: true
   })
 }
