@@ -4,33 +4,22 @@ import { EventMixin } from './mixins/EventMixin.js'
  * Base class for creating components
  */
 export class Component extends EventMixin(window.HTMLElement) {
-  constructor (data = {}) {
-    super()
-    this._ = data
+  connectedCallback () {
+    console.log(this.constructor.name, 'connected');
+    this.paint()
   }
 
-  /**
-   *
-   */
-  toString () {
-    return this.paint()
-  }
-
-  /**
-   *
-   */
-  set _ (newValue) {
-    // Can now add a callback here
-    super._ = newValue
+  get html () {
+    return ``
   }
 
   /**
    * Paint the element into the DOM
    */
   paint () {
-    if (!this.template) return
-    const template = Reflect.construct(this.template, [this])
-    this.trigger('paint', this)
-    return template.paint()
+    while (this.firstChild) {
+      this.removeChild(this.firstChild)
+    }
+    this.appendChild(this.html)
   }
 }

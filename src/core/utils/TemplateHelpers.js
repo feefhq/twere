@@ -22,7 +22,7 @@ export const no = condition => {
  *
  * @param {*} iterable
  */
-export const all = iterable => {
+export const all = (iterable = []) => {
   return { then: (action) => then(iterable.map(action).join(''), true) }
 }
 

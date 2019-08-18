@@ -1,14 +1,52 @@
 import { Component } from '../core/Component.js'
-import { CommandTemplate } from '../templates/CommandTemplate.js'
+import { Template } from '../core/Template.js'
 
 /**
  * A web component to provides command prompt functionality.
  */
 export class CommandComponent extends Component {
-  constructor () {
-    super()
-    this.template = CommandTemplate
-    this.context = '--&gt;'
+  get html () {
+    return Template.dom`
+      <dt class="prompt">--></dt>
+      <dd class="prompt">
+        <form method='post' action='/note'>
+          <textarea name="content" rows="1" placeholder="..."></textarea>
+        </form>
+      </dd>
+      <style>
+        dt.prompt {
+          color: var(--caret-color);
+          line-height: 2;
+          font-size: 1rem;
+        }
+        dt.prompt.out {
+          animation: 0.1s ease-in 0s prompt_out;
+        }
+        dt.prompt.in {
+          animation: 0.1s ease-out 0s prompt_in;
+        }
+        @keyframes prompt_out {
+          0% {
+            opacity: 1;
+            transform: translate(0, 0);
+          }
+          100% {
+            opacity: 0;
+            transform: translate(0, 2em);
+          }
+        }
+        @keyframes prompt_in {
+          0% {
+            opacity: 0;
+            transform: translate(0, -2em);
+          }
+          100% {
+            opacity: 1;
+            transform: translate(0, 0);
+          }
+        }
+      </style>
+    `
   }
 
   /**
@@ -16,7 +54,8 @@ export class CommandComponent extends Component {
    * function which we're overriding and it feels icky.
    */
   connectedCallback () {
-    this.paint()
+    super.connectedCallback()
+    this.context = '--&gt;'
     this.textarea = this.querySelector('textarea')
     this.textarea.focus()
     this.scrollDown()

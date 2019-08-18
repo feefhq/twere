@@ -6,8 +6,4 @@ describe('CommandComponent', () => {
   beforeEach(() => {
     Application.components = [CommandComponent]
   })
-
-  it('should have default context', () => {
-    new CommandComponent().context.should.equal('--&gt;')
-  })
 })
