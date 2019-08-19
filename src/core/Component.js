@@ -2,6 +2,7 @@ import { EventMixin } from './mixins/EventMixin.js'
 
 /**
  * Base class for creating components
+ * @extends HTMLElement
  */
 export class Component extends EventMixin(window.HTMLElement) {
   connectedCallback () {
