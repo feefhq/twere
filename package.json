@@ -28,6 +28,7 @@
   },
   "standard": {
     "globals": [
+      "HTMLElement",
       "Node"
     ]
   }

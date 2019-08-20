@@ -31,15 +31,22 @@ describe('Template', () => {
   })
 
   describe('#dom``', () => {
+    it('should return a DocumentFragement', () => {
+      const dom = template.dom``
+      dom.should.be.instanceOf(DocumentFragment)
+    })
     it('should return simple string content', () => {
       const dom = template.dom`test`
-      dom.should.be.instanceOf(DocumentFragment)
       dom.children.should.be.instanceOf(HTMLCollection)
       dom.children.length.should.equal(0)
     })
   })
 
   describe('#Template.dom``', () => {
+    it('should return a DocumentFragement', () => {
+      const dom = Template.dom``
+      dom.should.be.instanceOf(DocumentFragment)
+    })
     it('should return simple string content', () => {
       const dom = Template.dom`test`
       dom.should.be.instanceOf(DocumentFragment)

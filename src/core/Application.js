@@ -10,10 +10,10 @@ import { ServiceWorker } from './ServiceWorker.js'
 export class Application {
   /**
    * Add a service worker and register it.
-   * @param {string} worker A service worker prototype
+   * @param {string} path path to a service worker prototype
    */
-  static set worker (url) {
-    ServiceWorker.register(url)
+  static set worker (path) {
+    ServiceWorker.register(path)
   }
 
   /**
@@ -31,7 +31,7 @@ export class Application {
    * @type {Comopnent[]}
    */
   static set components (components = []) {
-    if (components.constructor.name !== 'Array') throw new Error(`Components should be passed in as an array.`)
+    if (components.constructor.name !== 'Array') throw new Error('Components should be passed in as an array.')
     components.forEach(component => {
       console.debug('Registering component:', component.name)
       window.customElements.define(`${Application.name}-${component.name.toLowerCase()}`, component)
@@ -42,7 +42,7 @@ export class Application {
    * @type {Model[]}
    */
   static set models (models = []) {
-    if (models.constructor.name !== 'Array') throw new Error(`Modules should be passed in as an array.`)
+    if (models.constructor.name !== 'Array') throw new Error('Modules should be passed in as an array.')
     models.forEach(model => this.db.createObjectStore(model.name))
   }
 
