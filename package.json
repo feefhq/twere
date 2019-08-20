@@ -26,5 +26,9 @@
     "serve": "^11.0.0",
     "standard": "^14.0.0"
   },
-  "dependencies": {}
+  "standard": {
+    "globals": [
+      "Node"
+    ]
+  }
 }

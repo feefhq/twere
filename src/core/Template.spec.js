@@ -2,34 +2,44 @@
 import { Template } from './Template.js'
 
 describe('Template', () => {
-  let temp
+  let template
   beforeEach(() => {
-    temp = new Template()
+    template = new Template()
+  })
+  describe('#constructor()', () => {
+    it('should be properly formed', () => {
+      template.should.be.instanceOf(Template)
+      template.should.haveOwnProperty('placeholders')
+      template.should.haveOwnProperty('element')
+    })
   })
 
-  it('should have a template', () => {
-    temp.root.should.be.instanceOf(HTMLTemplateElement)
-  })
-
-  describe('#deserialize()', () => {
-    it('should return parts', () => {
-      const [strings, expressions] = new Template().deserialize``
-      strings.should.be.instanceOf(Array)
-      expressions.should.be.instanceOf(Array)
+  describe('#content', () => {
+    it('should return a DocumentFragment', () => {
+      template.content.should.be.instanceOf(DocumentFragment)
     })
   })
 
   describe('#orderParts()', () => {
     it('should return order array', () => {
-      const template = new Template()
-      const [strings, expressions] = template.deserialize`test ${1 + 1} aft`
+      const strings = ['test', 'aft']
+      const expressions = [(1 + 1)]
       const ordered = template.orderParts(strings, expressions)
       ordered.should.be.instanceOf(Array)
-      ordered.should.have.members(['test ', 2, ' aft'])
+      ordered.should.have.members(['test', 2, 'aft'])
     })
   })
 
-  describe('#dom', () => {
+  describe('#dom``', () => {
+    it('should return simple string content', () => {
+      const dom = template.dom`test`
+      dom.should.be.instanceOf(DocumentFragment)
+      dom.children.should.be.instanceOf(HTMLCollection)
+      dom.children.length.should.equal(0)
+    })
+  })
+
+  describe('#Template.dom``', () => {
     it('should return simple string content', () => {
       const dom = Template.dom`test`
       dom.should.be.instanceOf(DocumentFragment)
@@ -46,6 +56,16 @@ describe('Template', () => {
       const node = document.createElement('div')
       const dom = Template.dom`${node}`
       dom.children[0].should.be.instanceOf(HTMLDivElement)
+    })
+
+    it('should return arrays', () => {
+      const dom = Template.dom`<span>arf${[1 + 1, 3]}</span>`
+      dom.children[0].innerHTML.should.equal('arf23')
+    })
+
+    it('should return complex arrays', () => {
+      const dom = Template.dom`<span>arf${[1 + 1, [1, 2, 3]]}</span>`
+      dom.children[0].innerHTML.should.equal('arf2123')
     })
   })
 })
