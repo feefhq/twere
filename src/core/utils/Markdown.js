@@ -16,7 +16,8 @@ export class Markdown {
    */
   static toHTML (md) {
     const processed = new Markdown(md)
-    processed.trim()
+    processed
+      .trim()
       .codeBlock()
       .vanillaURL()
       .vanillaParagraph()
@@ -76,25 +77,31 @@ export class Markdown {
     let negate = false
     const paras = this.flux.split(/\n{2}/)
     if (paras.length === 1) return this
-    this.flux = paras.map(para => {
-      if (/^(<pre>|`{3})/.test(para.trim())) negate = true
-      const returnVal = (negate) ? `${para}\n\n` : `<p>${para.trim()}</p>`
-      if (/(<\/pre>|`{3}$)/.test(para.trim())) negate = false
-      return returnVal
-    }).join('').trim()
+    this.flux = paras
+      .map(para => {
+        if (/^(<pre>|`{3})/.test(para.trim())) negate = true
+        const returnVal = negate ? `${para}\n\n` : `<p>${para.trim()}</p>`
+        if (/(<\/pre>|`{3}$)/.test(para.trim())) negate = false
+        return returnVal
+      })
+      .join('')
+      .trim()
     return this
   }
 
   vanillaBR () {
     let negate = false
     const lines = this.flux.trim().split(/\n/)
-    this.flux = lines.map((line, index, array) => {
-      if (index === array.length - 1) return line
-      if (/^(<pre|`{3})/.test(line.trim())) negate = true
-      const returnValue = (negate) ? `${line}\n` : `${line}<br>`
-      if (/(<\/pre>|`{3}$)/.test(line.trim())) negate = false
-      return returnValue
-    }).join('').trim()
+    this.flux = lines
+      .map((line, index, array) => {
+        if (index === array.length - 1) return line
+        if (/^(<pre|`{3})/.test(line.trim())) negate = true
+        const returnValue = negate ? `${line}\n` : `${line}<br>`
+        if (/(<\/pre>|`{3}$)/.test(line.trim())) negate = false
+        return returnValue
+      })
+      .join('')
+      .trim()
     return this
   }
 
@@ -102,23 +109,36 @@ export class Markdown {
    * Convert URLs to safe cross-origin URLs. `noreferrer` ensures optimum performance.
    */
   vanillaURL () {
-    return this.mutate(/(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g, (match, capture) =>
-      `<a href='${match}' target='_blank' rel='noreferrer'>${this.prettifyURL(match)}</a>`
+    return this.mutate(
+      /(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g,
+      (match, capture) =>
+        `<a href='${match}' target='_blank' rel='noreferrer'>${this.prettifyURL(
+          match
+        )}</a>`
     )
   }
 
   prettifyURL (url) {
     const urlParts = new URL(url)
-    return `<i class='protocol'>${urlParts.protocol}</i>` +
+    const search = urlParts.search.length
+      ? `<i class='search'>${urlParts.search}</i>`
+      : ``
+    const hash = urlParts.hash.length ? `${urlParts.hash}` : ``
+    return (
+      `<i class='protocol'>${urlParts.protocol}</i>` +
       `<i class='host'>${urlParts.host}</i>` +
-      `${urlParts.pathname.replace(/[/]/g, `<i class='split'>$&</i>`).replace(/[-_]/g, `<i class='delimiter'>$&</i>`)}` +
-      `<i class='search'>${urlParts.search}</i>` +
-      `${urlParts.hash}`
+      `${urlParts.pathname
+        .replace(/[/]$/g, '')
+        .replace(/[/]/g, `<i class='split'>$&</i>`)
+        .replace(/[-_]/g, `<i class='delimiter'>$&</i>`)}` +
+      search +
+      hash
+    )
   }
 
   bold () {
     return this.mutate(/\*{2}(\S[\s\S]*?)\*{2}/g, (match, capture) =>
-      (/\S$/.test(capture)) ? `<strong>${capture}</strong>` : match
+      /\S$/.test(capture) ? `<strong>${capture}</strong>` : match
     )
   }
 
@@ -127,7 +147,7 @@ export class Markdown {
    */
   inlineCode () {
     return this.mutate(/`(\S[\s\S]*?)`/g, (match, capture) =>
-      (/\S$/.test(capture)) ? `<code>${capture}</code>` : match
+      /\S$/.test(capture) ? `<code>${capture}</code>` : match
     )
   }
 
