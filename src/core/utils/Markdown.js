@@ -1,3 +1,5 @@
+import { PrettyURL } from './PrettyURL.js'
+
 /**
  * Markdown parser which is intended to be lightweight and sipmlistic. By
  * design, it avoids doing too much strict validation., with the assumption
@@ -112,27 +114,9 @@ export class Markdown {
     return this.mutate(
       /(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g,
       (match, capture) =>
-        `<a href='${match}' target='_blank' rel='noreferrer'>${this.prettifyURL(
+        `<a href='${match}' target='_blank' rel='noreferrer'>${PrettyURL.prettifyURL(
           match
         )}</a>`
-    )
-  }
-
-  prettifyURL (url) {
-    const urlParts = new URL(url)
-    const search = urlParts.search.length
-      ? `<i class='search'>${urlParts.search}</i>`
-      : ``
-    const hash = urlParts.hash.length ? `${urlParts.hash}` : ``
-    return (
-      `<i class='protocol'>${urlParts.protocol}</i>` +
-      `<i class='host'>${urlParts.host}</i>` +
-      `${urlParts.pathname
-        .replace(/[/]$/g, '')
-        .replace(/[/]/g, `<i class='split'>$&</i>`)
-        .replace(/[-_]/g, `<i class='delimiter'>$&</i>`)}` +
-      search +
-      hash
     )
   }
 
