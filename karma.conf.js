@@ -18,7 +18,8 @@ module.exports = function (config) {
     port: 9999,
     // Using a different launcher until this issue is resolved
     // https://github.com/karma-runner/karma-safari-launcher/issues/29
-    browsers: ['ChromeHeadless', 'FirefoxHeadless', 'Safari'],
+    browsers: ['ChromeHeadless'],
+    // browsers: ['ChromeHeadless', 'FirefoxHeadless', 'Safari'],
     preprocessors: {
       'src/**/!(*.spec.*).js': ['karma-coverage-istanbul-instrumenter']
     },
