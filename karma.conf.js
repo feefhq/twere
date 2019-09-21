@@ -11,9 +11,7 @@ module.exports = function (config) {
       }
     },
     frameworks: ['mocha', 'chai'],
-    files: [
-      { pattern: 'src/**/!(index).js', type: 'module' }
-    ],
+    files: [{ pattern: 'src/**/!(index).js', type: 'module' }],
     reporters: ['mocha', 'coverage-istanbul'],
     port: 9999,
     // Using a different launcher until this issue is resolved
@@ -30,6 +28,10 @@ module.exports = function (config) {
       reports: ['lcovonly'],
       dir: path.join(__dirname, 'coverage')
     },
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    mochaReporter: {
+      output: 'autowatch',
+      showDiff: true
+    }
   })
 }
