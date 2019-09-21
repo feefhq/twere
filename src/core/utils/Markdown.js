@@ -114,7 +114,7 @@ export class Markdown {
     return this.mutate(
       /(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g,
       (match, capture) =>
-        `<a href='${match}' target='_blank' rel='noreferrer'>${PrettyURL.prettifyURL(
+        `<a href='${match}' target='_blank' rel='noreferrer'>${PrettyURL.url(
           match
         )}</a>`
     )
