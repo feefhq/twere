@@ -3,11 +3,17 @@ const path = require('path')
 
 module.exports = function (config) {
   config.set({
+    captureTimeout: 300000,
+    browserNoActivityTimeout: 300000,
+    browserDisconnectTolerance: 2,
     customLaunchers: {
       FirefoxHeadless: {
         base: 'Firefox',
-        flags: ['-headless'],
-        displayName: 'FirefoxHeadless'
+        flags: ['-headless']
+      },
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless'
+        // flags: ['--no-sandbox']
       }
     },
     frameworks: ['mocha', 'chai'],
@@ -25,7 +31,7 @@ module.exports = function (config) {
       esModules: true
     },
     coverageIstanbulReporter: {
-      reports: ['lcovonly'],
+      reports: ['lcov', 'text'],
       dir: path.join(__dirname, 'coverage')
     },
     restartOnFileChange: true,
