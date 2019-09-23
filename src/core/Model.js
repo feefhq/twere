@@ -1,11 +1,10 @@
-import { Base } from './Base.js'
 import { Application } from './Application.js'
 import { EventMixin } from './mixins/EventMixin.js'
 
 /**
  * Base class to be extended to define models.
  */
-export class Model extends EventMixin(Base) {
+export class Model extends EventMixin(Object) {
   /**
    * Create a new instance with optional object properties applied. Still some
    * work to be done here to make instantiation cleaner, more intuitive and
@@ -16,8 +15,35 @@ export class Model extends EventMixin(Base) {
    */
   constructor (obj = {}) {
     super()
+    this.method = ''
     const props = new Map(Object.entries(obj))
-    props.forEach((value, key) => Reflect.defineProperty(this, key, { value, writable: true }))
+    props.forEach((value, key) =>
+      Reflect.defineProperty(this, key, { value, writable: true })
+    )
+  }
+
+  static get GET () {
+    const obj = Object.create(this.prototype)
+    obj.method = obj.get
+    return obj
+  }
+
+  static get DELETE () {
+    const obj = Object.create(this.prototype)
+    obj.method = obj.delete
+    return obj
+  }
+
+  static get PUT () {
+    const obj = Object.create(this.prototype)
+    obj.method = obj.put
+    return obj
+  }
+
+  static get POST () {
+    const obj = Object.create(this.prototype)
+    obj.method = obj.post
+    return obj
   }
 
   get (params) {
@@ -26,13 +52,17 @@ export class Model extends EventMixin(Base) {
 
   delete (params) {
     console.log('DELETE', ...params)
-    params.forEach((value, key) => { this[key] = value })
+    params.forEach((value, key) => {
+      this[key] = value
+    })
     this.remove(this.id)
   }
 
   post (params) {
     console.log('POST', ...params)
-    params.forEach((value, key) => { this[key] = value })
+    params.forEach((value, key) => {
+      this[key] = value
+    })
     this.createdAt = new Date()
     this.save()
   }
@@ -72,7 +102,8 @@ export class Model extends EventMixin(Base) {
    */
   static list (count = 1000, order = 'desc') {
     return new Promise(resolve => {
-      Application.db.list(this.prototype.constructor.name, count, order)
+      Application.db
+        .list(this.prototype.constructor.name, count, order)
         .then(result => {
           const instances = result.map(obj => {
             return Reflect.construct(this.prototype.constructor, [obj])
