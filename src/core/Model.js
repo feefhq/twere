@@ -20,6 +20,31 @@ export class Model extends EventMixin(Object) {
   }
 
   /**
+   * Returns the constructor name
+   */
+  static toString () {
+    return this.name
+  }
+
+  /**
+   * Returns the constructor name
+   */
+  toString () {
+    return this.constructor.name
+  }
+
+  /**
+   * Creates a store for this model based on the name. Probably needs a better
+   * name to avoid confusion with native function name. This looks as though it
+   * is extra cruft at the moment, but we will want to define indexes at a later
+   * stage.
+   */
+  static createObjectStore (db) {
+    console.debug('Creating model object store:', this.name, db)
+    Application.db.createObjectStore(this.name, db)
+  }
+
+  /**
    * Creates a new object, sets it's next expected method, then returns it.
    * @param {Function} f Expected to be a function from this class
    */
@@ -59,6 +84,23 @@ export class Model extends EventMixin(Object) {
    */
   static get PUT () {
     return this.getMethodConstant(this.prototype.put)
+  }
+
+  /**
+   * Gets a list of entities. Needs more work.
+   * @returns {Promise} Promise object represents an array of model objects
+   */
+  static list (count = 1000, order = 'desc') {
+    return new Promise(resolve => {
+      Application.db
+        .list(this.prototype.constructor.name, count, order)
+        .then(result => {
+          const instances = result.map(obj => {
+            return Reflect.construct(this.prototype.constructor, [obj])
+          })
+          resolve(instances)
+        })
+    })
   }
 
   /**
@@ -123,17 +165,6 @@ export class Model extends EventMixin(Object) {
   }
 
   /**
-   * Creates a store for this model based on the name. Probably needs a better
-   * name to avoid confusion with native function name. This looks as though it
-   * is extra cruft at the moment, but we will want to define indexes at a later
-   * stage.
-   */
-  static createObjectStore (db) {
-    console.debug('Creating model object store:', this.name, db)
-    Application.db.createObjectStore(this.name, db)
-  }
-
-  /**
    * Save the entity. The DB activity probably needs to be factored out.
    * Needs lots of error handling to be added.
    */
@@ -142,26 +173,12 @@ export class Model extends EventMixin(Object) {
     this.constructor.trigger('dirty', this)
   }
 
-  remove (id) {
+  /**
+   * Remove the entity.
+   */
+  remove (id = Number) {
     Application.db.delete(this.constructor.name, id)
     this.constructor.trigger('dirty', this)
-  }
-
-  /**
-   * Gets a list of entities. Needs more work.
-   * @returns {Promise} Promise object represents an array of model objects
-   */
-  static list (count = 1000, order = 'desc') {
-    return new Promise(resolve => {
-      Application.db
-        .list(this.prototype.constructor.name, count, order)
-        .then(result => {
-          const instances = result.map(obj => {
-            return Reflect.construct(this.prototype.constructor, [obj])
-          })
-          resolve(instances)
-        })
-    })
   }
 
   /**
@@ -171,12 +188,5 @@ export class Model extends EventMixin(Object) {
     const dataObj = Object.assign({}, this)
     delete dataObj.method // This is important, but need to document why
     return dataObj
-  }
-
-  /**
-   * Returns the constructor name
-   */
-  static toString () {
-    return this.name
   }
 }
