@@ -11,53 +11,100 @@ export class Model extends EventMixin(Object) {
    * robust
    *
    * @param {Object} obj An optional object which will have it's properties
-   * mapped one to one to the instance
+   * reflected one to one to the instance
    */
   constructor (obj = {}) {
     super()
-    this.method = ''
+    this.method = Function
+    this.reflect(obj)
+  }
+
+  /**
+   * Creates a new object, sets it's next expected method, then returns it.
+   * @param {Function} f Expected to be a function from this class
+   */
+  static getMethodConstant (f = Function) {
+    const obj = Object.create(this.prototype)
+    obj.method = f
+    return obj
+  }
+
+  /**
+   * Static constant for a DELETE method
+   * @return {Function}
+   */
+  static get DELETE () {
+    return this.getMethodConstant(this.prototype.delete)
+  }
+
+  /**
+   * Static constant for a GET method
+   * @return {Function}
+   */
+  static get GET () {
+    return this.getMethodConstant(this.prototype.get)
+  }
+
+  /**
+   * Static constant for a POST method
+   * @return {Function}
+   */
+  static get POST () {
+    return this.getMethodConstant(this.prototype.post)
+  }
+
+  /**
+   * Static constant for a PUT method
+   * @return {Function}
+   */
+  static get PUT () {
+    return this.getMethodConstant(this.prototype.put)
+  }
+
+  /**
+   * Given an object, reflects the properties to this instance. Will only apply
+   * properties which are writable.
+   * @param {Object} obj a key/value object
+   */
+  reflect (obj = {}) {
     const props = new Map(Object.entries(obj))
     props.forEach((value, key) =>
-      Reflect.defineProperty(this, key, { value, writable: true })
+      Object.defineProperty(this, key, { value, writable: true })
     )
   }
 
-  static get GET () {
-    const obj = Object.create(this.prototype)
-    obj.method = obj.get
-    return obj
+  /**
+   * A cheap, but hacky way to call a predetermined function of an instance. This is very
+   * unsafe and verbose, but does the job right now
+   * @param {FormData} params data to pass to the proxied function
+   */
+  proxy (params) {
+    this.method(params)
   }
 
-  static get DELETE () {
-    const obj = Object.create(this.prototype)
-    obj.method = obj.delete
-    return obj
-  }
-
-  static get PUT () {
-    const obj = Object.create(this.prototype)
-    obj.method = obj.put
-    return obj
-  }
-
-  static get POST () {
-    const obj = Object.create(this.prototype)
-    obj.method = obj.post
-    return obj
-  }
-
-  get (params) {
-    console.log('GET', params)
-  }
-
+  /**
+   *
+   * @param {FormData} params
+   */
   delete (params) {
-    console.log('DELETE', ...params)
     params.forEach((value, key) => {
       this[key] = value
     })
     this.remove(this.id)
   }
 
+  /**
+   * Not implemented.
+   * @param {FormData} params
+   */
+  get (params) {
+    console.log('GET', params)
+  }
+
+  /**
+   *
+   * @param {FormData} params
+   */
   post (params) {
     console.log('POST', ...params)
     params.forEach((value, key) => {
@@ -67,6 +114,10 @@ export class Model extends EventMixin(Object) {
     this.save()
   }
 
+  /**
+   * Not implemented.
+   * @param {FormData} params
+   */
   put (params) {
     console.log('PUT', params)
   }
@@ -118,7 +169,7 @@ export class Model extends EventMixin(Object) {
    */
   getData () {
     const dataObj = Object.assign({}, this)
-    delete dataObj.method
+    delete dataObj.method // This is important, but need to document why
     return dataObj
   }
 

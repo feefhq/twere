@@ -10,7 +10,7 @@ export class Router {
     if (!route) return
     console.log(`Registering route: ${route}`)
     this.init()
-    this.routes = this.routes || new Map()
+    this.routes || (this.routes = new Map())
     this.routes.set(route, objs)
     return this
   }
@@ -32,9 +32,11 @@ export class Router {
     const route = this.matchPath(path)
 
     if (route) {
-      const finalRoute = this.routes.get(route).find(m => m.method.name === method.toLowerCase())
+      const finalRoute = this.routes.get(route).find(m => {
+        return m.method.name === method.toLowerCase()
+      })
       const params = this.buildParams(target, path, route)
-      finalRoute.push(params)
+      finalRoute.proxy(params)
       window.history.pushState({}, 'Updated!', path)
     }
   }
@@ -62,8 +64,12 @@ export class Router {
    */
   static init () {
     if (!this.touched) {
-      document.addEventListener('click', event => this.interceptRoutableEvents(event))
-      document.addEventListener('submit', event => this.interceptRoutableEvents(event))
+      document.addEventListener('click', event =>
+        this.interceptRoutableEvents(event)
+      )
+      document.addEventListener('submit', event =>
+        this.interceptRoutableEvents(event)
+      )
     }
     this.touched = true
   }
@@ -89,7 +95,10 @@ export class Router {
    * @param {Event} event The event being evaluated
    */
   static matchesOrigin (event) {
-    const url = new URL(event.target.getAttribute('href'), window.location.origin)
+    const url = new URL(
+      event.target.getAttribute('href'),
+      window.location.origin
+    )
     return url.origin === window.location.origin
   }
 
@@ -103,19 +112,21 @@ export class Router {
   }
 
   static inferAction (event) {
-    return event.target.getAttribute('href') ||
+    return (
+      event.target.getAttribute('href') ||
       event.target.action ||
-      (event.target.form &&
-      event.target.form.action)
+      (event.target.form && event.target.form.action)
+    )
   }
 
   static inferMethod (event) {
-    return event.target.getAttribute('data-method') ||
-      event.target.method ||
-      'GET'
+    return (
+      event.target.getAttribute('data-method') || event.target.method || 'GET'
+    )
   }
 
   static inferTarget (event) {
+    console.log(event)
     switch (event.target.tagName.toLowerCase()) {
       case 'a':
         return
@@ -129,8 +140,9 @@ export class Router {
 
   static buildParams (target, path, route) {
     const data = new window.FormData(target)
-    this.extractParamsFromPath(path, route)
-      .forEach((value, key) => data.append(key, value))
+    this.extractParamsFromPath(path, route).forEach((value, key) =>
+      data.append(key, value)
+    )
     return data
   }
 
@@ -142,8 +154,9 @@ export class Router {
     const routeParts = routeUrl.pathname.split('/')
     urlParts.forEach((part, index) => {
       const paramName = routeParts[index].slice(1)
-      if (~routeParts[index].indexOf(':')) params.append(paramName, part)
+      if (routeParts[index].indexOf(':') > -1) params.append(paramName, part)
     })
+
     return params
   }
 }
