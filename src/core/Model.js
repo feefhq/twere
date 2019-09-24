@@ -139,16 +139,13 @@ export class Model extends EventMixin(Object) {
    * Not implemented.
    * @param {FormData} params
    */
-  get (params) {
-    console.log('GET', params)
-  }
+  get (params) {}
 
   /**
    *
    * @param {FormData} params
    */
   post (params) {
-    console.log('POST', ...params)
     params.forEach((value, key) => {
       this[key] = value
     })
@@ -160,9 +157,7 @@ export class Model extends EventMixin(Object) {
    * Not implemented.
    * @param {FormData} params
    */
-  put (params) {
-    console.log('PUT', params)
-  }
+  put (params) {}
 
   /**
    * Save the entity. The DB activity probably needs to be factored out.

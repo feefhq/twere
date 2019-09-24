@@ -3,16 +3,32 @@
  * constant source of truth. TODO: add tests and docs.
  */
 export class Router {
+  constructor () {
+    this.touched = null
+    this.routes = null
+  }
   /**
    * Add a route to the application. Is chainable, hooray!
    */
   static add (route, ...objs) {
     if (!route) return
     console.log(`Registering route: ${route}`)
-    this.init()
+    this.touched || (this.touched = this.createListeners())
     this.routes || (this.routes = new Map())
     this.routes.set(route, objs)
     return this
+  }
+
+  /**
+   * Register router events. Is intended to be idempotent.
+   */
+  static createListeners () {
+    return (
+      ['click', 'submit'].forEach(t =>
+        document.addEventListener(t, e => this.interceptRoutableEvents(e))
+      ),
+      true
+    )
   }
 
   /**
@@ -56,22 +72,6 @@ export class Router {
     } else {
       throw new Error(`No match for path: ${path}`)
     }
-  }
-
-  /**
-   * Initiates the router, registering it's events. Is idempotent to help
-   * with composition.
-   */
-  static init () {
-    if (!this.touched) {
-      document.addEventListener('click', event =>
-        this.interceptRoutableEvents(event)
-      )
-      document.addEventListener('submit', event =>
-        this.interceptRoutableEvents(event)
-      )
-    }
-    this.touched = true
   }
 
   /**
@@ -126,7 +126,6 @@ export class Router {
   }
 
   static inferTarget (event) {
-    console.log(event)
     switch (event.target.tagName.toLowerCase()) {
       case 'a':
         return
