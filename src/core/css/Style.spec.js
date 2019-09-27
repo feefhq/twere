@@ -13,7 +13,7 @@ describe('Style', () => {
     })
 
     stub = sinon
-      .stub(style, 'fetch')
+      .stub(window, 'fetch')
       .callThrough()
       .withArgs('/stub')
       .callsFake(() => {
@@ -33,14 +33,22 @@ describe('Style', () => {
     })
   })
 
-  describe('#fetch()', () => {
-    it('should return a promise', () => {
-      expect(style.fetch('/stub')).to.be.an.instanceof(Promise)
+  describe('#featchCSS()', () => {
+    it('should get content', async () => {
+      expect(await style.fetchCSS('/stub')).to.equal('a {}')
+      expect(await style.fetchCSS()).to.equal('')
+    })
+  })
+
+  describe('#loadCSS()', () => {
+    it('should return empty string', async () => {
+      await style.loadCSS()
+      expect(style.link.innerText).to.equal('')
     })
 
-    it('should resolve a response', async () => {
-      const response = await style.fetch('/stub')
-      expect(response).to.be.an.instanceof(Response)
+    it('should return some CSS', async () => {
+      await style.loadCSS('/stub')
+      expect(style.link.innerText).to.equal('a {}')
     })
   })
 })
