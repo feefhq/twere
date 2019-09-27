@@ -21,7 +21,7 @@ module.exports = function (config) {
       { pattern: 'src/**/!(index).js', type: 'module' },
       { pattern: 'src/**/*.css', type: 'css', included: false }
     ],
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage-istanbul'],
     port: 9999,
     // Using a different launcher until this issue is resolved
     // https://github.com/karma-runner/karma-safari-launcher/issues/29
