@@ -1,7 +1,14 @@
 export class Style {
-  constructor () {
-    this.css = new CSSStyleSheet()
+  constructor (doc = document) {
+    this.doc = doc
+    this.link = this.doc.createElement('style')
   }
 
-  lazyLoad () {}
+  /**
+   * Simple wrapper around `window.fetch()`
+   * @param {string} url
+   */
+  fetch (url) {
+    return window.fetch(url)
+  }
 }

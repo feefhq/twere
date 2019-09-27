@@ -16,13 +16,16 @@ module.exports = function (config) {
         // flags: ['--no-sandbox']
       }
     },
-    frameworks: ['mocha', 'chai'],
-    files: [{ pattern: 'src/**/!(index).js', type: 'module' }],
-    reporters: ['mocha', 'coverage-istanbul'],
+    frameworks: ['mocha', 'chai', 'sinon'],
+    files: [
+      { pattern: 'src/**/!(index).js', type: 'module' },
+      { pattern: 'src/**/*.css', type: 'css', included: false }
+    ],
+    reporters: ['mocha'],
     port: 9999,
     // Using a different launcher until this issue is resolved
     // https://github.com/karma-runner/karma-safari-launcher/issues/29
-    browsers: ['ChromeHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox'],
     // browsers: ['ChromeHeadless', 'FirefoxHeadless', 'Safari'],
     preprocessors: {
       'src/**/!(*.spec.*).js': ['karma-coverage-istanbul-instrumenter']
