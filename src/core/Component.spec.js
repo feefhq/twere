@@ -5,11 +5,32 @@ import { Component } from './Component.js'
 import { Application } from './Application.js'
 import { Template } from './Template.js'
 
+describe('Component.define()', () => {
+  it('should define default custom element', () => {
+    class ExtComponent extends Component {}
+    ExtComponent.define()
+    expect(new ExtComponent()).to.be.an.instanceof(ExtComponent)
+    expect(window.customElements.get('default-extcomponent').name).to.equal(
+      'ExtComponent'
+    )
+  })
+
+  it('should define named custom element', () => {
+    class ExtComponent extends Component {}
+    ExtComponent.define('ext')
+    expect(new ExtComponent()).to.be.an.instanceof(ExtComponent)
+    expect(window.customElements.get('ext-extcomponent').name).to.equal(
+      'ExtComponent'
+    )
+  })
+})
+
 describe('Component', () => {
   let component
 
   before(() => {
-    Application.components = [Component]
+    Component.define()
+    component = new Component()
   })
 
   describe('#html', () => {

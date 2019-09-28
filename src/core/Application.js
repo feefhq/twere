@@ -3,6 +3,10 @@ import { Router } from './Router.js'
 import { ServiceWorker } from './ServiceWorker.js'
 
 /**
+ * @typedef {import('./Component.js').Component} Component
+ */
+
+/**
  * The main Application class. This is designed to be a constant with only
  * static methods, so that it can martial state, and be easily injected
  * anywhere.
@@ -28,13 +32,19 @@ export class Application {
   }
 
   /**
-   * @type {Comopnent[]}
+   * @type {Component[]}
    */
-  static set components (components = []) {
-    if (components.constructor.name !== 'Array') throw new Error('Components should be passed in as an array.')
+  static get components () {
+    return Application.components
+  }
+
+  static set components (components) {
+    if (components.constructor.name !== 'Array') {
+      throw new Error('Components should be an array')
+    }
     components.forEach(component => {
       console.debug('Registering component:', component.name)
-      window.customElements.define(`${Application.name}-${component.name.toLowerCase()}`, component)
+      component.define(Application.appName)
     })
   }
 
@@ -42,7 +52,9 @@ export class Application {
    * @type {Model[]}
    */
   static set models (models = []) {
-    if (models.constructor.name !== 'Array') throw new Error('Modules should be passed in as an array.')
+    if (models.constructor.name !== 'Array') {
+      throw new Error('Modules should be passed in as an array.')
+    }
     models.forEach(model => this.db.createObjectStore(model.name))
   }
 

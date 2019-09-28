@@ -7,6 +7,11 @@ import { Style } from './css/Style.js'
  * @extends HTMLElement
  */
 export class Component extends EventMixin(window.HTMLElement) {
+  static define (prefix = 'default') {
+    const name = `${prefix}-${this.name.toLowerCase()}`
+    window.customElements.define(name, this)
+  }
+
   /**
    * Invoked each time the element is appended into a document-connected element, as per
    * the Custom Elements API.
