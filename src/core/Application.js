@@ -21,6 +21,7 @@ export class Application {
   }
 
   /**
+   * A name for the application. Defaults to `default`
    * @type {string}
    */
   static get name () {
@@ -32,6 +33,8 @@ export class Application {
   }
 
   /**
+   * Components which are attached to the application. Setting components will
+   * automatically define the components as custom elements.
    * @type {Component[]}
    */
   static get components () {
