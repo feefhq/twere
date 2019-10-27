@@ -33,6 +33,12 @@ describe('Component', () => {
     component = new Component()
   })
 
+  describe('constructor', () => {
+    it('should have state', () => {
+      expect(new Component()).to.have.property('_')
+    })
+  })
+
   describe('#html', () => {
     it('should return a string', () => {
       expect(new Component().html).to.be.a('String')

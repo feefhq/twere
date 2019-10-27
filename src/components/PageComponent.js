@@ -9,7 +9,7 @@ import { Template } from '../core/Template.js'
 export class PageComponent extends Component {
   constructor () {
     super()
-    this.notes = []
+    this._.notes = []
   }
 
   connectedCallback () {
@@ -37,7 +37,7 @@ export class PageComponent extends Component {
             simple Markdown including <code>_</code>, <code>**</code>, <code>\`</code> and <code>\`\`\`</code>.
           </p>
         </dd>
-        ${this.notes.map(note => new NoteComponent(note))}
+        ${this._.notes.map(note => new NoteComponent(note))}
         <twere-commandcomponent></twere-commandcomponent>
       </dl>
     </section>`
@@ -53,7 +53,7 @@ export class PageComponent extends Component {
    * @memberof PageComponent
    */
   async getNoteList () {
-    this.notes = await Note.list(100)
+    this._.notes = await Note.list(100)
     this.paint()
   }
 }

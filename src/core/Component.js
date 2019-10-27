@@ -1,12 +1,20 @@
 import { EventMixin } from './mixins/EventMixin.js'
 import { Template } from './Template.js'
 import { Style } from './css/Style.js'
+import { State } from './State.js'
 
 /**
  * Base class for creating components. Based on the Custom Elements API.
  * @extends HTMLElement
  */
 export class Component extends EventMixin(window.HTMLElement) {
+  constructor () {
+    super()
+    this._ = new State()._
+  }
+  /**
+   * Register the component as a custom element.
+   */
   static define (prefix = 'default') {
     const name = `${prefix}-${this.name.toLowerCase()}`
     window.customElements.define(name, this)
