@@ -189,7 +189,6 @@ twere-notecomponent dt:hover a {
 
 twere-notecomponent:hover dd {
   border-left-color: var(--caret-color-mute);
-  background-color: hsla(255, 100%, 100%, 0.01);
 }
 
 dt {
@@ -261,11 +260,11 @@ code {
   padding: 0 0.25rem;
   margin: 0 -0.25rem;
   background: repeating-linear-gradient(
-    90deg,
+    45deg,
     transparent,
-    transparent 0.15rem,
-    hsla(255, 100%, 100%, .05) 0.15rem,
-    hsla(255, 100%, 100%, .05) 0.3rem
+    transparent 0.1rem,
+    hsla(255, 100%, 100%, .05) 0.1rem,
+    hsla(255, 100%, 100%, .05) 0.2rem
   );
   background-color: hsla(0, 0%, 100%, 0.05);
   background-repeat: repeat-x;
@@ -335,7 +334,7 @@ dd a {
   margin: 0 -0.25rem;
   position: relative;
   box-decoration-break: clone;
-  box-shadow: 0 -0.1rem hsla(147, 100%, 49%, 0.1) inset;
+  /* box-shadow: 0 -0.1rem hsla(147, 100%, 49%, 0.1) inset; */
 }
 
 dd a i {
@@ -362,6 +361,7 @@ dd a .split {
   display: inline-block;
   transform: scale(0.6);
   transform-origin: center 65%;
+  color: hsla(146, 81%, 72%, 0.25);
 }
 
 dd a .split::before,
@@ -376,7 +376,8 @@ dd a .search {
 }
 
 dd a:hover {
-  background: var(--elevation-02dp);
+  /* background: var(--elevation-01dp); */
+  color: hsl(146, 44%, 54%);
 }
 
 cite {
