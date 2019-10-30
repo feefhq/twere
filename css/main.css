@@ -239,12 +239,13 @@ pre {
     hsla(255, 100%, 100%, .05) 0.15rem,
     hsla(255, 100%, 100%, .05) 0.3rem
   );
-  background-color: hsla(0, 0%, 100%, 0.05);
+  background-color: hsla(0, 0%, 100%, 0.025);
   background-repeat: repeat-x;
   background-position-y: top;
   background-size: 100% 0.1rem;
   color: var(--color-low);
   font-family: "Fira Code";
+  font-weight: 500;
 }
 
 pre:first-child {
@@ -266,7 +267,7 @@ code {
     hsla(255, 100%, 100%, .05) 0.1rem,
     hsla(255, 100%, 100%, .05) 0.2rem
   );
-  background-color: hsla(0, 0%, 100%, 0.05);
+  background-color: hsla(0, 0%, 100%, 0.025);
   background-repeat: repeat-x;
   background-position-y: top;
   background-size: 100% 0.1rem;
@@ -275,6 +276,7 @@ code {
   line-height: 1.2em;
   color: var(--color-low);
   font-family: "Fira Code";
+  font-weight: 500;
 }
 
 form {
