@@ -10,14 +10,13 @@ export class CommandComponent extends Component {
       <dt class="prompt">--></dt>
       <dd class="prompt">
         <form method='post' action='/note'>
-          <label>Submit</label>
           <textarea name="content" rows="1" placeholder="..."></textarea>
+          <label>Submit with CMD / CTRL + ENTER</label>
         </form>
       </dd>
       <style>
         dt.prompt {
           color: var(--caret-color);
-          line-height: 2;
           font-size: 1rem;
         }
         dt.prompt.out {
