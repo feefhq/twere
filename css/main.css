@@ -278,9 +278,13 @@ code {
   font-family: "Fira Code";
 }
 
+form {
+  margin: 0;
+  padding: 0;
+}
+
 textarea {
   outline: none;
-  box-sizing: border-box; /* Ensures width can be set exactly */
   resize: none;
   border: none;
   overflow-y: hidden;
