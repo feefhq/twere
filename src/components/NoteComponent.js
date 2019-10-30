@@ -12,8 +12,9 @@ export class NoteComponent extends Component {
     return Template.dom`
     <dt relative-time='${this.note.relativeCreatedAt}'>
       <a href='/note/${this.note.id}' data-method='delete'>
-        ${this.note.relativeCreatedAt}
+        &#x2326;
       </a>
+      ${this.note.relativeCreatedAt}
     </dt>
     <dd>
         ${Markdown.toHTML(this.note.content)}
@@ -22,7 +23,11 @@ export class NoteComponent extends Component {
 
   connectedCallback () {
     super.connectedCallback()
-    if (this.previousSibling.querySelector && this.previousSibling.querySelector('dt').getAttribute('relative-time') === this.querySelector('dt').getAttribute('relative-time')) {
+    if (
+      this.previousSibling.querySelector &&
+      this.previousSibling.querySelector('dt').getAttribute('relative-time') ===
+        this.querySelector('dt').getAttribute('relative-time')
+    ) {
       this.classList.add('group')
     }
   }

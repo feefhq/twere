@@ -25,6 +25,8 @@
   --caret-color-mute: hsla(205, 100%, 50%, 0.5);
   --caret-color-faint: hsla(205, 100%, 50%, 0.25);
 
+  --destructive-color: hsla(0, 100%, 50%, 0.544);
+
   --link-color:       rgba(0, 148, 255, 0.15);
   --code-background:  rgba(255, 255, 255, 0.02);
   --code-color:       rgba(255, 255, 255, 0.75);
@@ -166,12 +168,22 @@ twere-notecomponent.group dt {
   opacity: 0;
 }
 
-twere-notecomponent.group dt a {
+twere-notecomponent dt a {
+  opacity: 0;
+  vertical-align: middle;
+  color: var(--destructive-color);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  display: inline-block;
+  padding: 0 0.25rem;
+}
+
+twere-notecomponent dt:hover {
   color: var(--caret-color-mute);
 }
 
 twere-notecomponent.group:hover dt,
-twere-notecomponent.group:hover dt a {
+twere-notecomponent dt:hover a {
   opacity: 1;
 }
 
@@ -183,9 +195,10 @@ twere-notecomponent:hover dd {
 dt {
   white-space: nowrap;
   margin: 0.25rem 0;
-  padding: .55rem 1rem .15rem 2rem;
+  padding: 0 1rem 0 2rem;
   text-align: right;
   font-size: 0.75rem;
+  line-height: 3;
   text-transform: uppercase;
 }
 
@@ -194,7 +207,6 @@ dt, dt a {
 }
 
 dt a {
-  display: inline;
   border: none;
 }
 
