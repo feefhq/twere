@@ -202,6 +202,7 @@ dd {
   border-left: 0.15em solid hsla(255, 100%, 100%, .025);
   margin: 0.25em 0;
   padding: 0.25em 1em;
+  overflow-x: hidden;
 }
 
 dd.info {
@@ -306,6 +307,7 @@ textarea::selection {
 a {
   color: var(--color-high);
   text-decoration: none;
+  overflow-wrap: break-word;
 }
 
 dd a {
