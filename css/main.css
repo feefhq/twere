@@ -350,22 +350,19 @@ dd a .host {
   color: hsla(147, 100%, 49%, 0.5);
 }
 
-dd a .delimiter {
+dd a .delimiter,
+dd a .split,
+dd a .hash {
   display: inline-block;
   transform: scale(0.6);
-  transform-origin: center 65%;
-  color: hsla(146, 81%, 72%, 0.25);
-}
-
-dd a .split {
-  display: inline-block;
-  transform: scale(0.6);
-  transform-origin: center 65%;
+  transform-origin: center 60%;
   color: hsla(146, 81%, 72%, 0.25);
 }
 
 dd a .split::before,
-dd a .split::after {
+dd a .hash::before,
+dd a .split::after,
+dd a .hash::after {
   content: ' ';
   display: inline-block;
   width: 0.3rem;

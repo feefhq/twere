@@ -94,7 +94,7 @@ describe('Markdown code', () => {
 })
 
 describe('Vanilla URL', () => {
-  it('should convert vanilla URL', () => {
+  it('should convert basic vanilla URL', () => {
     Markdown.toHTML('https://test.io').should.equal(
       "<a href='https://test.io' target='_blank' rel='noreferrer'><i class='protocol'>https:</i><i class='host'>test.io</i></a>"
     )

@@ -27,7 +27,7 @@ export class PrettyURL {
    * Get a styled hash part
    */
   static hash (hash = '') {
-    return hash ? `${hash}` : hash
+    return `${hash.replace(/[#]/g, `<i class='hash'>$&</i>`)}`
   }
 
   /**

@@ -43,8 +43,8 @@ describe('PrettyURL', () => {
     it('should get pretty hash', () => {
       PrettyURL.hash().should.equal('')
       PrettyURL.hash('').should.equal('')
-      PrettyURL.hash('#').should.equal('#')
-      PrettyURL.hash('#a').should.equal('#a')
+      PrettyURL.hash('#').should.equal("<i class='hash'>#</i>")
+      PrettyURL.hash('#a').should.equal("<i class='hash'>#</i>a")
     })
   })
 
