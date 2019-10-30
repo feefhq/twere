@@ -10,6 +10,7 @@ export class CommandComponent extends Component {
       <dt class="prompt">--></dt>
       <dd class="prompt">
         <form method='post' action='/note'>
+          <label>Submit</label>
           <textarea name="content" rows="1" placeholder="..."></textarea>
         </form>
       </dd>
@@ -70,8 +71,13 @@ export class CommandComponent extends Component {
    */
   onInput (event) {
     this.contextHelper()
+    const computedStyle = getComputedStyle(this.textarea)
     this.textarea.style.height = 'auto'
-    this.textarea.style.height = `${this.textarea.scrollHeight}px`
+    const height =
+      this.textarea.scrollHeight -
+      parseFloat(computedStyle.paddingTop) -
+      parseFloat(computedStyle.paddingBottom)
+    this.textarea.style.height = `${height}px`
     this.scrollDown()
   }
 
@@ -111,7 +117,10 @@ export class CommandComponent extends Component {
    * dispatch might fail.
    */
   submit () {
-    const event = new window.Event('submit', { bubbles: true, cancelable: true })
+    const event = new window.Event('submit', {
+      bubbles: true,
+      cancelable: true
+    })
     this.textarea.form.dispatchEvent(event)
     this.reset()
   }
@@ -130,7 +139,11 @@ export class CommandComponent extends Component {
    */
   contextHelper () {
     let context = '--&gt;'
-    if (/(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g.test(this.textarea.value)) {
+    if (
+      /(http|https):\/\/[a-z0-9\-.]+\.[a-z]{2,10}(\/[^<\s]*)?/g.test(
+        this.textarea.value
+      )
+    ) {
       context = '~@'
     } else if (/^`{3}/g.test(this.textarea.value)) {
       context = '&lt;/&gt;'
@@ -151,7 +164,9 @@ export class CommandComponent extends Component {
     this.prompt = this.querySelector('dt.prompt')
     this.prompt.classList.remove('in')
     this.prompt.classList.add('out')
-    this.prompt.addEventListener('animationend', event => this.onAnimationEnd(event))
+    this.prompt.addEventListener('animationend', event =>
+      this.onAnimationEnd(event)
+    )
   }
 
   /**
