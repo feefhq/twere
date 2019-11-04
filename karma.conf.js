@@ -29,7 +29,7 @@ module.exports = function (config) {
     browsers: ['ChromeHeadlessNoSandbox'],
     // browsers: ['ChromeHeadless', 'FirefoxHeadless', 'Safari'],
     preprocessors: {
-      'src/**/!(*.spec.*).js': ['karma-coverage-istanbul-instrumenter']
+      'src/**/!(*.spec).js': ['karma-coverage-istanbul-instrumenter']
     },
     coverageIstanbulInstrumenter: {
       esModules: true
