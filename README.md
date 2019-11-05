@@ -1,19 +1,10 @@
 # `twere
 
-## August 2019 Update
-
-The project has almost reached a stable state for desktop. Unit tests with good code
-coverage are now in place, and everything is working well in modern versions of Chrome,
-Firefox and Safari. Edge support is also looking good, only complicated by a current
-lack of automated testing.
-
-Although not a true PWA yet, the core architecture and funcitonality is working well,
-and I've been using the app on a daily basis: kicking the tyres and thinking about how
-it should be improved. **PP**
-
 ## Introduction
 
 **`twere** is a journalling webapp for developers. It's intended to be a natural everyday work tool which allows you to keep track of the things you're doing, a place to save code snippets and useful links, and to help you keep track of the things you want to get done.
+
+You can try it out at https://twere.io
 
 The more you use **`twere**, it will become a rich resource you can easily search, to retrieve the useful things which your brain has evicted from it's RAM, and to give you insights and hints about the work you do.
 
