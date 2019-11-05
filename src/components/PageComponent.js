@@ -23,20 +23,6 @@ export class PageComponent extends Component {
     return Template.dom`
     <section>
       <dl>
-        <dt></dt>
-        <dd class='info'>
-          <p>
-            The best way to use <span class='brand'>twere</span> is to keep it open in a
-            tab throughout your day. Whatever you write will be saved on your device —
-            your data goes nowhere. Tomorrow, just pick up where you left off.
-          </p>
-          <p>
-            <span class='brand'>twere</span> takes it's cues from many keyboard-focused
-            applications. There is no <code>submit</code> button. When you're ready to
-            save a note, hit <code>CTRL + ENTER</code> or <code>CMD + ENTER</code>. You can also use
-            simple Markdown including <code>_</code>, <code>**</code>, <code>\`</code> and <code>\`\`\`</code>.
-          </p>
-        </dd>
         ${this._.notes.map(note => new NoteComponent(note))}
         <twere-commandcomponent></twere-commandcomponent>
       </dl>
