@@ -193,7 +193,7 @@ twere-notecomponent:hover dd {
 
 dt {
   white-space: nowrap;
-  margin: 0.25rem 0;
+  margin: 0.25rem 0 0;
   padding: 0 1rem 0 2rem;
   text-align: right;
   font-size: 0.75rem;
@@ -230,7 +230,7 @@ pre {
   white-space: pre;
   -moz-tab-size: 4;
   tab-size: 1;
-  margin: 0.5rem 0 0.5rem -1rem;
+  margin: 0.5rem 0 0 -1rem;
   padding: 0.25rem 1rem;
   background: repeating-linear-gradient(
     90deg,
