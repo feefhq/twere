@@ -83,4 +83,26 @@ describe('Component', () => {
       expect(component.innerHTML).to.equal('test2')
     })
   })
+
+  describe('#inferPath()', () => {
+    it('should return absolute path', () => {
+      expect(component.inferPath()).to.equal(
+        'http://localhost:9999/base/src/core'
+      )
+    })
+  })
+
+  describe('#inferName()', () => {
+    it('should return absolute path', () => {
+      expect(component.inferName()).to.equal('Component')
+    })
+  })
+
+  describe('#getInferredCSS()', () => {
+    it('should return CSS', () => {
+      expect(component.getInferredCSS()).to.equal(
+        'http://localhost:9999/base/src/core/Component.css'
+      )
+    })
+  })
 })
