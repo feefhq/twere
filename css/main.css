@@ -79,7 +79,7 @@ footer {
 h1,
 span.brand {
   position: relative;
-  font-weight: 500;
+  font-weight: 300;
   color: hsl(255, 0%, 100%);
 }
 
@@ -116,15 +116,15 @@ footer a {
 
 h1 {
   display: inline-block;
-  font-weight: 300;
-  font-size: 5rem;
+  /* font-weight: 400; */
+  font-size: 2rem;
   margin: 0;
   padding: 0;
 }
 
 h2 {
-  font-size: 1.5rem;
-  font-weight: 100;
+  font-size: 1rem;
+  font-weight: 500;
   margin: 0 auto 3rem;
 }
 
