@@ -1,5 +1,5 @@
-import { Component } from '../core/Component.js'
-import { Template } from '../core/Template.js'
+import { Component } from '../core/Component.mjs'
+import { Template } from '../core/Template.mjs'
 
 /**
  * A web component to provides command prompt functionality.

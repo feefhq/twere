@@ -1,4 +1,4 @@
-import { PrettyURL } from './PrettyURL.js'
+import { PrettyURL } from './PrettyURL.mjs'
 
 describe('PrettyURL', () => {
   describe('#getParts()', () => {

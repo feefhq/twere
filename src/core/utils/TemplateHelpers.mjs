@@ -3,11 +3,11 @@
  */
 
 export const when = condition => {
-  return { then: (action) => then(action, condition) }
+  return { then: action => then(action, condition) }
 }
 
 export const has = condition => {
-  return { then: (action) => then(action, condition && condition.length) }
+  return { then: action => then(action, condition && condition.length) }
 }
 
 /**
@@ -15,7 +15,7 @@ export const has = condition => {
  * @param {*} condition
  */
 export const no = condition => {
-  return { then: (action) => then(action, !condition || !condition.length) }
+  return { then: action => then(action, !condition || !condition.length) }
 }
 
 /**
@@ -23,7 +23,7 @@ export const no = condition => {
  * @param {*} iterable
  */
 export const all = (iterable = []) => {
-  return { then: (action) => then(iterable.map(action).join(''), true) }
+  return { then: action => then(iterable.map(action).join(''), true) }
 }
 
 /**
@@ -32,5 +32,5 @@ export const all = (iterable = []) => {
  * @param {*} execute
  */
 export const then = (action, execute) => {
-  return (action !== undefined && execute) ? action : ``
+  return action !== undefined && execute ? action : ''
 }

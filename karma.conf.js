@@ -19,7 +19,7 @@ module.exports = function (config) {
     frameworks: ['mocha', 'chai', 'sinon'],
     files: [
       { pattern: 'src/**/!(index).js', type: 'module' },
-      { pattern: 'src/**/*.css', type: 'css', included: false }
+      { pattern: 'src/**/!(index).mjs', type: 'module' }
     ],
     // reporters: ['mocha'],
     reporters: ['mocha', 'coverage-istanbul'],
@@ -29,7 +29,8 @@ module.exports = function (config) {
     browsers: ['ChromeHeadlessNoSandbox'],
     // browsers: ['ChromeHeadless', 'FirefoxHeadless', 'Safari'],
     preprocessors: {
-      'src/**/!(*.spec).js': ['karma-coverage-istanbul-instrumenter']
+      'src/**/!(*.spec).js': ['karma-coverage-istanbul-instrumenter'],
+      'src/**/*.mjs': ['karma-coverage-istanbul-instrumenter']
     },
     coverageIstanbulInstrumenter: {
       esModules: true

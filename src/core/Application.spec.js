@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-import { Application } from './Application.js'
+import { Application } from './Application.mjs'
 import { DB } from './storage/DB.js'
-import { Component } from './Component.js'
+import { Component } from './Component.mjs'
 
 describe('Application', () => {
   it('should have default name', () => {

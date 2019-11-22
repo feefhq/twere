@@ -1,4 +1,4 @@
 /* eslint-disable no-undef */
-import { Note } from './Note.js'
+import { Note } from './Note.mjs'
 
 describe('Note', () => {})

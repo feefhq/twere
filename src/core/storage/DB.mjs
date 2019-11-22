@@ -1,4 +1,4 @@
-import { Transaction } from './Transaction.js'
+import { Transaction } from './Transaction.mjs'
 
 /**
  * A wrapper around `window.indexedDB` which uses promises.
@@ -38,7 +38,7 @@ export class DB {
     return new Promise((resolve, reject) => {
       this.close() // Don't like this; must be a better way
       const db = window.indexedDB.open(this.name, version)
-      db.onsuccess = (e) => {
+      db.onsuccess = e => {
         this.db = db.result
         this.db.onversionchange = e => e.version || this.db.close()
         resolve(this)
@@ -75,7 +75,10 @@ export class DB {
    */
   onupgradeneeded (e) {
     this.upgradeQueries.forEach(async name => {
-      e.target.result.createObjectStore(name, { keyPath: 'id', autoIncrement: true })
+      e.target.result.createObjectStore(name, {
+        keyPath: 'id',
+        autoIncrement: true
+      })
     })
     this.upgradeQueries = []
   }
@@ -84,7 +87,7 @@ export class DB {
    * Shortcut to trigger an upgrade.
    */
   async triggerUpgrade () {
-    await this.open((this.db) ? this.db.version + 1 : 1)
+    await this.open(this.db ? this.db.version + 1 : 1)
   }
 
   /**
@@ -177,13 +180,12 @@ export class DB {
     return new Promise((resolve, reject) => {
       const list = []
       this.query(storeName, 'readonly', (tx, store) => {
-        return this.openCursor(store)
-          .then(async (cursor) => {
-            await this.forEach(cursor, (result) => {
-              list.push(result)
-            })
-            resolve(list)
+        return this.openCursor(store).then(async cursor => {
+          await this.forEach(cursor, result => {
+            list.push(result)
           })
+          resolve(list)
+        })
       })
     })
   }

@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import { Transaction } from './Transaction.js'
-import { DB } from './DB.js'
+import { Transaction } from './Transaction.mjs'
+import { DB } from './DB.mjs'
 
 describe('Transaction', () => {
   let db = null

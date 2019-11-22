@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Style } from './Style.js'
+import { Style } from './Style.mjs'
 
 describe('Style', () => {
   let style = null

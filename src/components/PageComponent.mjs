@@ -1,7 +1,7 @@
-import { Component } from '../core/Component.js'
-import { Note } from '../models/Note.js'
-import { NoteComponent } from '../components/NoteComponent.js'
-import { Template } from '../core/Template.js'
+import { Component } from '../core/Component.mjs'
+import { Note } from '../models/Note.mjs'
+import { NoteComponent } from '../components/NoteComponent.mjs'
+import { Template } from '../core/Template.mjs'
 
 /**
  * Page component provides the overall page layout

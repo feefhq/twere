@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Markdown } from './Markdown.js'
+import { Markdown } from './Markdown.mjs'
 
 describe('Markdown basic', () => {
   it('should return same vanilla string', () => {

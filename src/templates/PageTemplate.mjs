@@ -1,6 +1,6 @@
-import { Template } from '../core/Template.js'
-import { NoteComponent } from '../components/NoteComponent.js'
-import { all, no } from './../core/utils/TemplateHelpers.js'
+import { Template } from '../core/Template.mjs'
+import { NoteComponent } from '../components/NoteComponent.mjs'
+import { all, no } from './../core/utils/TemplateHelpers.mjs'
 
 export class PageTemplate extends Template {
   render () {

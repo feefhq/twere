@@ -27,7 +27,7 @@ export class PrettyURL {
    * Get a styled hash part
    */
   static hash (hash = '') {
-    return `${hash.replace(/[#]/g, `<i class='hash'>$&</i>`)}`
+    return `${hash.replace(/[#]/g, '<i class=\'hash\'>$&</i>')}`
   }
 
   /**
@@ -43,8 +43,8 @@ export class PrettyURL {
   static pathname (pathname = '') {
     return `${pathname
       .replace(/[/]$/g, '')
-      .replace(/[/]/g, `<i class='split'>$&</i>`)
-      .replace(/[-_]/g, `<i class='delimiter'>$&</i>`)}`
+      .replace(/[/]/g, '<i class=\'split\'>$&</i>')
+      .replace(/[-_]/g, '<i class=\'delimiter\'>$&</i>')}`
   }
 
   /**

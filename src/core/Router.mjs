@@ -7,6 +7,7 @@ export class Router {
     this.touched = null
     this.routes = null
   }
+
   /**
    * Add a route to the application. Is chainable, hooray!
    */

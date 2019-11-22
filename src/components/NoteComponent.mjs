@@ -1,6 +1,6 @@
-import { Component } from '../core/Component.js'
-import { Markdown } from '../core/utils/Markdown.js'
-import { Template } from '../core/Template.js'
+import { Component } from '../core/Component.mjs'
+import { Markdown } from '../core/utils/Markdown.mjs'
+import { Template } from '../core/Template.mjs'
 
 export class NoteComponent extends Component {
   constructor (note) {

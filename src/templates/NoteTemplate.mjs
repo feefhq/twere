@@ -1,5 +1,5 @@
-import { Template } from '../core/Template.js'
-import { Markdown } from './../core/utils/Markdown.js'
+import { Template } from '../core/Template.mjs'
+import { Markdown } from './../core/utils/Markdown.mjs'
 
 export class NoteTemplate extends Template {
   render () {

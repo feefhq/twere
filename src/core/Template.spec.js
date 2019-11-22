@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Template } from './Template.js'
+import { Template } from './Template.mjs'
 
 describe('Template', () => {
   let template
@@ -23,7 +23,7 @@ describe('Template', () => {
   describe('#orderParts()', () => {
     it('should return order array', () => {
       const strings = ['test', 'aft']
-      const expressions = [(1 + 1)]
+      const expressions = [1 + 1]
       const ordered = template.orderParts(strings, expressions)
       ordered.should.be.instanceOf(Array)
       ordered.should.have.members(['test', 2, 'aft'])

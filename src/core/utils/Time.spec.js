@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Time } from './Time.js'
+import { Time } from './Time.mjs'
 
 describe('Relative time', () => {
   describe('#relativeTime()', () => {

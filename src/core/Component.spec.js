@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
-import { Component } from './Component.js'
+import { Component } from './Component.mjs'
 import { Template } from './Template.js'
 
 describe('Component.define()', () => {

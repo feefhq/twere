@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
-
-import { Model } from './Model.js'
+import { Model } from './Model.mjs'
 
 describe('Model', () => {
   let model = null

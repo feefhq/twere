@@ -1,6 +1,6 @@
-import { DB } from './storage/DB.js'
-import { Router } from './Router.js'
-import { ServiceWorker } from './ServiceWorker.js'
+import { DB } from './storage/DB.mjs'
+import { Router } from './Router.mjs'
+import { ServiceWorker } from './ServiceWorker.mjs'
 
 /**
  * @typedef {import('./Component.js').Component} Component

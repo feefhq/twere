@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
-import { DB } from './DB.js'
+import { DB } from './DB.mjs'
 
 describe('DB', () => {
   const dbname = 'testdb'
@@ -53,7 +53,7 @@ describe('DB', () => {
   describe('#set()', () => {
     it('should set a value', async () => {
       await db.createObjectStore('teststore')
-      const result = await db.set('teststore', { 'data': 'something' })
+      const result = await db.set('teststore', { data: 'something' })
       result.should.equal(1)
     })
   })
@@ -61,7 +61,7 @@ describe('DB', () => {
   describe('#get()', () => {
     it('should set and get a value', async () => {
       await db.createObjectStore('teststore')
-      await db.set('teststore', { 'data': 'something' })
+      await db.set('teststore', { data: 'something' })
       const result = await db.get('teststore', 1)
       result.data.should.equal('something')
     })
@@ -70,9 +70,9 @@ describe('DB', () => {
   describe('#delete()', () => {
     it('should delete a value', async () => {
       await db.createObjectStore('teststore')
-      const key = await db.set('teststore', { 'data': 'something' })
+      const key = await db.set('teststore', { data: 'something' })
       let get = await db.get('teststore', key)
-      get.should.eql({ data: 'something', id: 1 } )
+      get.should.eql({ data: 'something', id: 1 })
       await db.delete('teststore', key)
       get = await db.get('teststore', key)
       expect(get).to.be.undefined
@@ -100,8 +100,8 @@ describe('DB', () => {
     })
 
     it('should return a list', async () => {
-      await db.set('teststore', { 'data': 'something' })
-      await db.set('teststore', { 'data': 'something2' })
+      await db.set('teststore', { data: 'something' })
+      await db.set('teststore', { data: 'something2' })
       const list = await db.list('teststore')
       list.length.should.be.equal(2)
     })
