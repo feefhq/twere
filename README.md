@@ -76,4 +76,10 @@ To run tests:
 $ yarn test
 ```
 
-Testing is currently focused on Firefox, Chrome and Safari desktop browsers. Internet Explorer, Edge and mobile will be added soon.
+Testing is currently focused on Firefox, Chrome and Safari desktop browsers. Internet Explorer, Edge and mobile will be added soon, with the help of the lovely guys at Sauce Labs.
+
+### Big Thanks
+
+Cross-browser Testing Platform and Open Source ❤️ provided by [Sauce Labs][homepage]
+
+[homepage]: https://saucelabs.com
