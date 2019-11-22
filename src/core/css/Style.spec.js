@@ -1,8 +1,8 @@
+/* eslint-disable no-undef */
 import { Style } from './Style.js'
 
 describe('Style', () => {
   let style = null
-  let stub = null
 
   beforeEach(() => {
     style = new Style()
@@ -12,14 +12,12 @@ describe('Style', () => {
       headers: { 'Content-type': 'text/css' }
     })
 
-    stub = sinon
+    sinon
       .stub(window, 'fetch')
       .callThrough()
       .withArgs('/stub')
       .callsFake(() => {
-        return new Promise((resolve, reject) => {
-          resolve(mockResponse)
-        })
+        return new Promise(resolve => resolve(mockResponse))
       })
   })
 

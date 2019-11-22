@@ -1,6 +1,4 @@
 import { EventMixin } from './mixins/EventMixin.js'
-import { Template } from './Template.js'
-import { Style } from './css/Style.js'
 import { State } from './State.js'
 
 /**
@@ -53,23 +51,5 @@ export class Component extends EventMixin(window.HTMLElement) {
   paint (html) {
     while (this.firstChild) this.removeChild(this.firstChild)
     this.append(html || this.html)
-  }
-
-  /**
-   * Infers the path to the module
-   */
-  inferPath (url = import.meta.url) {
-    return url.slice(0, url.lastIndexOf('/'))
-  }
-
-  /**
-   * Infers the path to the module
-   */
-  inferName (url = import.meta.url) {
-    return url.slice(url.lastIndexOf('/') + 1, url.lastIndexOf('.'))
-  }
-
-  getInferredCSS () {
-    return `${this.inferPath()}/${this.inferName()}.css`
   }
 }
