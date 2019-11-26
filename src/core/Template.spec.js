@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Template } from './Template.mjs'
+import { Template } from './Template.js'
 
 describe('Template', () => {
   let template
@@ -30,49 +30,49 @@ describe('Template', () => {
     })
   })
 
-  describe('#dom``', () => {
+  describe('#html``', () => {
     it('should return a DocumentFragement', () => {
-      const dom = template.dom``
-      dom.should.be.instanceOf(DocumentFragment)
+      const html = template.html``
+      html.should.be.instanceOf(DocumentFragment)
     })
     it('should return simple string content', () => {
-      const dom = template.dom`test`
-      dom.children.should.be.instanceOf(HTMLCollection)
-      dom.children.length.should.equal(0)
+      const html = template.html`test`
+      html.children.should.be.instanceOf(HTMLCollection)
+      html.children.length.should.equal(0)
     })
   })
 
-  describe('#Template.dom``', () => {
+  describe('#Template.html``', () => {
     it('should return a DocumentFragement', () => {
-      const dom = Template.dom``
-      dom.should.be.instanceOf(DocumentFragment)
+      const html = Template.html``
+      html.should.be.instanceOf(DocumentFragment)
     })
     it('should return simple string content', () => {
-      const dom = Template.dom`test`
-      dom.should.be.instanceOf(DocumentFragment)
-      dom.children.should.be.instanceOf(HTMLCollection)
-      dom.children.length.should.equal(0)
+      const html = Template.html`test`
+      html.should.be.instanceOf(DocumentFragment)
+      html.children.should.be.instanceOf(HTMLCollection)
+      html.children.length.should.equal(0)
     })
 
     it('should return simple string and expression', () => {
-      const dom = Template.dom`<span>test ${1 + 1}</span>`
-      dom.children[0].innerHTML.should.equal('test 2')
+      const html = Template.html`<span>test ${1 + 1}</span>`
+      html.children[0].innerHTML.should.equal('test 2')
     })
 
     it('should return nodes', () => {
       const node = document.createElement('div')
-      const dom = Template.dom`${node}`
-      dom.children[0].should.be.instanceOf(HTMLDivElement)
+      const html = Template.html`${node}`
+      html.children[0].should.be.instanceOf(HTMLDivElement)
     })
 
     it('should return arrays', () => {
-      const dom = Template.dom`<span>arf${[1 + 1, 3]}</span>`
-      dom.children[0].innerHTML.should.equal('arf23')
+      const html = Template.html`<span>arf${[1 + 1, 3]}</span>`
+      html.children[0].innerHTML.should.equal('arf23')
     })
 
     it('should return complex arrays', () => {
-      const dom = Template.dom`<span>arf${[1 + 1, [1, 2, 3]]}</span>`
-      dom.children[0].innerHTML.should.equal('arf2123')
+      const html = Template.html`<span>arf${[1 + 1, [1, 2, 3]]}</span>`
+      html.children[0].innerHTML.should.equal('arf2123')
     })
   })
 })

@@ -1,12 +1,12 @@
 import { Component } from '../core/Component.mjs'
-import { Template } from '../core/Template.mjs'
+import { Template } from '../core/Template.js'
 
 /**
  * A web component to provides command prompt functionality.
  */
 export class CommandComponent extends Component {
   get html () {
-    return Template.dom`
+    return Template.html`
       <dt class="prompt">--></dt>
       <dd class="prompt">
         <form method='post' action='/note'>

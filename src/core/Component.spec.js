@@ -44,7 +44,7 @@ describe('Component', () => {
 
     it('should return a DocumentFragment', () => {
       const component = new Component()
-      component.html = Template.dom``
+      component.html = Template.html``
       expect(component.html).to.be.instanceOf(DocumentFragment)
     })
   })

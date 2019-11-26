@@ -28,7 +28,7 @@ export class Template {
    * @param {string[]} strings
    * @param {...any} expressions
    */
-  dom (strings, ...expressions) {
+  html (strings, ...expressions) {
     const parts = this.orderParts(strings, ...expressions)
     return this.generateNodes(parts)
   }
@@ -42,8 +42,8 @@ export class Template {
    * @param {string[]} strings
    * @param {...any} expressions
    */
-  static dom (strings, ...expressions) {
-    return new Template().dom(strings, expressions)
+  static html (strings, ...expressions) {
+    return new Template().html(strings, expressions)
   }
 
   /**
@@ -53,7 +53,10 @@ export class Template {
    */
   orderParts (strings, expressions) {
     return strings.reduce((carry, current, index) => {
-      return carry.concat(current, (index + 1 === strings.length) ? [] : expressions[index])
+      return carry.concat(
+        current,
+        index + 1 === strings.length ? [] : expressions[index]
+      )
     }, [])
   }
 
@@ -80,7 +83,9 @@ export class Template {
     if (partial instanceof Node) {
       const uid = this.generateID()
       this.placeholders.push({ uid, node: partial })
-      return accumulator.concat(`<${partial.nodeName} id="${uid}"></${partial.nodeName}>`)
+      return accumulator.concat(
+        `<${partial.nodeName} id="${uid}"></${partial.nodeName}>`
+      )
     } else {
       return accumulator.concat(partial)
     }
@@ -90,7 +95,12 @@ export class Template {
    * Generate a random UID
    */
   generateID () {
-    return '_' + Math.random().toString(16).substr(2, 9)
+    return (
+      '_' +
+      Math.random()
+        .toString(16)
+        .substr(2, 9)
+    )
   }
 
   /**
