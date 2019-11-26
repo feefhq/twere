@@ -1,0 +1,75 @@
+:root {
+  --body-max-width: 1200px;
+  --body-margin: 0.5rem auto;
+  --body-padding: 0;
+
+  --background: hsl(0, 0%, 7%);
+  --elevation-00dp: linear-gradient(var(--background), var(--background));
+  --elevation-01dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.05),
+      hsla(0, 0%, 100%, 0.05)
+    ),
+    var(--elevation-00dp);
+  --elevation-02dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.07),
+      hsla(0, 0%, 100%, 0.07)
+    ),
+    var(--elevation-00dp);
+  --elevation-03dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.08),
+      hsla(0, 0%, 100%, 0.08)
+    ),
+    var(--elevation-00dp);
+  --elevation-04dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.09),
+      hsla(0, 0%, 100%, 0.09)
+    ),
+    var(--elevation-00dp);
+  --elevation-06dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.11),
+      hsla(0, 0%, 100%, 0.11)
+    ),
+    var(--elevation-00dp);
+  --elevation-08dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.12),
+      hsla(0, 0%, 100%, 0.12)
+    ),
+    var(--elevation-00dp);
+  --elevation-12dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.14),
+      hsla(0, 0%, 100%, 0.14)
+    ),
+    var(--elevation-00dp);
+  --elevation-16dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.15),
+      hsla(0, 0%, 100%, 0.15)
+    ),
+    var(--elevation-00dp);
+  --elevation-24dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.16),
+      hsla(0, 0%, 100%, 0.16)
+    ),
+    var(--elevation-00dp);
+
+  --color-high: hsla(0, 0%, 100%, 0.87);
+  --color-default: hsla(255, 0%, 100%, 0.6);
+  --color-low: hsla(255, 0%, 100%, 0.38);
+
+  --caret-color: hsl(205, 100%, 50%);
+  --caret-color-mute: hsla(205, 100%, 50%, 0.5);
+  --caret-color-faint: hsla(205, 100%, 50%, 0.25);
+
+  --destructive-color: hsla(0, 100%, 50%, 0.544);
+
+  --link-color: rgba(0, 148, 255, 0.15);
+  --code-background: rgba(255, 255, 255, 0.02);
+  --code-color: rgba(255, 255, 255, 0.75);
+  --code-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  --code-padding: 0.25em 1em 0.25em 0.6em;
+  --code-margin: -0.25em 0 0.5em -0.15em;
+  --editable-padding: 8px 12px 8px 12px;
+  --editable-margin: -8px -12px -8px -15px;
+  --base-font-size: 15px;
+
+  --inline-border-radius: 0.15rem;
+}
