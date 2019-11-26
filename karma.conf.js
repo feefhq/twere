@@ -1,5 +1,5 @@
 // Karma configuration
-const path = require('path')
+// const path = require('path')
 
 module.exports = function (config) {
   config.set({
@@ -21,24 +21,24 @@ module.exports = function (config) {
       { pattern: 'src/**/!(index).js', type: 'module' },
       { pattern: 'src/**/!(index).mjs', type: 'module' }
     ],
-    // reporters: ['mocha'],
-    reporters: ['mocha', 'coverage-istanbul'],
+    reporters: ['mocha'],
     port: 9999,
     // Using a different launcher until this issue is resolved
     // https://github.com/karma-runner/karma-safari-launcher/issues/29
     browsers: ['ChromeHeadlessNoSandbox'],
-    // browsers: ['ChromeHeadless', 'FirefoxHeadless', 'Safari'],
-    preprocessors: {
-      'src/**/!(*.spec).js': ['karma-coverage-istanbul-instrumenter'],
-      'src/**/*.mjs': ['karma-coverage-istanbul-instrumenter']
-    },
-    coverageIstanbulInstrumenter: {
-      esModules: true
-    },
-    coverageIstanbulReporter: {
-      reports: ['lcov', 'text'],
-      dir: path.join(__dirname, 'coverage')
-    },
+
+    // Disabling coverage reporting for now, as it's proving tricky to set up multiple Karma configs.
+    // preprocessors: {
+    //   'src/**/!(*.spec).js': ['karma-coverage-istanbul-instrumenter'],
+    //   'src/**/*.mjs': ['karma-coverage-istanbul-instrumenter']
+    // },
+    // coverageIstanbulInstrumenter: {
+    //   esModules: true
+    // },
+    // coverageIstanbulReporter: {
+    //   reports: ['lcov', 'text'],
+    //   dir: path.join(__dirname, 'coverage')
+    // },
     restartOnFileChange: true,
     mochaReporter: {
       output: 'autowatch',
