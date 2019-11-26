@@ -1,48 +1,84 @@
-@import url('./../fonts/fira_code.css');
+@import url("./../fonts/fira_code.css");
 
 :root {
-  --body-max-width:   1200px;
-  --body-margin:      0.5rem auto;
-  --body-padding:     0;
+  --body-max-width: 1200px;
+  --body-margin: 0.5rem auto;
+  --body-padding: 0;
 
-  --background:       hsl(0, 0%, 7%);
-  --elevation-00dp:   linear-gradient(var(--background), var(--background));
-  --elevation-01dp:   linear-gradient(hsla(0, 0%, 100%, 0.05), hsla(0, 0%, 100%, 0.05)), var(--elevation-00dp);
-  --elevation-02dp:   linear-gradient(hsla(0, 0%, 100%, 0.07), hsla(0, 0%, 100%, 0.07)), var(--elevation-00dp);
-  --elevation-03dp:   linear-gradient(hsla(0, 0%, 100%, 0.08), hsla(0, 0%, 100%, 0.08)), var(--elevation-00dp);
-  --elevation-04dp:   linear-gradient(hsla(0, 0%, 100%, 0.09), hsla(0, 0%, 100%, 0.09)), var(--elevation-00dp);
-  --elevation-06dp:   linear-gradient(hsla(0, 0%, 100%, 0.11), hsla(0, 0%, 100%, 0.11)), var(--elevation-00dp);
-  --elevation-08dp:   linear-gradient(hsla(0, 0%, 100%, 0.12), hsla(0, 0%, 100%, 0.12)), var(--elevation-00dp);
-  --elevation-12dp:   linear-gradient(hsla(0, 0%, 100%, 0.14), hsla(0, 0%, 100%, 0.14)), var(--elevation-00dp);
-  --elevation-16dp:   linear-gradient(hsla(0, 0%, 100%, 0.15), hsla(0, 0%, 100%, 0.15)), var(--elevation-00dp);
-  --elevation-24dp:   linear-gradient(hsla(0, 0%, 100%, 0.16), hsla(0, 0%, 100%, 0.16)), var(--elevation-00dp);
+  --background: hsl(0, 0%, 7%);
+  --elevation-00dp: linear-gradient(var(--background), var(--background));
+  --elevation-01dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.05),
+      hsla(0, 0%, 100%, 0.05)
+    ),
+    var(--elevation-00dp);
+  --elevation-02dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.07),
+      hsla(0, 0%, 100%, 0.07)
+    ),
+    var(--elevation-00dp);
+  --elevation-03dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.08),
+      hsla(0, 0%, 100%, 0.08)
+    ),
+    var(--elevation-00dp);
+  --elevation-04dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.09),
+      hsla(0, 0%, 100%, 0.09)
+    ),
+    var(--elevation-00dp);
+  --elevation-06dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.11),
+      hsla(0, 0%, 100%, 0.11)
+    ),
+    var(--elevation-00dp);
+  --elevation-08dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.12),
+      hsla(0, 0%, 100%, 0.12)
+    ),
+    var(--elevation-00dp);
+  --elevation-12dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.14),
+      hsla(0, 0%, 100%, 0.14)
+    ),
+    var(--elevation-00dp);
+  --elevation-16dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.15),
+      hsla(0, 0%, 100%, 0.15)
+    ),
+    var(--elevation-00dp);
+  --elevation-24dp: linear-gradient(
+      hsla(0, 0%, 100%, 0.16),
+      hsla(0, 0%, 100%, 0.16)
+    ),
+    var(--elevation-00dp);
 
-  --color-high:       hsla(0, 0%, 100%, 0.87);
-  --color-default:    hsla(255, 0%, 100%, 0.6);
-  --color-low:        hsla(255, 0%, 100%, 0.38);
+  --color-high: hsla(0, 0%, 100%, 0.87);
+  --color-default: hsla(255, 0%, 100%, 0.6);
+  --color-low: hsla(255, 0%, 100%, 0.38);
 
-  --caret-color:      hsl(205, 100%, 50%);
+  --caret-color: hsl(205, 100%, 50%);
   --caret-color-mute: hsla(205, 100%, 50%, 0.5);
   --caret-color-faint: hsla(205, 100%, 50%, 0.25);
 
   --destructive-color: hsla(0, 100%, 50%, 0.544);
 
-  --link-color:       rgba(0, 148, 255, 0.15);
-  --code-background:  rgba(255, 255, 255, 0.02);
-  --code-color:       rgba(255, 255, 255, 0.75);
-  --code-box-shadow:  0 0 2px rgba(0, 0, 0, .1);
-  --code-padding:     0.25em 1em 0.25em .6em;
-  --code-margin:      -0.25em 0 .5em -.15em;
+  --link-color: rgba(0, 148, 255, 0.15);
+  --code-background: rgba(255, 255, 255, 0.02);
+  --code-color: rgba(255, 255, 255, 0.75);
+  --code-box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+  --code-padding: 0.25em 1em 0.25em 0.6em;
+  --code-margin: -0.25em 0 0.5em -0.15em;
   --editable-padding: 8px 12px 8px 12px;
-  --editable-margin:  -8px -12px -8px -15px;
-  --base-font-size:   15px;
+  --editable-margin: -8px -12px -8px -15px;
+  --base-font-size: 15px;
 
   --inline-border-radius: 0.15rem;
 }
 
 html {
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
-  -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
+  -moz-osx-font-smoothing: grayscale; /* pixel antialiasing. This has no impact on mobile. */
   margin: 0;
   background: var(--background);
   font-size: var(--base-font-size);
@@ -71,9 +107,9 @@ footer {
   width: 100%;
   background-image: var(--elevation-02dp);
   font-weight: 500;
-  color: hsla(255, 100%, 100%, .75);
+  color: hsla(255, 100%, 100%, 0.75);
   padding: 0.25em 1em 0.25em 0.35em;
-  box-shadow: 0 0 2px rgba(0, 0, 0, .1);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 h1,
@@ -85,11 +121,11 @@ span.brand {
 
 h1::before,
 span.brand::before {
-  content: '`';
+  content: "`";
   color: rgb(0, 148, 255);
   font-weight: 900;
   position: absolute;
-  margin-right: -.25em;
+  margin-right: -0.25em;
   margin-top: -0.035em;
   right: 100%;
 }
@@ -201,7 +237,8 @@ dt {
   text-transform: uppercase;
 }
 
-dt, dt a {
+dt,
+dt a {
   color: var(--color-low);
 }
 
@@ -210,7 +247,7 @@ dt a {
 }
 
 dd {
-  border-left: 0.15em solid hsla(255, 100%, 100%, .025);
+  border-left: 0.15em solid hsla(255, 100%, 100%, 0.025);
   margin: 0.25em 0;
   padding: 0.25em 1em;
   overflow-x: hidden;
@@ -236,8 +273,8 @@ pre {
     90deg,
     transparent,
     transparent 0.15rem,
-    hsla(255, 100%, 100%, .05) 0.15rem,
-    hsla(255, 100%, 100%, .05) 0.3rem
+    hsla(255, 100%, 100%, 0.05) 0.15rem,
+    hsla(255, 100%, 100%, 0.05) 0.3rem
   );
   background-color: hsla(0, 0%, 100%, 0.025);
   background-repeat: repeat-x;
@@ -264,8 +301,8 @@ code {
     45deg,
     transparent,
     transparent 0.1rem,
-    hsla(255, 100%, 100%, .05) 0.1rem,
-    hsla(255, 100%, 100%, .05) 0.2rem
+    hsla(255, 100%, 100%, 0.05) 0.1rem,
+    hsla(255, 100%, 100%, 0.05) 0.2rem
   );
   background-color: hsla(0, 0%, 100%, 0.025);
   background-repeat: repeat-x;
@@ -302,9 +339,9 @@ textarea {
   font-weight: 100;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
-  -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
+  -moz-osx-font-smoothing: grayscale; /* pixel antialiasing. This has no impact on mobile. */
   width: 100%;
-  border-left: 0.15em solid hsla(255, 100%, 100%, .025);
+  border-left: 0.15em solid hsla(255, 100%, 100%, 0.025);
   padding: 0.5em 1em;
   box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.7);
   resize: none;
@@ -324,7 +361,7 @@ dd > *::selection {
 
 textarea::selection {
   background: var(--caret-color);
-  color: hsla(0, 0%, 0%, 1)
+  color: hsla(0, 0%, 0%, 1);
 }
 
 a {
@@ -371,7 +408,7 @@ dd a .split::before,
 dd a .hash::before,
 dd a .split::after,
 dd a .hash::after {
-  content: ' ';
+  content: " ";
   display: inline-block;
   width: 0.3rem;
 }
