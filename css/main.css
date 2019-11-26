@@ -84,9 +84,24 @@ html {
   font-size: var(--base-font-size);
   line-height: 1.5;
   font-weight: 100;
-  font-feature-settings: "calt" 1;
-  font-family: "Fira Code";
   color: var(--color-default);
+}
+
+html,
+pre,
+code,
+textarea {
+  font-feature-settings: "calt";
+  font-family: "Fira Code", monospace;
+}
+
+@supports (font-variation-settings: normal) {
+  html,
+  pre,
+  code,
+  textarea {
+    font-family: "Fira Code VF", monospace;
+  }
 }
 
 body {
@@ -281,7 +296,6 @@ pre {
   background-position-y: top;
   background-size: 100% 0.1rem;
   color: var(--color-low);
-  font-family: "Fira Code";
   font-weight: 500;
 }
 
@@ -312,7 +326,6 @@ code {
   border-image-slice: 1;
   line-height: 1.2em;
   color: var(--color-low);
-  font-family: "Fira Code";
   font-weight: 500;
 }
 
@@ -335,7 +348,6 @@ textarea {
   overflow-y: hidden;
   color: rgb(255, 255, 255);
   background-image: var(--elevation-01dp);
-  font-family: "Fira Code";
   font-weight: 100;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */

@@ -54,7 +54,6 @@ export class CommandComponent extends Component {
           overflow-y: hidden;
           color: rgb(255, 255, 255);
           background: transparent;
-          font-family: "Fira Code";
           font-weight: 100;
           line-height: 1.5;
           -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
