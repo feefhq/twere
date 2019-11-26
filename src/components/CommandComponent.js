@@ -14,6 +14,7 @@ export class CommandComponent extends Component {
           <label>Submit with CMD / CTRL + ENTER</label>
         </form>
       </dd>
+
       <style>
 
         dt.prompt {

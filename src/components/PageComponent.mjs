@@ -1,7 +1,7 @@
 import { Component } from '../core/Component.mjs'
 import { Note } from '../models/Note.mjs'
-import { NoteComponent } from '../components/NoteComponent.mjs'
-import { Template } from '../core/Template.mjs'
+import { NoteComponent } from '../components/NoteComponent.js'
+import { Template } from '../core/Template.js'
 
 /**
  * Page component provides the overall page layout
@@ -20,7 +20,7 @@ export class PageComponent extends Component {
   }
 
   get html () {
-    return Template.dom`
+    return Template.html`
     <section>
       <dl>
         ${this._.notes.map(note => new NoteComponent(note))}

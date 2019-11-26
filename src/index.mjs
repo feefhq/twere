@@ -1,6 +1,6 @@
 import { Application } from './core/Application.mjs'
-import { CommandComponent } from './components/CommandComponent.mjs'
-import { NoteComponent } from './components/NoteComponent.mjs'
+import { CommandComponent } from './components/CommandComponent.js'
+import { NoteComponent } from './components/NoteComponent.js'
 import { PageComponent } from './components/PageComponent.mjs'
 import { Note } from './models/Note.mjs'
 
