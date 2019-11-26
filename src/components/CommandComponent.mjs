@@ -15,6 +15,7 @@ export class CommandComponent extends Component {
         </form>
       </dd>
       <style>
+
         dt.prompt {
           color: var(--caret-color);
           font-size: 1rem;
@@ -44,6 +45,41 @@ export class CommandComponent extends Component {
             opacity: 1;
             transform: translate(0, 0);
           }
+        }
+        textarea {
+          margin: 0;
+          outline: none;
+          resize: none;
+          border: none;
+          overflow-y: hidden;
+          color: rgb(255, 255, 255);
+          background: transparent;
+          font-family: "Fira Code";
+          font-weight: 100;
+          line-height: 1.5;
+          -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
+          -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
+          width: 100%;
+          border-left: 0.15em solid hsla(255, 100%, 100%, .025);
+          padding: 0.5em 1em;
+          caret-color: var(--caret-color);
+          font-size: var(--base-font-size);
+        }
+        dd::selection,
+        dd > *::selection {
+          background: var(--caret-color-mute);
+          color: hsla(0, 0%, 0%, 1);
+        }
+
+        textarea::selection {
+          background: var(--caret-color);
+          color: hsla(0, 0%, 0%, 1)
+        }
+
+        form {
+          padding: 0;
+          position: relative;
+          margin: 0 0 1rem -1.15em;
         }
       </style>
     `
