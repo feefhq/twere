@@ -227,7 +227,7 @@ form {
 }
 
 label {
-  color: hsla(255, 100%, 100%, 0.1);
+  color: hsla(255, 100%, 100%, 0.5);
   padding: 0.5em 1em;
 }
 
