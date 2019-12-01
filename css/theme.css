@@ -244,27 +244,6 @@ label {
   padding: 0.5em 1em;
 }
 
-textarea {
-  margin: 0;
-  outline: none;
-  resize: none;
-  border: none;
-  overflow-y: hidden;
-  color: rgb(255, 255, 255);
-  background-image: var(--elevation-01dp);
-  font-weight: 100;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
-  -moz-osx-font-smoothing: grayscale; /* pixel antialiasing. This has no impact on mobile. */
-  width: 100%;
-  border-left: 0.15em solid hsla(255, 100%, 100%, 0.025);
-  padding: 0.5em 1em;
-  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.7);
-  resize: none;
-  caret-color: var(--caret-color);
-  font-size: var(--base-font-size);
-}
-
 textarea:focus {
   border-color: var(--caret-color);
 }
