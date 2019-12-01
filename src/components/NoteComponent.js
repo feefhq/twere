@@ -49,8 +49,14 @@ export class NoteComponent extends Component {
         opacity: 1;
       }
 
+      twere-notecomponent dd {
+        position: relative;
+        transition: all .1s ease-in-out;
+      }
+
       twere-notecomponent:hover dd {
         border-left-color: var(--caret-color-mute);
+        background-color: hsla(0, 0%, 0%, .25);
       }
     </style>`
   }
