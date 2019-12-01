@@ -52,8 +52,10 @@ footer {
 h1,
 span.brand {
   position: relative;
-  font-weight: 300;
+  font-weight: 500;
   color: hsl(255, 0%, 100%);
+  z-index: 2;
+  cursor: default;
 }
 
 h1::before,
@@ -62,9 +64,22 @@ span.brand::before {
   color: rgb(0, 148, 255);
   font-weight: 900;
   position: absolute;
-  margin-right: -0.25em;
-  margin-top: -0.035em;
+  margin-right: -0.38em;
+  top: -0.075em;
+  bottom: -0.075em;
   right: 100%;
+  font-size: 18em;
+  z-index: -1;
+  line-height: 1;
+  overflow: hidden;
+  opacity: 0.5;
+  transition: opacity 0.5s ease-in-out, transform 0.25s ease-in;
+}
+
+h1:hover::before,
+span.brand:hover::before {
+  opacity: 1;
+  transform: rotate(2.5deg);
 }
 
 header {
@@ -89,9 +104,8 @@ footer a {
 
 h1 {
   display: inline-block;
-  /* font-weight: 400; */
   font-size: 2rem;
-  margin: 0;
+  margin: 1rem 0 3rem;
   padding: 0;
 }
 
