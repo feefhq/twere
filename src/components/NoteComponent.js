@@ -21,8 +21,7 @@ export class NoteComponent extends Component {
     </dd>
 
     <style>
-      twere-notecomponent,
-      twere-commandcomponent {
+      twere-notecomponent {
         display: contents;
       }
 

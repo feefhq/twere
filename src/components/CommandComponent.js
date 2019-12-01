@@ -17,6 +17,10 @@ export class CommandComponent extends Component {
 
       <style>
 
+        twere-commandcomponent {
+          display: contents;
+        }
+
         dt.prompt {
           color: var(--caret-color);
           font-size: 1rem;
