@@ -32,12 +32,14 @@
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
+    "babel-eslint": "^10.0.3",
     "standard": "^14.3.1"
   },
   "standard": {
     "globals": [
       "describe",
       "it"
-    ]
+    ],
+    "parser": "babel-eslint"
   }
 }
