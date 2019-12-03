@@ -3,7 +3,6 @@
   flex-direction: column-reverse;
   overflow: auto;
   height: 100vh;
-  text-align: center;
   background-color: #282c34;
   color: white;
 }

@@ -1,12 +1,14 @@
 import React from 'react'
 import './App.css'
-import Prompt from './Prompt'
+import Palette from './components/palette/Palette'
+import Ledger from './components/ledger/Ledger'
 
 class App extends React.Component {
   render () {
     return (
       <div className='App'>
-        <Prompt />
+        <Palette />
+        <Ledger />
       </div>
     )
   }

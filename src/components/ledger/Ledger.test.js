@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Prompt from './Prompt'
+import Ledger from './Ledger'
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<Prompt />, div)
+  ReactDOM.render(<Ledger />, div)
   ReactDOM.unmountComponentAtNode(div)
 })
