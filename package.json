@@ -32,14 +32,12 @@
     "@storybook/addon-links": "^5.2.8",
     "@storybook/addons": "^5.2.8",
     "@storybook/react": "^5.2.8",
-    "eslint-plugin-prettier": "^3.1.1",
-    "husky": "^3.1.0",
-    "prettier": "^1.19.1",
-    "pretty-quick": "^2.0.1"
+    "standard": "^14.3.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
+  "standard": {
+    "globals": [
+      "describe",
+      "it"
+    ]
   }
 }
