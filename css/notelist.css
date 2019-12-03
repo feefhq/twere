@@ -1,0 +1,24 @@
+twere-notelistcomponent {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 0fr auto;
+}
+
+twere-notelistcomponent time {
+  white-space: nowrap;
+  margin: 0.25rem 0 0;
+  padding: 0 1rem 0 2rem;
+  text-align: right;
+  font-size: 0.75rem;
+  line-height: 3;
+  text-transform: uppercase;
+}
+
+twere-notelistcomponent time,
+twere-notelistcomponent time a {
+  color: var(--color-low);
+}
+
+twere-notelistcomponent time a {
+  border: none;
+}

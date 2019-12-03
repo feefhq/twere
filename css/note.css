@@ -1,0 +1,36 @@
+twere-notecomponent {
+  display: contents;
+}
+
+twere-notecomponent.group time {
+  opacity: 0;
+}
+
+twere-notecomponent time a {
+  opacity: 0;
+  vertical-align: middle;
+  color: var(--destructive-color);
+  font-size: 1.25rem;
+  line-height: 1.5;
+  display: inline-block;
+  padding: 0 0.25rem;
+}
+
+twere-notecomponent time:hover {
+  color: var(--caret-color-mute);
+}
+
+twere-notecomponent.group:hover time,
+twere-notecomponent time:hover a {
+  opacity: 1;
+}
+
+twere-notecomponent article {
+  position: relative;
+  transition: all 0.1s ease-in-out;
+}
+
+twere-notecomponent:hover article {
+  border-left-color: var(--caret-color-mute);
+  background-color: hsla(0, 0%, 0%, 0.25);
+}
