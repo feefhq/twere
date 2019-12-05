@@ -1,8 +1,0 @@
-.App {
-  display: flex;
-  flex-direction: column-reverse;
-  overflow: auto;
-  height: 100vh;
-  background-color: #282c34;
-  color: white;
-}

@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Ledger from './Ledger'
+import TextInput from './TextInput'
 
 it('renders without crashing', () => {
   const div = document.createElement('div')
-  ReactDOM.render(<Ledger />, div)
+  ReactDOM.render(<TextInput />, div)
   ReactDOM.unmountComponentAtNode(div)
 })

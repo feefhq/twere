@@ -1,0 +1,17 @@
+.textarea {
+  display: block;
+  box-sizing: border-box;
+  resize: none;
+  width: 100%;
+  margin: 0;
+  padding: 0.5em 1em;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  font-family: var(--primary-font-family);
+  font-size: var(--primary-font-size);
+  line-height: var(--primary-line-height);
+  caret-color: var(--caret-color);
+
+}
