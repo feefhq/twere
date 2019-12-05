@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Story.module.css'
+import styles from './Narrative.module.css'
 import Palette from '../palette/Palette'
 
 class Story extends React.Component {

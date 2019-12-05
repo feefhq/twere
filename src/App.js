@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './App.module.css'
-import Story from './components/story/Story'
+import Narrative from './components/narrative/Narrative'
 
 class App extends React.Component {
   render () {
     return (
       <div className={styles.App}>
-        <Story />
+        <Narrative />
       </div>
     )
   }
