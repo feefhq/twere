@@ -1,5 +1,5 @@
-import { Application } from './Application.mjs'
-import { EventMixin } from './mixins/EventMixin.mjs'
+import { Application } from './Application.js'
+import { EventMixin } from './mixins/EventMixin.js'
 
 /**
  * Base class to be extended to define models.

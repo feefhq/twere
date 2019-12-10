@@ -1,4 +1,4 @@
 /* eslint-disable no-undef */
-import { PageTemplate } from './PageTemplate.mjs'
+import { PageTemplate } from './PageTemplate.js'
 
 describe('PageTemplate', () => {})

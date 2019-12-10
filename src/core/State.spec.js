@@ -1,4 +1,4 @@
-import { State } from './State.mjs'
+import { State } from './State.js'
 
 describe('State', () => {
   describe('constructor()', () => {

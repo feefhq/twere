@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-expressions */
-import { DB } from './DB.mjs'
+import { DB } from './DB.js'
 
 describe('DB', () => {
   const dbname = 'testdb'

@@ -1,4 +1,4 @@
-import { Transaction } from './Transaction.mjs'
+import { Transaction } from './Transaction.js'
 
 /**
  * A wrapper around `window.indexedDB` which uses promises.

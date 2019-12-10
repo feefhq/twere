@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { ServiceWorker } from './ServiceWorker.mjs'
+import { ServiceWorker } from './ServiceWorker.js'
 
 describe('ServiceWorker', () => {
   describe(':register()', () => {

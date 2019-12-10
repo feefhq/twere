@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
-import { Application } from './../core/Application.mjs'
-import { StatusComponent } from './StatusComponent.mjs'
+import { Application } from './../core/Application.js'
+import { StatusComponent } from './StatusComponent.js'
 
 describe('StatusComponent', () => {
   beforeEach(() => {

@@ -1,5 +1,5 @@
-import { EventMixin } from './mixins/EventMixin.mjs'
-import { State } from './State.mjs'
+import { EventMixin } from './mixins/EventMixin.js'
+import { State } from './State.js'
 
 /**
  * Base class for creating components. Based on the Custom Elements API.

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Application } from './../core/Application.mjs'
+import { Application } from './../core/Application.js'
 import { CommandComponent } from './CommandComponent.js'
 
 describe('CommandComponent', () => {

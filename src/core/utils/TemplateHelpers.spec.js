@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { then } from './TemplateHelpers.mjs'
+import { then } from './TemplateHelpers.js'
 
 describe('Tempalte Helper - then()', () => {
   it('Should execute if true', () => {

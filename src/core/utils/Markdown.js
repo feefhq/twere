@@ -1,4 +1,4 @@
-import { PrettyURL } from './PrettyURL.mjs'
+import { PrettyURL } from './PrettyURL.js'
 
 /**
  * Markdown parser which is intended to be lightweight and sipmlistic. By

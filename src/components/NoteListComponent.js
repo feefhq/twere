@@ -1,6 +1,6 @@
-import { Component } from '../core/Component.mjs'
+import { Component } from '../core/Component.js'
 import { Template } from '../core/Template.js'
-import { Note } from '../models/Note.mjs'
+import { Note } from '../models/Note.js'
 import { NoteComponent } from '../components/NoteComponent.js'
 
 export class NoteListComponent extends Component {

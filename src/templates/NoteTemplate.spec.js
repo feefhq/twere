@@ -1,4 +1,4 @@
 /* eslint-disable no-undef */
-import { NoteTemplate } from './NoteTemplate.mjs'
+import { NoteTemplate } from './NoteTemplate.js'
 
 describe('NoteTemplate', () => {})

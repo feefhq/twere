@@ -1,4 +1,4 @@
-import { Component } from '../core/Component.mjs'
+import { Component } from '../core/Component.js'
 import { Template } from '../core/Template.js'
 
 /**

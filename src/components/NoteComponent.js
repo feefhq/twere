@@ -1,5 +1,5 @@
-import { Component } from '../core/Component.mjs'
-import { Markdown } from '../core/utils/Markdown.mjs'
+import { Component } from '../core/Component.js'
+import { Markdown } from '../core/utils/Markdown.js'
 import { Template } from '../core/Template.js'
 
 export class NoteComponent extends Component {
