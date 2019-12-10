@@ -1,18 +1,16 @@
 import React from 'react'
 import styles from './Narrative.module.css'
-import Palette from '../palette/Palette'
+import Narreme from './Narreme'
 
-class Story extends React.Component {
+class Narrative extends React.Component {
   render () {
     return (
-      <ul className={styles.Ledger}>
-        <li>I'm a ledger entry</li>
-        <li>
-          <Palette />
-        </li>
-      </ul>
+      <div role='list' className={styles.Narrative}>
+        <Narreme />
+        <Narreme />
+      </div>
     )
   }
 }
 
-export default Story
+export default Narrative
