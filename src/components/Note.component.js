@@ -10,9 +10,6 @@ export class NoteComponent extends Component {
 
   get html () {
     return Template.html`
-      <style>
-        @import url("/css/components/Note.component.css");
-      </style>
       <time relative-time='${this.note.relativeCreatedAt}'>
         <a href='/note/${this.note.id}' data-method='delete'>
           &#x2326;

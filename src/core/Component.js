@@ -15,8 +15,13 @@ export class Component extends EventMixin(window.HTMLElement) {
    * Register the component as a custom element.
    */
   static define (prefix = 'default') {
-    const name = this.name.replace(/([A-Z])/g, '-$1').toLowerCase()
-    window.customElements.define(`${prefix}${name}`, this)
+    const kebabString = this.name.replace(/([A-Z])/g, '-$1').toLowerCase()
+    const context = this.name.replace('Component', '')
+    window.customElements.define(`${prefix}${kebabString}`, this)
+    const style = document.createElement('style')
+    style.innerHTML = `@import url('/css/components/${context}.component.css')`
+    const ref = document.querySelector('script')
+    ref.parentNode.insertBefore(style, ref)
   }
 
   /**

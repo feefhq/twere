@@ -7,9 +7,6 @@ import { Template } from '../core/Template.js'
 export class HeaderComponent extends Component {
   get html () {
     return Template.html`
-      <style>
-        @import url("/css/components/Header.component.css");
-      </style>
       <header>
         <h1>twere</h1>
         <h2>
