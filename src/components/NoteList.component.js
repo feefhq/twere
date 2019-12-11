@@ -17,6 +17,9 @@ export class NoteListComponent extends Component {
 
   get html () {
     return Template.html`
+      <style>
+        @import url("/css/components/NoteList.component.css");
+      </style>
       ${this._.notes.map(note => new NoteComponent(note))}
     `
   }

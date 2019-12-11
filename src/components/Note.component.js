@@ -10,15 +10,18 @@ export class NoteComponent extends Component {
 
   get html () {
     return Template.html`
-    <time relative-time='${this.note.relativeCreatedAt}'>
-      <a href='/note/${this.note.id}' data-method='delete'>
-        &#x2326;
-      </a>
-      ${this.note.relativeCreatedAt}
-    </time>
-    <article>
-        ${Markdown.toHTML(this.note.content)}
-    </article>`
+      <style>
+        @import url("/css/components/Note.component.css");
+      </style>
+      <time relative-time='${this.note.relativeCreatedAt}'>
+        <a href='/note/${this.note.id}' data-method='delete'>
+          &#x2326;
+        </a>
+        ${this.note.relativeCreatedAt}
+      </time>
+      <article>
+          ${Markdown.toHTML(this.note.content)}
+      </article>`
   }
 
   connectedCallback () {

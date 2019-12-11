@@ -7,6 +7,9 @@ import { Template } from '../core/Template.js'
 export class CommandComponent extends Component {
   get html () {
     return Template.html`
+      <style>
+        @import url("/css/components/Command.component.css");
+      </style>
       <span class="prompt">--></span>
       <form method='post' action='/note'>
         <textarea name="content" rows="1" placeholder="..."></textarea>

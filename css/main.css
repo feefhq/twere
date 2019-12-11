@@ -2,8 +2,3 @@
 
 @import url("./root.css");
 @import url("./theme.css");
-
-@import url("./components/Note.component.css");
-@import url("./components/NoteList.component.css");
-@import url("./components/Command.component.css");
-@import url("./components/Header.component.css");
