@@ -7,17 +7,17 @@ import { Note } from './models/Note.js'
 
 // Application.worker = './../sw.js'
 
-Application.name = 'twere'
+Application.setLabel('twere')
 
 Application.router
   .add('/note', Note.POST)
   .add('/note/:id', Note.GET, Note.DELETE, Note.POST)
 
-Application.models = [Note]
+Application.setModels([Note])
 
-Application.components = [
+Application.setComponents([
   PageComponent,
   NoteComponent,
   NoteListComponent,
   CommandComponent
-]
+])

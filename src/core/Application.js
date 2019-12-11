@@ -4,6 +4,7 @@ import { ServiceWorker } from './ServiceWorker.js'
 
 /**
  * @typedef {import('./Component.js').Component} Component
+ * @typedef {import('./Model.js').Model} Model
  */
 
 /**
@@ -21,38 +22,44 @@ export class Application {
   }
 
   /**
-   * A name for the application. Defaults to `default`
+   * Label for the app
    */
-  static get name () {
-    return Application.appName || 'default'
+  static get label () {
+    return Application.appLabel || 'default'
   }
 
-  static set name (appName) {
-    Application.appName = appName
+  static set label (label) {
+    Application.appLabel = label
   }
 
   /**
-   * Components which are attached to the application. Setting components will
-   * automatically define the components as custom elements.
+   * Set a label for the application. Defaults to `default`
+   * @param {string} label
    */
-  static get components () {
-    return Application.components
+  static setLabel (label) {
+    Application.label = label
   }
 
-  static set components (components) {
+  /**
+   * Sets componentsto attach to the application. Setting components will
+   * automatically define the components as custom elements.
+   * @param {Component[]} components
+   */
+  static setComponents (components) {
     if (components.constructor.name !== 'Array') {
       throw new Error('Components should be an array')
     }
     components.forEach(component => {
       console.debug('Registering component:', component.name)
-      component.define(Application.appName)
+      component.define(Application.label)
     })
   }
 
   /**
-   *
+   * Set models for the app.
+   * @param {Model[]} models
    */
-  static set models (models = []) {
+  static setModels (models) {
     if (models.constructor.name !== 'Array') {
       throw new Error('Modules should be passed in as an array.')
     }
@@ -60,14 +67,14 @@ export class Application {
   }
 
   /**
-   *
+   * Get the DB instance for app.
    */
   static get db () {
-    return new DB(Application.name)
+    return new DB(Application.label)
   }
 
   /**
-   *
+   * Get the app Router.
    */
   static get router () {
     return Router

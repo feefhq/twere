@@ -5,12 +5,12 @@ import { Component } from './Component.js'
 
 describe('Application', () => {
   it('should have default name', () => {
-    Application.name.should.equal('default')
+    Application.label.should.equal('default')
   })
 
   it('should allow change of name', () => {
-    Application.name = 'testname'
-    Application.name.should.equal('testname')
+    Application.setLabel('testname')
+    Application.label.should.equal('testname')
   })
 
   it('should set a service worker', () => {})
@@ -21,11 +21,11 @@ describe('Application', () => {
 
   describe(':components', () => {
     it('should be an array', () => {
-      expect(() => (Application.components = '')).to.throw(Error)
+      expect(() => (Application.setComponents(''))).to.throw(Error)
     })
     it('should register component', () => {
       class ExtComponent extends Component {}
-      Application.components = [ExtComponent]
+      Application.setComponents([ExtComponent])
       expect(window.customElements.get('testname-extcomponent').name).to.equal(
         'ExtComponent'
       )
