@@ -8,9 +8,9 @@ export class PageComponent extends Component {
   get html () {
     return Template.html`
     <section>
-      <twere-commandcomponent></twere-commandcomponent>
-      <twere-notelistcomponent></twere-notelistcomponent>
-      <twere-headercomponent></twere-headercomponent>
+      <twere-command-component></twere-command-component>
+      <twere-note-list-component></twere-note-list-component>
+      <twere-header-component></twere-header-component>
     </section>`
   }
 }

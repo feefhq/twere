@@ -15,8 +15,8 @@ export class Component extends EventMixin(window.HTMLElement) {
    * Register the component as a custom element.
    */
   static define (prefix = 'default') {
-    const name = `${prefix}-${this.name.toLowerCase()}`
-    window.customElements.define(name, this)
+    const name = this.name.replace(/([A-Z])/g, '-$1').toLowerCase()
+    window.customElements.define(`${prefix}${name}`, this)
   }
 
   /**

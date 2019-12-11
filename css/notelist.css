@@ -1,4 +1,4 @@
-twere-notelistcomponent {
+twere-note-list-component {
   flex-grow: 1;
   margin: 0;
   display: grid;
@@ -8,7 +8,7 @@ twere-notelistcomponent {
   justify-content: center;
 }
 
-twere-notelistcomponent time {
+twere-note-list-component time {
   white-space: nowrap;
   margin: 0.25rem 0 0;
   padding: 0 1rem 0 2rem;
@@ -19,11 +19,11 @@ twere-notelistcomponent time {
   min-width: 8rem;
 }
 
-twere-notelistcomponent time,
-twere-notelistcomponent time a {
+twere-note-list-component time,
+twere-note-list-component time a {
   color: var(--color-low);
 }
 
-twere-notelistcomponent time a {
+twere-note-list-component time a {
   border: none;
 }

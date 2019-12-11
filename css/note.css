@@ -1,12 +1,12 @@
-twere-notecomponent {
+twere-note-component {
   display: contents;
 }
 
-twere-notecomponent.group time {
+twere-note-component.group time {
   opacity: 0;
 }
 
-twere-notecomponent time a {
+twere-note-component time a {
   opacity: 0;
   vertical-align: middle;
   color: var(--destructive-color);
@@ -16,21 +16,21 @@ twere-notecomponent time a {
   padding: 0 0.25rem;
 }
 
-twere-notecomponent time:hover {
+twere-note-component time:hover {
   color: var(--caret-color-mute);
 }
 
-twere-notecomponent.group:hover time,
-twere-notecomponent time:hover a {
+twere-note-component.group:hover time,
+twere-note-component time:hover a {
   opacity: 1;
 }
 
-twere-notecomponent article {
+twere-note-component article {
   position: relative;
   transition: all 0.1s ease-in-out;
 }
 
-twere-notecomponent:hover article {
+twere-note-component:hover article {
   border-left-color: var(--caret-color-mute);
   background-color: hsla(0, 0%, 0%, 0.25);
 }
