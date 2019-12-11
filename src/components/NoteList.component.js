@@ -1,7 +1,7 @@
 import { Component } from '../core/Component.js'
 import { Template } from '../core/Template.js'
 import { Note } from '../models/Note.js'
-import { NoteComponent } from '../components/NoteComponent.js'
+import { NoteComponent } from './Note.component.js'
 
 export class NoteListComponent extends Component {
   constructor () {

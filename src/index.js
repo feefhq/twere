@@ -1,10 +1,10 @@
 import { Application } from './core/Application.js'
-import { CommandComponent } from './components/CommandComponent.js'
-import { NoteComponent } from './components/NoteComponent.js'
-import { NoteListComponent } from './components/NoteListComponent.js'
-import { PageComponent } from './components/PageComponent.js'
+import { CommandComponent } from './components/Command.component.js'
+import { NoteComponent } from './components/Note.component.js'
+import { NoteListComponent } from './components/NoteList.component.js'
+import { PageComponent } from './components/Page.component.js'
 import { Note } from './models/Note.js'
-import { HeaderComponent } from './components/HeaderComponent.js'
+import { HeaderComponent } from './components/Header.component.js'
 
 // Application.worker = './../sw.js'
 

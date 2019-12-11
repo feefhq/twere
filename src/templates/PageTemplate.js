@@ -1,5 +1,5 @@
 import { Template } from '../core/Template.js'
-import { NoteComponent } from '../components/NoteComponent.js'
+import { NoteComponent } from '../components/Note.component.js'
 import { all, no } from '../core/utils/TemplateHelpers.js'
 
 export class PageTemplate extends Template {
