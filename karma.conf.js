@@ -18,8 +18,7 @@ module.exports = function (config) {
     },
     frameworks: ['mocha', 'chai', 'sinon'],
     files: [
-      { pattern: 'src/**/!(index).js', type: 'module' },
-      { pattern: 'src/**/!(index).mjs', type: 'module' }
+      { pattern: 'src/**/!(index).js', type: 'module' }
     ],
     reporters: ['mocha'],
     port: 9999,
@@ -29,8 +28,7 @@ module.exports = function (config) {
 
     // Disabling coverage reporting for now, as it's proving tricky to set up multiple Karma configs.
     // preprocessors: {
-    //   'src/**/!(*.spec).js': ['karma-coverage-istanbul-instrumenter'],
-    //   'src/**/*.mjs': ['karma-coverage-istanbul-instrumenter']
+    //   'src/**/!(*.spec).js': ['karma-coverage-istanbul-instrumenter']
     // },
     // coverageIstanbulInstrumenter: {
     //   esModules: true

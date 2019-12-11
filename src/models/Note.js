@@ -1,8 +1,8 @@
 /**
  * A Note model.
  */
-import { Model } from './../core/Model.mjs'
-import { Time } from '../core/utils/Time.mjs'
+import { Model } from './../core/Model.js'
+import { Time } from '../core/utils/Time.js'
 
 export class Note extends Model {
   /**

@@ -1,5 +1,5 @@
 import { DB } from './storage/DB.js'
-import { Router } from './Router.mjs'
+import { Router } from './Router.js'
 import { ServiceWorker } from './ServiceWorker.js'
 
 /**

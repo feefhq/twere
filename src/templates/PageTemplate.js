@@ -1,4 +1,4 @@
-import { Template } from '../core/Template.mjs'
+import { Template } from '../core/Template.js'
 import { NoteComponent } from '../components/NoteComponent.js'
 import { all, no } from '../core/utils/TemplateHelpers.js'
 
