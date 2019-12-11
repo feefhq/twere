@@ -12,8 +12,8 @@ export class CommandComponent extends Component {
       </style>
       <span class="prompt">--></span>
       <form method='post' action='/note'>
-        <textarea name="content" rows="1" placeholder="..."></textarea>
-        <label>Submit with CMD / CTRL + ENTER</label>
+        <textarea name="content" id="content" rows="1" placeholder="..."></textarea>
+        <label for="content">Submit with CMD / CTRL + ENTER</label>
       </form>
     `
   }
