@@ -98,10 +98,7 @@ export class CommandComponent extends Component {
   resizeForm () {
     const computedStyle = getComputedStyle(this.textarea)
     this.textarea.style.height = 'auto'
-    const height =
-      this.textarea.scrollHeight -
-      parseFloat(computedStyle.paddingTop) -
-      parseFloat(computedStyle.paddingBottom)
+    const height = this.textarea.scrollHeight
     this.textarea.style.height = `${height}px`
   }
 

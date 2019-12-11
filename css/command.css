@@ -1,17 +1,18 @@
 twere-commandcomponent {
+  background-image: var(--elevation-01dp);
+  width: 100%;
   margin: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   display: grid;
-  grid-template-columns: 0fr auto;
+  grid-template-columns: 20ch minmax(20ch, 92ch);
+  justify-content: center;
 }
 
 span.prompt {
   color: var(--caret-color);
-  font-size: 1rem;
-  margin: 0.25rem 0 0;
-  padding: 0 1rem 0 2rem;
+  padding: 0.5rem 1rem 0 2rem;
   text-align: right;
-  min-width: 8rem;
-  line-height: 2;
 }
 
 span.prompt.out {
@@ -41,13 +42,14 @@ span.prompt.in {
   }
 }
 textarea {
+  box-sizing: border-box;
   margin: 0;
   outline: none;
   resize: none;
   border: none;
   overflow-y: hidden;
   color: rgb(255, 255, 255);
-  background: transparent;
+  background: rgb(10, 10, 10);
   font-weight: 100;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
@@ -72,5 +74,4 @@ textarea::selection {
 form {
   padding: 0;
   position: relative;
-  margin: 0 0 1rem 0;
 }

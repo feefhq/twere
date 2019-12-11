@@ -2,6 +2,7 @@ html {
   -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
   -moz-osx-font-smoothing: grayscale; /* pixel antialiasing. This has no impact on mobile. */
   margin: 0;
+  padding: 0;
   background: var(--background);
   font-size: var(--base-font-size);
   line-height: 1.5;
@@ -28,12 +29,12 @@ textarea {
 
 body {
   margin: 0;
+  padding: 0;
   /* padding: var(--body-padding); */
 }
 
 section {
-  max-width: var(--body-max-width);
-  margin: var(--body-margin);
+  align-items: center;
   display: flex;
   flex-direction: column-reverse;
   overflow: auto;
