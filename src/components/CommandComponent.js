@@ -7,85 +7,11 @@ import { Template } from '../core/Template.js'
 export class CommandComponent extends Component {
   get html () {
     return Template.html`
-      <dt class="prompt">--></dt>
-      <dd class="prompt">
-        <form method='post' action='/note'>
-          <textarea name="content" rows="1" placeholder="..."></textarea>
-          <label>Submit with CMD / CTRL + ENTER</label>
-        </form>
-      </dd>
-
-      <style>
-
-        twere-commandcomponent {
-          display: contents;
-        }
-
-        dt.prompt {
-          color: var(--caret-color);
-          font-size: 1rem;
-        }
-        dt.prompt.out {
-          animation: 0.1s ease-in 0s prompt_out;
-        }
-        dt.prompt.in {
-          animation: 0.1s ease-out 0s prompt_in;
-        }
-        @keyframes prompt_out {
-          0% {
-            opacity: 1;
-            transform: translate(0, 0);
-          }
-          100% {
-            opacity: 0;
-            transform: translate(0, 2em);
-          }
-        }
-        @keyframes prompt_in {
-          0% {
-            opacity: 0;
-            transform: translate(0, -2em);
-          }
-          100% {
-            opacity: 1;
-            transform: translate(0, 0);
-          }
-        }
-        textarea {
-          margin: 0;
-          outline: none;
-          resize: none;
-          border: none;
-          overflow-y: hidden;
-          color: rgb(255, 255, 255);
-          background: transparent;
-          font-weight: 100;
-          line-height: 1.5;
-          -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
-          -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
-          width: 100%;
-          border-left: 0.15em solid hsla(255, 100%, 100%, .025);
-          padding: 0.5em 1em;
-          caret-color: var(--caret-color);
-          font-size: var(--base-font-size);
-        }
-        dd::selection,
-        dd > *::selection {
-          background: var(--caret-color-mute);
-          color: hsla(0, 0%, 0%, 1);
-        }
-
-        textarea::selection {
-          background: var(--caret-color);
-          color: hsla(0, 0%, 0%, 1)
-        }
-
-        form {
-          padding: 0;
-          position: relative;
-          margin: 0 0 1rem -1.15em;
-        }
-      </style>
+      <span class="prompt">--></span>
+      <form method='post' action='/note'>
+        <textarea name="content" rows="1" placeholder="..."></textarea>
+        <label>Submit with CMD / CTRL + ENTER</label>
+      </form>
     `
   }
 
@@ -200,7 +126,7 @@ export class CommandComponent extends Component {
    */
   changeContext (context) {
     this.context = context
-    this.prompt = this.querySelector('dt.prompt')
+    this.prompt = this.querySelector('span.prompt')
     this.prompt.classList.remove('in')
     this.prompt.classList.add('out')
     this.prompt.addEventListener('animationend', event =>

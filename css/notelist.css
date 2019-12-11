@@ -12,6 +12,7 @@ twere-notelistcomponent time {
   font-size: 0.75rem;
   line-height: 3;
   text-transform: uppercase;
+  min-width: 8rem;
 }
 
 twere-notelistcomponent time,

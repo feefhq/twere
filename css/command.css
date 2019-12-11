@@ -1,0 +1,76 @@
+twere-commandcomponent {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 0fr auto;
+}
+
+span.prompt {
+  color: var(--caret-color);
+  font-size: 1rem;
+  margin: 0.25rem 0 0;
+  padding: 0 1rem 0 2rem;
+  text-align: right;
+  min-width: 8rem;
+  line-height: 2;
+}
+
+span.prompt.out {
+  animation: 0.1s ease-in 0s prompt_out;
+}
+span.prompt.in {
+  animation: 0.1s ease-out 0s prompt_in;
+}
+@keyframes prompt_out {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0, 2em);
+  }
+}
+@keyframes prompt_in {
+  0% {
+    opacity: 0;
+    transform: translate(0, -2em);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+textarea {
+  margin: 0;
+  outline: none;
+  resize: none;
+  border: none;
+  overflow-y: hidden;
+  color: rgb(255, 255, 255);
+  background: transparent;
+  font-weight: 100;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
+  -moz-osx-font-smoothing: grayscale;  /* pixel antialiasing. This has no impact on mobile. */
+  width: 100%;
+  border-left: 0.15em solid hsla(255, 100%, 100%, .025);
+  padding: 0.5em 1em;
+  caret-color: var(--caret-color);
+  font-size: var(--base-font-size);
+}
+form::selection,
+form > *::selection {
+  background: var(--caret-color-mute);
+  color: hsla(0, 0%, 0%, 1);
+}
+
+textarea::selection {
+  background: var(--caret-color);
+  color: hsla(0, 0%, 0%, 1)
+}
+
+form {
+  padding: 0;
+  position: relative;
+  margin: 0 0 1rem 0;
+}
