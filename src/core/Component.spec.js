@@ -8,7 +8,7 @@ describe('Component.define()', () => {
     class ExtComponent extends Component {}
     ExtComponent.define()
     expect(new ExtComponent()).to.be.an.instanceof(ExtComponent)
-    expect(window.customElements.get('default-extcomponent').name).to.equal(
+    expect(window.customElements.get('default-ext-component').name).to.equal(
       'ExtComponent'
     )
   })
@@ -17,7 +17,7 @@ describe('Component.define()', () => {
     class ExtComponent extends Component {}
     ExtComponent.define('ext')
     expect(new ExtComponent()).to.be.an.instanceof(ExtComponent)
-    expect(window.customElements.get('ext-extcomponent').name).to.equal(
+    expect(window.customElements.get('ext-ext-component').name).to.equal(
       'ExtComponent'
     )
   })

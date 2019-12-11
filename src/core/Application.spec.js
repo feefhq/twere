@@ -26,7 +26,7 @@ describe('Application', () => {
     it('should register component', () => {
       class ExtComponent extends Component {}
       Application.setComponents([ExtComponent])
-      expect(window.customElements.get('testname-extcomponent').name).to.equal(
+      expect(window.customElements.get('testname-ext-component').name).to.equal(
         'ExtComponent'
       )
     })
