@@ -16,8 +16,17 @@ export class Component extends EventMixin(window.HTMLElement) {
    */
   static define (prefix = 'default') {
     const kebabString = this.name.replace(/([A-Z])/g, '-$1').toLowerCase()
-    const context = this.name.replace('Component', '')
+    this.insertCSS()
     window.customElements.define(`${prefix}${kebabString}`, this)
+  }
+
+  /**
+   * Import CSS for this component, by inserting an import. Requires much more
+   * work to ensure that file names are inferred correctly, and to use fetching
+   * for async and error handling.
+   */
+  static insertCSS () {
+    const context = this.name.replace('Component', '')
     const style = document.createElement('style')
     style.innerHTML = `@import url('/css/components/${context}.component.css')`
     const ref = document.querySelector('script')
