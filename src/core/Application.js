@@ -22,7 +22,6 @@ export class Application {
 
   /**
    * A name for the application. Defaults to `default`
-   * @type {string}
    */
   static get name () {
     return Application.appName || 'default'
@@ -35,7 +34,6 @@ export class Application {
   /**
    * Components which are attached to the application. Setting components will
    * automatically define the components as custom elements.
-   * @type {Component[]}
    */
   static get components () {
     return Application.components
@@ -52,7 +50,7 @@ export class Application {
   }
 
   /**
-   * @type {Model[]}
+   *
    */
   static set models (models = []) {
     if (models.constructor.name !== 'Array') {
@@ -62,14 +60,14 @@ export class Application {
   }
 
   /**
-   * @type {Database}
+   *
    */
   static get db () {
     return new DB(Application.name)
   }
 
   /**
-   * @type {Router}
+   *
    */
   static get router () {
     return Router
