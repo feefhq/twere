@@ -12,7 +12,6 @@ export class NoteListComponent extends Component {
   connectedCallback () {
     this.getNoteList()
     Note.on('dirty', () => this.getNoteList())
-    this.on('paint', () => this.doScroll())
     super.connectedCallback()
   }
 

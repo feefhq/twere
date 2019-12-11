@@ -1,10 +1,13 @@
 twere-notelistcomponent {
+  flex-grow: 1;
   margin: 0;
   display: grid;
   grid-template-columns: 0fr auto;
+  grid-auto-rows: min-content;
 }
 
 twere-notelistcomponent time {
+  flex: auto;
   white-space: nowrap;
   margin: 0.25rem 0 0;
   padding: 0 1rem 0 2rem;

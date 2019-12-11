@@ -36,13 +36,7 @@ export class CommandComponent extends Component {
    */
   onInput (event) {
     this.contextHelper()
-    const computedStyle = getComputedStyle(this.textarea)
-    this.textarea.style.height = 'auto'
-    const height =
-      this.textarea.scrollHeight -
-      parseFloat(computedStyle.paddingTop) -
-      parseFloat(computedStyle.paddingBottom)
-    this.textarea.style.height = `${height}px`
+    this.resizeForm()
     this.scrollDown()
   }
 
@@ -95,6 +89,20 @@ export class CommandComponent extends Component {
    */
   reset () {
     this.textarea.value = ''
+    this.resizeForm()
+  }
+
+  /**
+   * Resize the form's textarea to fit the contents.
+   */
+  resizeForm () {
+    const computedStyle = getComputedStyle(this.textarea)
+    this.textarea.style.height = 'auto'
+    const height =
+      this.textarea.scrollHeight -
+      parseFloat(computedStyle.paddingTop) -
+      parseFloat(computedStyle.paddingBottom)
+    this.textarea.style.height = `${height}px`
   }
 
   /**

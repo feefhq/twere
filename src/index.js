@@ -4,6 +4,7 @@ import { NoteComponent } from './components/NoteComponent.js'
 import { NoteListComponent } from './components/NoteListComponent.js'
 import { PageComponent } from './components/PageComponent.js'
 import { Note } from './models/Note.js'
+import { HeaderComponent } from './components/HeaderComponent.js'
 
 // Application.worker = './../sw.js'
 
@@ -16,6 +17,7 @@ Application.router
 Application.setModels([Note])
 
 Application.setComponents([
+  HeaderComponent,
   PageComponent,
   NoteComponent,
   NoteListComponent,

@@ -8,15 +8,9 @@ export class PageComponent extends Component {
   get html () {
     return Template.html`
     <section>
+      <twere-commandcomponent></twere-commandcomponent>
       <twere-notelistcomponent></twere-notelistcomponent>
-      <dl>
-        <twere-commandcomponent></twere-commandcomponent>
-      </dl>
+      <twere-headercomponent></twere-headercomponent>
     </section>`
-  }
-
-  doScroll () {
-    const section = this.querySelector('section')
-    section.scrollTop = section.scrollHeight
   }
 }
