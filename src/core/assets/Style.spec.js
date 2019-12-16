@@ -5,7 +5,7 @@ describe('Style', () => {
   let style = null
 
   beforeEach(() => {
-    style = new Style()
+    style = new Style('TestComponent')
 
     const mockResponse = new Response('a {}', {
       status: 200,
@@ -15,10 +15,8 @@ describe('Style', () => {
     sinon
       .stub(window, 'fetch')
       .callThrough()
-      .withArgs('/stub')
-      .callsFake(() => {
-        return new Promise(resolve => resolve(mockResponse))
-      })
+      .withArgs('/css/components/Test.component.css')
+      .callsFake(() => Promise.resolve(mockResponse))
   })
 
   afterEach(() => {
@@ -29,23 +27,20 @@ describe('Style', () => {
     it('should have a style element', () => {
       expect(style.link).to.be.an.instanceof(HTMLStyleElement)
     })
-  })
-
-  describe('#featchCSS()', () => {
-    it('should get content', async () => {
-      expect(await style.fetchCSS('/stub')).to.equal('a {}')
-      expect(await style.fetchCSS()).to.equal('')
+    it('should have a context', () => {
+      expect(style.context).to.equal('TestComponent')
     })
   })
 
-  describe('#loadCSS()', () => {
-    it('should return empty string', async () => {
-      await style.loadCSS()
-      expect(style.link.innerText).to.equal('')
+  describe('#inferPath()', () => {
+    it('should infer from a component name', () => {
+      expect(style.inferPath()).to.equal('/css/components/Test.component.css')
     })
+  })
 
-    it('should return some CSS', async () => {
-      await style.loadCSS('/stub')
+  describe('#fetch()', () => {
+    it('should insert CSS', async () => {
+      await style.fetch()
       expect(style.link.innerText).to.equal('a {}')
     })
   })

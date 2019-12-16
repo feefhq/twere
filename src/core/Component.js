@@ -1,5 +1,6 @@
 import { EventMixin } from './mixins/EventMixin.js'
 import { State } from './State.js'
+import { Style } from './assets/Style.js'
 
 /**
  * Base class for creating components. Based on the Custom Elements API.
@@ -25,12 +26,11 @@ export class Component extends EventMixin(window.HTMLElement) {
    * work to ensure that file names are inferred correctly, and to use fetching
    * for async and error handling.
    */
-  static insertCSS () {
-    const context = this.name.replace('Component', '')
-    const style = document.createElement('style')
-    style.innerHTML = `@import url('/css/components/${context}.component.css')`
+  static async insertCSS () {
+    const style = new Style(this.name)
+    await style.fetch()
     const ref = document.querySelector('script')
-    ref.parentNode.insertBefore(style, ref)
+    ref.parentNode.insertBefore(style.link, ref)
   }
 
   /**
