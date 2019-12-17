@@ -2,6 +2,7 @@
 import { Application } from './Application.js'
 import { DB } from './storage/DB.js'
 import { Component } from './Component.js'
+import { Router } from './Router.js'
 
 describe('Application', () => {
   it('should have default name', () => {
@@ -19,7 +20,7 @@ describe('Application', () => {
     Application.db.should.be.instanceOf(DB)
   })
 
-  describe(':components', () => {
+  describe('.setComponents()', () => {
     it('should be an array', () => {
       expect(() => (Application.setComponents(''))).to.throw(Error)
     })
@@ -29,6 +30,12 @@ describe('Application', () => {
       expect(window.customElements.get('testname-ext-component').name).to.equal(
         'ExtComponent'
       )
+    })
+  })
+
+  describe('.router', () => {
+    it('should be a Router instance', () => {
+      expect(Application.router).to.be.instanceOf(Router)
     })
   })
 })

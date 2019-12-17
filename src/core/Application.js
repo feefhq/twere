@@ -72,11 +72,6 @@ export class Application {
   static get db () {
     return new DB(Application.label)
   }
-
-  /**
-   * Get the app Router.
-   */
-  static get router () {
-    return Router
-  }
 }
+
+Application.router = new Router()
