@@ -9,6 +9,14 @@ handlers:
 - url: /fonts
   static_dir: fonts
   secure: always
+- url: /manifest.json
+  static_files: manifest.json
+  upload: manifest.json
+  secure: always
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots.txt
+  secure: always
 - url: /.*
   static_files: index.html
   upload: index.html
