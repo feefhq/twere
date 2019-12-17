@@ -7,8 +7,8 @@
   "license": "GPL-3.0",
   "scripts": {
     "serve": "serve -s",
-    "test": "karma start --single-run",
-    "test:watch": "karma start --auto-watch"
+    "test": "karma start --coverage",
+    "test:watch": "karma start --auto-watch --single-run=false"
   },
   "devDependencies": {
     "chai": "^4.2.0",
