@@ -13,11 +13,18 @@ export class Component extends EventMixin(window.HTMLElement) {
   }
 
   /**
+   * Should CSS be loaded.
+   */
+  static get css () {
+    return true
+  }
+
+  /**
    * Register the component as a custom element.
    */
   static define (prefix = 'default') {
     const kebabString = this.name.replace(/([A-Z])/g, '-$1').toLowerCase()
-    this.insertCSS()
+    if (this.css) this.insertCSS()
     window.customElements.define(`${prefix}${kebabString}`, this)
   }
 

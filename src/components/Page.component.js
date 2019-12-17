@@ -5,6 +5,10 @@ import { Template } from '../core/Template.js'
  * Page component provides the overall page layout
  */
 export class PageComponent extends Component {
+  static get css () {
+    return false
+  }
+
   get html () {
     return Template.html`
     <section>

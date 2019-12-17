@@ -3,7 +3,7 @@
 import { Component } from './Component.js'
 import { Template } from './Template.js'
 
-describe('Component.define()', () => {
+describe('.define()', () => {
   it('should define default custom element', () => {
     class ExtComponent extends Component {}
     ExtComponent.define()
@@ -11,6 +11,7 @@ describe('Component.define()', () => {
     expect(window.customElements.get('default-ext-component').name).to.equal(
       'ExtComponent'
     )
+    expect(ExtComponent.css).to.be.true
   })
 
   it('should define named custom element', () => {
@@ -20,6 +21,17 @@ describe('Component.define()', () => {
     expect(window.customElements.get('ext-ext-component').name).to.equal(
       'ExtComponent'
     )
+  })
+
+  it('should allow CSS override', () => {
+    class Ext2Component extends Component {
+      static get css () {
+        return false
+      }
+    }
+    Ext2Component.define('ext2')
+    expect(Ext2Component).to.have.property('css')
+    expect(Ext2Component.css).to.be.false
   })
 })
 
