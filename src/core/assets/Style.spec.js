@@ -3,11 +3,13 @@ import { Style } from './Style.js'
 
 describe('Style', () => {
   let style = null
+  const responseText = `a {}
+    b {}`
 
   beforeEach(() => {
     style = new Style('TestComponent')
 
-    const mockResponse = new Response('a {}', {
+    const mockResponse = new Response(responseText, {
       status: 200,
       headers: { 'Content-type': 'text/css' }
     })
@@ -32,16 +34,25 @@ describe('Style', () => {
     })
   })
 
+  describe('.inferPaths()', () => {
+    it('should return paths', () => {
+      expect(Style.inferPaths('Test')).to.be.instanceOf(Array)
+    })
+  })
+
   describe('#inferPath()', () => {
-    it('should infer from a component name', () => {
-      expect(style.inferPath()).to.equal('/css/components/Test.component.css')
+    it('should return an array if inferred paths', () => {
+      expect(style.inferPaths()).to.be.instanceOf(Array)
     })
   })
 
   describe('#fetch()', () => {
     it('should insert CSS', async () => {
+      style = new Style('TestComponent')
       await style.fetch()
-      expect(style.link.innerText).to.equal('a {}')
+      expect(style.link.textContent).to.equal(responseText)
+      expect(style.link.innerText).to.equal(responseText)
+      expect(style.link.innerHTML).to.equal(responseText)
     })
   })
 })

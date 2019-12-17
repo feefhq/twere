@@ -19,18 +19,46 @@ export class Style {
   }
 
   /**
-   * Infer the probable path of the asset based on the given context.
-   * Really basic at the moment.
+   * Designed to be an abstract class member, so that in future pattern validity
+   * can be measured, to reduce redundant requests.
    */
-  inferPath () {
-    return `/css/components/${this.context.replace('Component', '')}.component.css`
+  static inferPaths (base) {
+    return [
+      `/css/components/${base}.component.css`,
+      `/src/components/${base}.component.css`
+    ]
   }
 
   /**
-   * Load CSS from a file and insert it into the link element
+   * Infer the probable path of the asset based on the given context.
+   * Really basic at the moment.
+   */
+  inferPaths () {
+    const base = this.context.replace('Component', '')
+    return Style.inferPaths(base)
+  }
+
+  /**
+   * Load CSS from a file and return it's contents, usually used for isnertion.
    */
   async fetch () {
-    const response = await Asset.fetch(this.inferPath())
-    this.link.innerText = await response.text()
+    const text = await this.cycle(this.inferPaths()).next()
+    this.link.textContent = text.value
+  }
+
+  /**
+   * Generator function for determination of successful path inferrance.
+   * A generator is more memory-efficient than other forms of iteration.
+   * @param {*} paths
+   */
+  async * cycle (paths = []) {
+    for (const path of paths) {
+      const response = await Asset.fetch(path)
+      const type = response.headers.get('Content-type')
+      if (response.ok && RegExp(/^text\/css/).test(type)) {
+        const text = await response.text()
+        yield text
+      }
+    }
   }
 }
