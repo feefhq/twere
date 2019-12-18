@@ -6,18 +6,43 @@ twere-note-component.group time {
   opacity: 0;
 }
 
+twere-note-component time {
+  white-space: nowrap;
+  margin: 0.25em 0 0;
+  padding: 0 1em 0 2em;
+  text-align: right;
+  font-size: 0.75em;
+  line-height: 3;
+  text-transform: uppercase;
+  min-width: 8rem;
+}
+
+twere-note-component time,
 twere-note-component time a {
+  color: var(--color-low);
+}
+
+twere-note-component time a {
+  border: none;
   opacity: 0;
   vertical-align: middle;
-  color: var(--destructive-color);
-  font-size: 1.25rem;
-  line-height: 1.5;
+  font-size: 1.5rem;
+  line-height: 1;
   display: inline-block;
-  padding: 0 0.25rem;
+  padding: 0.25em 0.25em;
+  /* transition: color 0.1s ease-in-out; */
 }
 
 twere-note-component time:hover {
   color: var(--caret-color-mute);
+}
+
+twere-note-component time:hover a {
+  animation: 0.1s ease-out 0s action_in;
+}
+
+twere-note-component time a:hover {
+  color: var(--destructive-color);
 }
 
 twere-note-component.group:hover time,
@@ -27,10 +52,21 @@ twere-note-component time:hover a {
 
 twere-note-component article {
   position: relative;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-out-bounce;
 }
 
 twere-note-component:hover article {
   border-left-color: var(--caret-color-mute);
   background-color: hsla(0, 0%, 0%, 0.25);
+}
+
+@keyframes action_in {
+  0% {
+    opacity: 0;
+    transform: translate(-2em, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
 }

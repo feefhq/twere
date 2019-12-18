@@ -7,23 +7,3 @@ twere-note-list-component {
   width: 100%;
   justify-content: center;
 }
-
-twere-note-list-component time {
-  white-space: nowrap;
-  margin: 0.25rem 0 0;
-  padding: 0 1rem 0 2rem;
-  text-align: right;
-  font-size: 0.75rem;
-  line-height: 3;
-  text-transform: uppercase;
-  min-width: 8rem;
-}
-
-twere-note-list-component time,
-twere-note-list-component time a {
-  color: var(--color-low);
-}
-
-twere-note-list-component time a {
-  border: none;
-}
