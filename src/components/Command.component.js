@@ -7,10 +7,10 @@ import { Template } from '../core/Template.js'
 export class CommandComponent extends Component {
   get html () {
     return Template.html`
-      <span class="prompt">--></span>
+      <label for="content">--></label>
       <form method='post' action='/note'>
         <textarea name="content" id="content" rows="1" placeholder="..."></textarea>
-        <label for="content">Submit with CMD / CTRL + ENTER</label>
+        <button title="&#8984; + &crarr; / ^ + &crarr;">&crarr;</button>
       </form>
     `
   }
@@ -21,12 +21,16 @@ export class CommandComponent extends Component {
    */
   connectedCallback () {
     super.connectedCallback()
+    this.prompt = this.querySelector('label')
     this.context = '--&gt;'
+    this.form = this.querySelector('form')
     this.textarea = this.querySelector('textarea')
     this.textarea.focus()
+    this.button = this.querySelector('button')
     this.scrollDown()
     this.addEventListener('input', this.onInput)
-    this.addEventListener('keydown', this.onKeyUp)
+    this.addEventListener('keydown', this.keydown)
+    this.button.addEventListener('click', (event) => this.onClick(event))
   }
 
   /**
@@ -41,15 +45,22 @@ export class CommandComponent extends Component {
   }
 
   /**
-   * Handles user interaction when a key is depressed. All it does right now is
+   * Handles user interaction when a key is pressed. All it does right now is
    * submit if a shortcut is used.
    * @param {Event} event The source event
    */
-  onKeyUp (event) {
+  keydown (event) {
     if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
-      event.preventDefault()
-      this.submit()
+      this.submit(event)
     }
+  }
+
+  /**
+   * Handles a click of a button to submit the form.
+   * @param {Event} event
+   */
+  onClick (event) {
+    this.submit(event)
   }
 
   /**
@@ -75,19 +86,20 @@ export class CommandComponent extends Component {
    * listen to itself for the reset rather than being hard-coded, because the
    * dispatch might fail.
    */
-  submit () {
-    const event = new window.Event('submit', {
+  submit (event) {
+    event.preventDefault()
+    const newEvent = new window.Event('submit', {
       bubbles: true,
       cancelable: true
     })
-    this.textarea.form.dispatchEvent(event)
+    this.textarea.form.dispatchEvent(newEvent)
     this.reset()
   }
 
   /**
    * Reset the form, usually after submission
    */
-  reset () {
+  reset (event) {
     this.textarea.value = ''
     this.resizeForm()
   }
@@ -96,7 +108,6 @@ export class CommandComponent extends Component {
    * Resize the form's textarea to fit the contents.
    */
   resizeForm () {
-    const computedStyle = getComputedStyle(this.textarea)
     this.textarea.style.height = 'auto'
     const height = this.textarea.scrollHeight
     this.textarea.style.height = `${height}px`
@@ -131,7 +142,6 @@ export class CommandComponent extends Component {
    */
   changeContext (context) {
     this.context = context
-    this.prompt = this.querySelector('span.prompt')
     this.prompt.classList.remove('in')
     this.prompt.classList.add('out')
     this.prompt.addEventListener('animationend', event =>

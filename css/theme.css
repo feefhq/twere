@@ -163,23 +163,9 @@ code {
   font-weight: 500;
 }
 
-label {
-  color: hsla(255, 100%, 100%, 0.5);
-  padding: 0.5em 1em;
-}
-
-textarea:focus {
-  border-color: var(--caret-color);
-}
-
 article::selection,
 article > *::selection {
   background: var(--caret-color-mute);
-  color: hsla(0, 0%, 0%, 1);
-}
-
-textarea::selection {
-  background: var(--caret-color);
   color: hsla(0, 0%, 0%, 1);
 }
 
