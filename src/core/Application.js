@@ -49,7 +49,7 @@ export class Application {
     if (components.constructor.name !== 'Array') {
       throw new Error('Components should be an array')
     }
-    components.forEach(component => {
+    components.forEach((component) => {
       console.debug('Registering component:', component.name)
       component.define(Application.label)
     })

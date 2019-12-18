@@ -4,9 +4,9 @@ import { Component } from './Component.js'
 import { Template } from './Template.js'
 
 describe('.define()', () => {
-  it('should define default custom element', () => {
+  it('should define default custom element', async () => {
     class ExtComponent extends Component {}
-    ExtComponent.define()
+    await ExtComponent.define()
     expect(new ExtComponent()).to.be.an.instanceof(ExtComponent)
     expect(window.customElements.get('default-ext-component').name).to.equal(
       'ExtComponent'
@@ -14,9 +14,9 @@ describe('.define()', () => {
     expect(ExtComponent.css).to.be.true
   })
 
-  it('should define named custom element', () => {
+  it('should define named custom element', async () => {
     class ExtComponent extends Component {}
-    ExtComponent.define('ext')
+    await ExtComponent.define('ext')
     expect(new ExtComponent()).to.be.an.instanceof(ExtComponent)
     expect(window.customElements.get('ext-ext-component').name).to.equal(
       'ExtComponent'
@@ -38,8 +38,8 @@ describe('.define()', () => {
 describe('Component', () => {
   let component
 
-  before(() => {
-    Component.define()
+  before(async () => {
+    await Component.define()
     component = new Component()
   })
 

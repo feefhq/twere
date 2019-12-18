@@ -20,11 +20,12 @@ export class Component extends EventMixin(window.HTMLElement) {
   }
 
   /**
-   * Register the component as a custom element.
+   * Register the component as a custom element. Dependency assets will get loaded
+   * prior to the element being added to the registry.
    */
-  static define (prefix = 'default') {
+  static async define (prefix = 'default') {
     const kebabString = this.name.replace(/([A-Z])/g, '-$1').toLowerCase()
-    if (this.css) this.insertCSS()
+    if (this.css) await this.insertCSS()
     window.customElements.define(`${prefix}${kebabString}`, this)
   }
 

@@ -24,9 +24,10 @@ describe('Application', () => {
     it('should be an array', () => {
       expect(() => (Application.setComponents(''))).to.throw(Error)
     })
-    it('should register component', () => {
+    it('should register component', async () => {
       class ExtComponent extends Component {}
       Application.setComponents([ExtComponent])
+      await window.customElements.whenDefined('testname-ext-component')
       expect(window.customElements.get('testname-ext-component').name).to.equal(
         'ExtComponent'
       )
