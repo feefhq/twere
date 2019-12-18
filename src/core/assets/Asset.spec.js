@@ -21,15 +21,13 @@ describe('Asset', () => {
   })
 
   describe('.fetch()', () => {
+    it('should return a promise', async () => {
+      expect(Asset.fetch('/stub')).to.be.instanceOf(Promise)
+    })
+
     it('should fetch content', async () => {
       const asset = await Asset.fetch('/stub')
       expect(await asset.text()).to.equal('response text')
-    })
-
-    it('should raise excpetion if no URL defined', () => {
-      return Asset.fetch().catch((err) => {
-        expect(err).to.have.property('message', 'No URL defined')
-      })
     })
   })
 })
