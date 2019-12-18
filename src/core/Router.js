@@ -16,7 +16,7 @@ export class Router {
     if (this.routes.get(route)) {
       throw new Error(`Route '${route}' is already defined`)
     }
-    console.log(`Registering route: ${route}`)
+    console.debug(`Registering route: ${route}`)
     this.routes.set(route, objs)
     return this
   }
