@@ -5,18 +5,7 @@ const coverage = process.argv.find(arg => arg.includes('--coverage'))
 
 module.exports = function (config) {
   config.set({
-    browsers: ['ChromeHeadlessNoSandbox'],
-
-    customLaunchers: {
-      FirefoxHeadless: {
-        base: 'Firefox',
-        flags: ['-headless']
-      },
-      ChromeHeadlessNoSandbox: {
-        base: 'ChromeHeadless',
-        flags: ['--no-sandbox', '--disable-setuid-sandbox']
-      }
-    },
+    browsers: ['ChromeHeadless'],
 
     frameworks: ['mocha', 'chai', 'sinon'],
 
