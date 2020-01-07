@@ -1,0 +1,12 @@
+:global(:root) {
+  --primary-background: hsla(220, 13%, 18%, 1);
+  --primary-font-family: "Fira Code VF", monospace;
+  --primary-font-size: 15px;
+  --primary-line-height: 1.5;
+  --primary-color: hsl(0, 0%, 100%, 1);
+
+  --basic-margin: 0.5em;
+  --basic-padding: 0.5em 1em;
+
+  --caret-color: hsla(205, 100%, 50%, 1);
+}

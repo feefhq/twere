@@ -1,4 +1,5 @@
 import React from 'react'
+import '../global/Root.module.css'
 import styles from './Palette.module.css'
 import TextInput from './TextInput'
 

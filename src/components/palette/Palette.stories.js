@@ -1,0 +1,13 @@
+import React from 'react'
+
+import Palette from './Palette'
+
+export default {
+  component: Palette,
+  title: 'Palette',
+  excludeStories: /.*Data$/
+}
+
+export const Default = () => {
+  return <Palette />
+}
