@@ -1,12 +1,65 @@
 :global(:root) {
+  -webkit-font-smoothing: antialiased; /* Currently using a dark theme, so enforce full */
+  -moz-osx-font-smoothing: grayscale; /* pixel antialiasing. This has no impact on mobile. */
+
   --primary-background: hsla(220, 13%, 18%, 1);
-  --primary-font-family: "Fira Code VF", monospace;
+  --primary-edit-background: hsla(0, 100%, 100%, .025);
+
+  --primary-font-family: "Fira Code", monospace;
   --primary-font-size: 15px;
   --primary-line-height: 1.5;
-  --primary-color: hsl(0, 0%, 100%, 1);
+
+  --primary-color: hsla(0, 0%, 100%, 1);
+  --muted-primary-color: hsla(0, 100%, 100%, .5);
+  --caret-color: hsla(205, 100%, 50%, 1);
 
   --basic-margin: 0.5em;
   --basic-padding: 0.5em 1em;
+}
 
-  --caret-color: hsla(205, 100%, 50%, 1);
+@supports (font-variation-settings: normal) {
+  :global(:root) {
+    --primary-font-family: 'Fira Code VF', monospace;
+  }
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('./fonts/woff2/FiraCode-Light.woff2') format('woff2'),
+    url("./fonts/woff/FiraCode-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('./fonts/woff2/FiraCode-Regular.woff2') format('woff2'),
+    url("./fonts/woff/FiraCode-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('./fonts/woff2/FiraCode-Medium.woff2') format('woff2'),
+    url("./fonts/woff/FiraCode-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('./fonts/woff2/FiraCode-Bold.woff2') format('woff2'),
+    url("./fonts/woff/FiraCode-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Code VF';
+  src: url('./fonts/woff2/FiraCode-VF.woff2') format('woff2-variations'),
+       url('./fonts/woff/FiraCode-VF.woff') format('woff-variations');
+  /* font-weight requires a range: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Fonts/Variable_Fonts_Guide#Using_a_variable_font_font-face_changes */
+  font-weight: 300 700;
+  font-style: normal;
 }

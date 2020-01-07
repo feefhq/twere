@@ -1,4 +1,4 @@
-.textarea {
+.TextInput {
   display: block;
   box-sizing: border-box;
   resize: none;
@@ -7,10 +7,15 @@
   padding: 0.5em 1em;
   outline: none;
   border: none;
-  background: transparent;
+  background: var(--primary-edit-background);
   color: var(--primary-color);
   font-family: var(--primary-font-family);
   font-size: var(--primary-font-size);
   line-height: var(--primary-line-height);
   caret-color: var(--caret-color);
+}
+
+.TextInput:disabled {
+  color: var(--muted-primary-color);
+  cursor: not-allowed;
 }
