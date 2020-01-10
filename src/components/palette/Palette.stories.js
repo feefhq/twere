@@ -4,7 +4,7 @@ import Palette from './Palette'
 
 export default {
   component: Palette,
-  title: 'Palette',
+  title: 'Design System|Palette/Palette',
   excludeStories: /.*Data$/
 }
 

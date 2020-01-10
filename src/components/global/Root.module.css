@@ -12,6 +12,7 @@
   --primary-color: hsla(0, 0%, 100%, 1);
   --muted-primary-color: hsla(0, 100%, 100%, .5);
   --caret-color: hsla(205, 100%, 50%, 1);
+  --caret-color-muted: hsla(205, 100%, 50%, 0.5);
 
   --basic-margin: 0.5em;
   --basic-padding: 0.5em 1em;

@@ -1,12 +1,16 @@
 import React from 'react'
-import Palette from '../palette/Palette'
 import styles from './Narreme.module.css'
 
 class Narreme extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { value: props.value }
+  }
+
   render () {
     return (
       <div role='listitem' className={styles.Narreme}>
-        <Palette />
+        {this.props.value}
       </div>
     )
   }
