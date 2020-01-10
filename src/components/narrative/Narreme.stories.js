@@ -19,3 +19,7 @@ export const Default = () => {
 export const Short = () => {
   return <Narreme value='Narreme is the basic unit of narrative structure.' />
 }
+
+export const BasicMarkdown = () => {
+  return <Narreme value='**I am bold**' />
+}

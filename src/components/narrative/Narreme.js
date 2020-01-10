@@ -1,4 +1,5 @@
 import React from 'react'
+import Markdown from './../../utils/text/Markdown'
 import styles from './Narreme.module.css'
 
 class Narreme extends React.Component {
@@ -10,7 +11,7 @@ class Narreme extends React.Component {
   render () {
     return (
       <div role='listitem' className={styles.Narreme}>
-        {this.props.value}
+        {Markdown.toHTML(this.props.value)}
       </div>
     )
   }
