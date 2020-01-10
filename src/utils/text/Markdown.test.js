@@ -26,8 +26,12 @@ describe('Markdown basic', () => {
     expect(Markdown.toHTML('\n\nStarts here\n\nNew para\n\n')).toBe('<p>Starts here</p><p>New para</p>')
   })
 
-  it('should convert **mighty** to <strong/>', () => {
+  it('should convert to <strong/>', () => {
     expect(Markdown.toHTML('**mighty**')).toBe('<strong>mighty</strong>')
+  })
+
+  it('should convert to <em/>', () => {
+    expect(Markdown.toHTML('_emphasis')).toBe('<em>mighty</em>')
   })
 
   it('should convert double line break to <p></p>', () => {

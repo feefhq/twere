@@ -8,11 +8,13 @@ class Narreme extends React.Component {
     this.state = { value: props.value }
   }
 
+  createMarkup () {
+    return { __html: Markdown.toHTML(this.props.value) }
+  }
+
   render () {
     return (
-      <div role='listitem' className={styles.Narreme}>
-        {Markdown.toHTML(this.props.value)}
-      </div>
+      <div role='listitem' className={styles.Narreme} dangerouslySetInnerHTML={this.createMarkup()} />
     )
   }
 }

@@ -11,9 +11,9 @@ export default class Markdown {
   }
 
   /**
- * Parse Markdown string and fire out an HTML string.
- * @param {string} md Markdown text
- */
+   * Parse Markdown string and fire out an HTML string.
+   * @param {string} md Markdown text
+   */
   static toHTML (md) {
     const processed = new Markdown(md)
     processed
@@ -28,20 +28,20 @@ export default class Markdown {
   }
 
   /**
- * Mutate the currently parsed string based on a regexp replacement. Can be
- * either a string replacement or a callback.
- * @param {RegExp} regexp a regular expression to match
- * @param {*} newSubstr either a string replacement, or a callback fucntion
- */
+   * Mutate the currently parsed string based on a regexp replacement. Can be
+   * either a string replacement or a callback.
+   * @param {RegExp} regexp a regular expression to match
+   * @param {*} newSubstr either a string replacement, or a callback fucntion
+   */
   mutate (regexp, newSubstr) {
     this.flux = this.flux.replace(regexp, newSubstr)
     return this
   }
 
   /**
- * Tidy up any ragged spaced or tabbed outdents
- * @param {String} str String to be tidied
- */
+   * Tidy up any ragged spaced or tabbed outdents
+   * @param {String} str String to be tidied
+   */
   outdent (str) {
     const firstLine = str.match(/^(\t| )+/) || []
     const regex = RegExp(`^${firstLine[0]}`, 'gm')
@@ -49,16 +49,16 @@ export default class Markdown {
   }
 
   /**
- * Escape any disruptive characters, such as chevrons
- * @param {String} str String to be escaped
- */
+   * Escape any disruptive characters, such as chevrons
+   * @param {String} str String to be escaped
+   */
   escape (str) {
     return str.replace(/</g, '&lt;').replace(/>/g, '&gt;')
   }
 
   /**
- * Strip any leading or trailing whitepace
- */
+   * Strip any leading or trailing whitepace
+   */
   trim () {
     this.flux = this.flux.trim()
     this.flux = this.flux.endsWith('/') ? this.flux.slice(0, -1) : this.flux
@@ -125,8 +125,8 @@ export default class Markdown {
   }
 
   /**
- * Convert `` to <code></code>
- */
+   * Convert `` to <code></code>
+   */
   inlineCode () {
     return this.mutate(/`(\S[\s\S]*?)`/g, (match, capture) =>
       /\S$/.test(capture) ? `<code>${capture}</code>` : match

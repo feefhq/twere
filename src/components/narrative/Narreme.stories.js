@@ -21,5 +21,5 @@ export const Short = () => {
 }
 
 export const BasicMarkdown = () => {
-  return <Narreme value='**I am bold**' />
+  return <Narreme value='**I am bold.** _I am italic._ I am not' />
 }
