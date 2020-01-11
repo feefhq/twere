@@ -26,12 +26,36 @@ describe('Markdown basic', () => {
     expect(Markdown.toHTML('\n\nStarts here\n\nNew para\n\n')).toBe('<p>Starts here</p><p>New para</p>')
   })
 
+  it('should convert to <strong /> and <em />', () => {
+    expect(Markdown.toHTML('***mighty***')).toBe('<strong><em>mighty</em></strong>')
+    expect(Markdown.toHTML('___mighty___')).toBe('<strong><em>mighty</em></strong>')
+    expect(Markdown.toHTML('__I am bold _I am oblique_ and just bold here__')).toBe('<strong>I am bold <em>I am oblique</em> and just bold here</strong>')
+    expect(Markdown.toHTML('**I am bold *I am oblique* and just bold here**')).toBe('<strong>I am bold <em>I am oblique</em> and just bold here</strong>')
+    expect(Markdown.toHTML('_I am oblique __I am bold__ and just oblique here_')).toBe('<em>I am oblique <strong>I am bold</strong> and just oblique here</em>')
+    expect(Markdown.toHTML('*I am oblique **I am bold** and just oblique here*')).toBe('<em>I am oblique <strong>I am bold</strong> and just oblique here</em>')
+    expect(Markdown.toHTML('___s+e_s*s+e*__')).toBe('<strong><em>s+e</em>s<em>s+e</em></strong>')
+  })
+
   it('should convert to <strong/>', () => {
     expect(Markdown.toHTML('**mighty**')).toBe('<strong>mighty</strong>')
+    expect(Markdown.toHTML('__mighty__')).toBe('<strong>mighty</strong>')
+    expect(Markdown.toHTML('Noraml and **mighty**')).toBe('Noraml and <strong>mighty</strong>')
+    expect(Markdown.toHTML('Noraml and __mighty__')).toBe('Noraml and <strong>mighty</strong>')
+    expect(Markdown.toHTML('**mighty** and normal')).toBe('<strong>mighty</strong> and normal')
+    expect(Markdown.toHTML('__mighty__ and normal')).toBe('<strong>mighty</strong> and normal')
   })
 
   it('should convert to <em/>', () => {
-    expect(Markdown.toHTML('_emphasis')).toBe('<em>mighty</em>')
+    expect(Markdown.toHTML('_emphasis_')).toBe('<em>emphasis</em>')
+    expect(Markdown.toHTML('*emphasis*')).toBe('<em>emphasis</em>')
+    expect(Markdown.toHTML('_emphasis_ and normal')).toBe('<em>emphasis</em> and normal')
+    expect(Markdown.toHTML('*emphasis* and normal')).toBe('<em>emphasis</em> and normal')
+    expect(Markdown.toHTML('Normal and _emphasis_')).toBe('Normal and <em>emphasis</em>')
+    expect(Markdown.toHTML('Normal and *emphasis*')).toBe('Normal and <em>emphasis</em>')
+  })
+
+  it('should convert to <del />', () => {
+    expect(Markdown.toHTML('~strikethrough~')).toBe('<del>strikethrough</del>')
   })
 
   it('should convert double line break to <p></p>', () => {
@@ -54,6 +78,11 @@ describe('Markdown code', () => {
 
   it('should retain line breaks in code blocks', () => {
     expect(Markdown.toHTML('```\nSome code\n\nAnother line of code\n```')).toBe('<pre>Some code\n\nAnother line of code</pre>')
+  })
+
+  it('should convert to <code />', () => {
+    expect(Markdown.toHTML('`some code`')).toBe('<code>some code</code>')
+    expect(Markdown.toHTML('`some code <tag>`')).toBe('<code>some code &lt;tag&gt;</code>')
   })
 
   it('should convert `inline code` in middle of a para', () => {

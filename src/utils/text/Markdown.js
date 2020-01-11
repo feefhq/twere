@@ -21,10 +21,30 @@ export default class Markdown {
       .codeBlock()
       .vanillaURL()
       .vanillaParagraph()
+      .inline()
       .vanillaBR()
-      .inlineCode()
-      .bold()
     return processed.result.trim()
+  }
+
+  /**
+   * Provides a map of replacement functions derived by a regex key. It would be nice to make this
+   * more readable, but it's regex, so ¯\_(ツ)_/¯.
+   */
+  getInlines () {
+    return new Map([
+      [/`(\S[\s\S]*?)`/g, (...[, match]) => `<code>${this.escape(match)}</code>`],
+      [/(\*{3}|_{3})(\S[\s\S]*?)(\*{3}|_{3})/g, (...[, , match]) => `<strong><em>${match}</em></strong>`],
+      [/(\*{2}|_{2})(\S[\s\S]*?)(\*{2}|_{2})/g, (...[, , match]) => `<strong>${match}</strong>`],
+      [/(_|\*)(\S[\s\S]*?)(_|\*)/g, (...[, , match]) => `<em>${match}</em>`],
+      [/~(\S[\s\S]*?)~/g, (...[, match]) => `<del>${match}</del>`]
+    ])
+  }
+
+  inline () {
+    for (const [key, value] of this.getInlines()) {
+      this.flux = this.flux.replace(key, value)
+    }
+    return this
   }
 
   /**
@@ -115,21 +135,6 @@ export default class Markdown {
         return `<a href='${match}' target='_blank' rel='noreferrer'>${match}</a>`
         // return `<a href='${match}' target='_blank' rel='noreferrer'>${PrettyURL.url(match)}</a>`
       }
-    )
-  }
-
-  bold () {
-    return this.mutate(/\*{2}(\S[\s\S]*?)\*{2}/g, (match, capture) =>
-      /\S$/.test(capture) ? `<strong>${capture}</strong>` : match
-    )
-  }
-
-  /**
-   * Convert `` to <code></code>
-   */
-  inlineCode () {
-    return this.mutate(/`(\S[\s\S]*?)`/g, (match, capture) =>
-      /\S$/.test(capture) ? `<code>${capture}</code>` : match
     )
   }
 

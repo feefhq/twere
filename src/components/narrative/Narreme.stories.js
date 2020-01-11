@@ -21,5 +21,13 @@ export const Short = () => {
 }
 
 export const BasicMarkdown = () => {
-  return <Narreme value='**I am bold.** _I am italic._ I am not' />
+  return <Narreme value='I am _oblique_. I am **bold**. I am neither.' />
+}
+
+export const Emphasis = () => {
+  return <Narreme value='This sentence simply _must_ include emphasis.' />
+}
+
+export const LongEmphasis = () => {
+  return <Narreme value={`<em>${description}</em>`} />
 }
