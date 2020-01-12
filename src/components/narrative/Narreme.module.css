@@ -1,5 +1,5 @@
 .Narreme {
-  display: block;
+  display: flex;
   box-sizing: border-box;
   width: 100%;
   margin: var(--basic-margin);

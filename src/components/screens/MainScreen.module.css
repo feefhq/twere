@@ -1,10 +1,8 @@
-.Narrative {
+.MainScreen {
   display: flex;
   flex-direction: column;
-  padding: 0;
-  list-style: none;
 }
 
-.Narrative.column-reverse {
+.MainScreen.column-reverse {
   flex-direction: column-reverse;
 }

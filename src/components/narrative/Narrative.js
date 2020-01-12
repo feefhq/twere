@@ -12,7 +12,7 @@ class Narrative extends React.Component {
 
   render () {
     return (
-      <div role='list' className={styles.Narrative}>
+      <div role='list' className={`${styles.Narrative} ${styles[this.props.direction]}`}>
         {this.listItems()}
       </div>
     )
