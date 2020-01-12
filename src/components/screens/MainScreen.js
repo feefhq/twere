@@ -12,13 +12,20 @@ class MainScreen extends React.Component {
     }
   }
 
+  handleAppend () {
+    this.setState(prev => {
+      const n = prev.narremes
+      n.unshift('I am new!')
+      return { narremes: n }
+    })
+  }
+
   render () {
     return (
       <div className={`${styles.MainScreen} ${styles[this.props.direction] || ''}`}>
-        <Palette />
-        <Narrative values={this.state.narremes} direction={this.state.direction} />
+        <Palette onAppend={() => this.handleAppend()} />
+        <Narrative narremes={this.state.narremes} direction={this.state.direction} />
       </div>
-
     )
   }
 }

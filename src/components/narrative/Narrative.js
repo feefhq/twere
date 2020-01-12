@@ -4,9 +4,8 @@ import Narreme from './Narreme'
 
 class Narrative extends React.Component {
   listItems () {
-    const narremes = this.props.values || []
-    return narremes.map((value) =>
-      <Narreme key={value} value={value} />
+    return this.props.narremes.map((value) =>
+      <Narreme key={Math.random()} value={value} />
     )
   }
 
