@@ -4,7 +4,7 @@
   resize: none;
   width: 100%;
   margin: 0;
-  padding: 0.5em 1em;
+  padding: var(--basic-padding);
   outline: none;
   border: none;
   overflow-y: hidden;

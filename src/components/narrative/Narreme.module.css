@@ -2,8 +2,9 @@
   display: block;
   box-sizing: border-box;
   width: 100%;
-  margin: 0;
-  padding: 0.5em 1em;
+  margin: var(--basic-margin);
+  padding: var(--basic-padding);
+  background: var(--primary-tile-background);
   color: var(--primary-color);
   font-family: var(--primary-font-family);
   font-size: var(--primary-font-size);
