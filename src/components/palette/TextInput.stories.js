@@ -4,8 +4,7 @@ import TextInput from './TextInput'
 
 export default {
   component: TextInput,
-  title: 'Design System|Palette/TextInput',
-  excludeStories: /.*Data$/
+  title: 'Design System|Palette/TextInput'
 }
 
 export const Default = () => {

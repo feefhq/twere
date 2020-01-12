@@ -8,8 +8,7 @@ Narreme is the basic unit of narrative structure. According to Helmut Bonheim (2
 
 export default {
   component: Narreme,
-  title: 'Design System|Narrative/Narreme',
-  excludeStories: /.*Data$/
+  title: 'Design System|Narrative/Narreme'
 }
 
 export const Default = () => {

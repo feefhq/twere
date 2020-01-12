@@ -8,12 +8,13 @@ export default {
   excludeStories: /.*Data$/
 }
 
+export const narrativeData = [
+  'Event number one',
+  'Event number two'
+]
+
 export const Default = () => {
-  const values = [
-    'Event number one',
-    'Event number two'
-  ]
   return (
-    <Narrative values={values} />
+    <Narrative values={narrativeData} />
   )
 }
