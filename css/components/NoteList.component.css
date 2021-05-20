@@ -1,9 +1,0 @@
-twere-note-list-component {
-  flex-grow: 1;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 20ch minmax(20ch, 92ch);
-  grid-auto-rows: min-content;
-  width: 100%;
-  justify-content: center;
-}
