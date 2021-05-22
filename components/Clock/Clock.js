@@ -1,40 +1,48 @@
+import useInterval from '@use-it/interval'
 import React from 'react'
-import useInterval from '../../lib/useInterval'
+import { formatDate, formatTime } from '../../lib/utils/dateUtil'
 
 /**
  * A simple clock to display date/time. It updates every 1000ms.
- *
- * ✅ Will often trigger: `Warning: Text content did not match...`
  */
-const Clock = () => {
-  const [date, setDate] = React.useState(Date.now())
-  const [openDate, setOpenDate] = React.useState(true)
-  const [openTime, setOpenTime] = React.useState(true)
+const Clock = ({
+  date: dateProp = Date.now(),
+  interval = 1000,
+  now: nowProp = Date.now(),
+  onInterval = null,
+  time: timeProp = Date.now()
+}) => {
+  const [date, setDate] = React.useState(dateProp)
+  const [now, setNow] = React.useState(nowProp)
+  const [time, setTime] = React.useState(timeProp)
 
-  const formatTime = date => new Date(date).toJSON().slice(11, 19)
-  const formatDate = date => new Date(date).toDateString()
+  const handleInterval = () => {
+    now && setNow(Date.now())
+    date && setDate(Date.now())
+    time && setTime(Date.now())
+  }
 
-  useInterval(() => setDate(Date.now()), 1000)
+  useInterval(onInterval || handleInterval, interval)
 
   return (
     <>
-      {openDate && <div>{formatDate(date)}</div>}
-      {openTime && <div>{formatTime(date)}</div>}
+      {date && <div>{formatDate(date)}</div>}
+      {time && <div>{formatTime(time)}</div>}
       <form>
+        I am a clock
         <label>
           <input
             type='checkbox'
-            onChange={() => setOpenDate(!openDate)}
-            checked={openDate}
+            onChange={() => setDate(!date && now)}
+            checked={date}
           />
           Date
         </label>
-
         <label>
           <input
             type='checkbox'
-            onChange={() => setOpenTime(!openTime)}
-            checked={openTime}
+            onChange={() => setTime(!time && now)}
+            checked={time}
           />
           Time
         </label>
