@@ -34,7 +34,7 @@ describe('<Clock />', () => {
   })
 
   it('should show/hide date', () => {
-    const { getByLabelText, queryByText } = render(<Clock />)
+    const { getByLabelText, queryByText } = render(<Clock toggles />)
     const formattedDate = formatDate(Date.now())
 
     userEvent.click(getByLabelText('Date'))
@@ -45,7 +45,7 @@ describe('<Clock />', () => {
   })
 
   it('should show/hide time', () => {
-    const { getByLabelText, queryByText } = render(<Clock />)
+    const { getByLabelText, queryByText } = render(<Clock toggles />)
     const formattedTime = formatTime(Date.now())
 
     userEvent.click(getByLabelText('Time'))

@@ -9,8 +9,9 @@ const Clock = ({
   date: dateProp = Date.now(),
   interval = 1000,
   now: nowProp = Date.now(),
-  onInterval = null,
-  time: timeProp = Date.now()
+  onInterval,
+  time: timeProp = Date.now(),
+  toggles
 }) => {
   const [date, setDate] = React.useState(dateProp)
   const [now, setNow] = React.useState(nowProp)
@@ -25,29 +26,40 @@ const Clock = ({
   useInterval(onInterval || handleInterval, interval)
 
   return (
-    <>
-      {date && <div>{formatDate(date)}</div>}
-      {time && <div>{formatTime(time)}</div>}
-      <form>
-        I am a clock
-        <label>
-          <input
-            type='checkbox'
-            onChange={() => setDate(!date && now)}
-            checked={date}
-          />
-          Date
-        </label>
-        <label>
-          <input
-            type='checkbox'
-            onChange={() => setTime(!time && now)}
-            checked={time}
-          />
-          Time
-        </label>
-      </form>
-    </>
+    <div>
+      {time && (
+        <time dateTime={formatTime(time)} className='text-xl'>
+          {formatTime(time)}
+        </time>
+      )}
+      {date && (
+        <time dateTime={formatDate(date)} className='mx-2 text-xs'>
+          {formatDate(date)}
+        </time>
+      )}
+
+      {toggles && (
+        <form>
+          <label>
+            <input
+              type='checkbox'
+              onChange={() => setDate(!date && now)}
+              checked={date}
+            />
+            Date
+          </label>
+
+          <label>
+            <input
+              type='checkbox'
+              onChange={() => setTime(!time && now)}
+              checked={time}
+            />
+            Time
+          </label>
+        </form>
+      )}
+    </div>
   )
 }
 
